@@ -1,8 +1,8 @@
-﻿<div class="modal @(Model.IsShow?ClassDefine.Modal.SHOW_ACTIVE:"")">
+﻿<div class="modal @DialogModel.ActiveClass">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
-            <p class="modal-card-title">@Model.Title</p>
+            <p class="modal-card-title">@DialogTitle</p>
             @if (Model.ButtonStyle.IsCloseButton())
             {
                 <button class="delete" type="button" aria-label="close" @onclick="OnCloseBtnClickAsync"></button>
