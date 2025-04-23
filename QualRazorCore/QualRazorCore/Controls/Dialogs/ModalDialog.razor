@@ -1,0 +1,27 @@
+﻿<div class="modal @(Model.IsShow?ClassDefine.Modal.SHOW_ACTIVE:"")">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">@Model.Title</p>
+            @if (Model.ButtonStyle.IsCloseButton())
+            {
+                <button class="delete" type="button" aria-label="close" @onclick="OnCloseBtnClickAsync"></button>
+            }
+        </header>
+        <section class="modal-card-body">
+            <div class="message-body">
+                @DialogContents
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            @if (Model.ButtonStyle.IsOkButton())
+            {
+                <button class="button is-success" type="@(Model.IsOkButtonType.ToString())" @onclick="OnOkBtnClickAsync">OK</button>
+            }
+            @if (Model.ButtonStyle.IsCancelButton())
+            {
+                <button class="button" type="button" @onclick="OnCancelBtnClickAsync">Cancel</button>
+            }
+        </footer>
+    </div>
+</div>

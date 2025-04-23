@@ -1,0 +1,13 @@
+﻿@inherits ButtonCore
+
+<button disabled="@DisabledValue" type="button" @attributes="AdditionalAttributes" class="button @ClassDefine.Button.SECONDARY" @onclick="ButtonClick" @onmouseup="ButtonUp" @onmousedown="ButtonDown">
+    @if (IconContent is not null)
+    {
+        <span class="icon">
+            @IconContent
+        </span>
+    }
+    <span>
+        @ButtonContent
+    </span>
+</button>

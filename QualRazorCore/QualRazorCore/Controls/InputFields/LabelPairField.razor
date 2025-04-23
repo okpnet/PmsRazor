@@ -1,0 +1,101 @@
+﻿@inherits FieldCore
+@typeparam T
+<div class="field" disabled="@DisabledValue">
+    @PreContent
+    <label class="label">@PreContent</label>
+    @switch (Option)
+    {
+        case NumberOption<T> numberOption:
+            <EditerNumber
+                    Tval="T"
+                    AdditionalAttributes="@AdditionalAttributes"
+                    PlaceHolder="@Option.PlaceHolder"
+                          ValueExpression="@ValueExpression"
+                    Comma="@numberOption.IsComma"
+                    Degit="@numberOption.NumberOfDigit"
+                    MaxValue="@numberOption.MaxValue"
+                    MinValue="@numberOption.MinValue"
+                    
+            ></EditerNumber>
+
+            break;
+        case BoolOption<T> boolOption:
+            <EditerBool 
+                    Tval="T"
+                    AdditionalAttributes="@AdditionalAttributes"
+                    ValueExpression="@ValueExpression"
+                    PlaceHolder="@Option.PlaceHolder"
+                    TrueValue="@boolOption.TrueValue"
+                    FalseValue="@boolOption.FalseValue"></EditerBool>
+            break;
+
+        case DateTimeOption dateTimeOption:
+            <EditerDate Tval="T"
+                        AdditionalAttributes="@AdditionalAttributes"
+                        ValueExpression="@ValueExpression"
+                        DateType="@dateTimeOption.DateType"
+                        CustomParseFormat="@dateTimeOption.ParseFormat"></EditerDate>
+            break;
+
+        case TimespanOption timespanOption:
+            <EditerTimeSpan
+                    Tval="T"
+                    AdditionalAttributes="@AdditionalAttributes"
+                    ValueExpression="@ValueExpression"
+                    Comma="@timespanOption.IsComma"
+                    MaxValue="@timespanOption.MaxValue"
+                    Degit="@timespanOption.NumberOfDigit"
+            TimeSpanUnit="@timespanOption.Unit"></EditerTimeSpan>
+            break;
+
+        case StringOption stringOption:
+            switch (stringOption)
+            {
+                case AutocompleteOption<T> autocompleteOption:
+                    <EditerAutocomplete Tval="T"
+                                        AdditionalAttributes="@AdditionalAttributes"
+                                        ValueExpression="@ValueExpression"
+                                        PlaceHolder="@Option.PlaceHolder"
+                                        EditType="@stringOption.TextEditType"
+                                        AutocompleteFrame="@autocompleteOption.AutocompleteFrames"
+                                        LoadingTemplate="@autocompleteOption.LoadingTemplae"
+                                        GetText="@autocompleteOption.GetValue"
+                                        CompleteCallBack="@autocompleteOption.LoadCompleteEvent"
+                                        
+                                        GetAutocomleteItems="@autocompleteOption.FindItemTask"></EditerAutocomplete>
+                    break;
+                default:
+                    if (stringOption.IsMutiLine)
+                    {
+                        <EditerTextArea Tval="T"
+                                        AdditionalAttributes="@AdditionalAttributes"
+                                        ValueExpression="@ValueExpression"
+                                        PlaceHolder="@Option.PlaceHolder"
+                        ></EditerTextArea>
+                    }
+                    else
+                    {
+                        <EditerText Tval="T"
+                                    AdditionalAttributes="@AdditionalAttributes"
+                                    ValueExpression="@ValueExpression"
+                                    PlaceHolder="@Option.PlaceHolder"
+                        EditType="@stringOption.TextEditType"></EditerText>
+                    }
+                    break;
+            }
+
+            break;
+        case SelectOption<T> selectOption:
+            <div class="select">
+            <EditerSelect Tval="T"
+                                    AdditionalAttributes="@AdditionalAttributes"
+                                    ValueExpression="@ValueExpression"
+                                    PlaceHolder="@Option.PlaceHolder"
+                                    Source="@(()=>selectOption.Source)"
+                                    OptionContents="@selectOption.GetOptionText"
+                                    ChoosePromptContents="@selectOption.ChoosePrompt"
+                ></EditerSelect>
+            </div>
+            break;
+    }
+</div>
