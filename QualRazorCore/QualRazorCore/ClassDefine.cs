@@ -13,7 +13,9 @@ namespace QualRazorCore
         public const string SIZE_MEDIUM = "is-medium";
         public const string PRIMARY = "is-primary";
         public const string SHOW_ACTIVE = "is-active";
-
+        public const string INFO_SUCCESS = "is-success";
+        public const string INFO_WARNING = "is-warning";
+        public const string INFO_DANGER = "is-danger";
         public static class Modal
         {
             public static string SHOW_ACTIVE => ClassDefine.SHOW_ACTIVE;
@@ -28,6 +30,15 @@ namespace QualRazorCore
 
             public static string TERTIARY=> $"is-text";
 
+        }
+
+        public static class Message
+        {
+            public static string MESSAGE_SUCCESS => ClassDefine.INFO_SUCCESS;
+
+            public static string MESSAGE_WARNING => ClassDefine.INFO_WARNING;
+
+            public static string MESSAGE_DANGER => ClassDefine.INFO_DANGER;
         }
     }
 }

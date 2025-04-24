@@ -17,10 +17,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\BlazorTools\BlazorCustomInput\BlazorCustomInput\BlazorCustomInput.csproj" />
+    <ProjectReference Include="..\..\..\..\BlazorTools\BlazorToaster\BlazorToaster\BlazorToaster.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\Toasts\" />
+    <Folder Include="Containers\" />
   </ItemGroup>
 
 </Project>

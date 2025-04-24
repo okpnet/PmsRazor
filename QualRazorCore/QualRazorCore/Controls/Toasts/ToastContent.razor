@@ -1,0 +1,21 @@
+﻿@inherits RazorCore
+
+<ToastContainer Collection="Collection">
+    <ToastTemplate Context="toast">
+        @{
+            toast.Presentation = !EventCallback.Equals( toast.Content.CloseEvent,EventCallback.Empty) ? PresentationMode.Event : PresentationMode.Auto;
+            toast.Content.CloseEvent = toast.CloseEvent;
+        }
+        <div class="notification @toast.Content.CssInformationClasses">
+            <button class="delete" @onclick="toast.CloseEvent"></button>
+            <span class="icon-text mr-4">
+                <span class="icon">
+                    <i class="@toast.Content.CssGGIconClasses" style="transform: scale(1.25);"></i>
+                </span>
+                <span>
+                    @((MarkupString)toast.Content.Message)
+                </span>
+            </span>
+        </div>
+    </ToastTemplate>
+</ToastContainer>

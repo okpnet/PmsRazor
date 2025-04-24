@@ -2,22 +2,16 @@
 using Microsoft.AspNetCore.Components;
 using QualRazorCore.Controls.InputFields.Core;
 using QualRazorCore.Controls.InputFields.Options;
-using QualRazorCore.Controls.InputFields.Options.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QualRazorCore.Controls.InputFields
 {
-    public partial class LabelPairAutoCompleteField<T>: LabelPairField<T>
+    public partial class LabelPairAutoCompleteField<T>: FieldCore<T>
     {
         [Parameter]
-        public RenderFragment? LoadingContent { get; set; }
+        public RenderFragment LoadingContent { get; set; } = default!;
         
         [Parameter]
-        public RenderFragment<IEnumerable<AutocompleteArg<T>>>? AutocompleteFrames { get; set; }
+        public RenderFragment<IEnumerable<AutocompleteArg<T>>> AutocompleteFrames { get; set; } = default!;
 
         [Parameter, EditorRequired]
         public new AutocompleteOption<T> Option { get; set; } = default!;
