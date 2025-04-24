@@ -1,0 +1,16 @@
+﻿@inherits LabelPairField<T>
+
+<div class="field" disabled="@DisabledValue">
+    @PreContent
+    <label class="label">@PreContent</label>
+    <EditerAutocomplete TVal="T"
+                        AdditionalAttributes="@AdditionalAttributes"
+                        ValueExpression="@ValueExpression"
+                        PlaceHolder="@Option.PlaceHolder"
+                        EditType="@Option.TextEditType"
+                        AutocompleteFrame="@AutocompleteFrames"
+                        LoadingTemplate="@LoadingContent"
+                        GetText="@Option.GetValue"
+                        CompleteCallBack="@Option.LoadCompleteEvent"
+                        GetAutocomleteItems="@Option.FindItemTask"></EditerAutocomplete>
+</div>

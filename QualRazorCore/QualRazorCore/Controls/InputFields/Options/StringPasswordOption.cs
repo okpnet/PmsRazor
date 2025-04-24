@@ -13,6 +13,5 @@ namespace QualRazorCore.Controls.InputFields.Options
         public StringPasswordOption(string? placeHolder) : base(placeHolder, false)
         {
         }
-
     }
 }

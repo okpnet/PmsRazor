@@ -59,6 +59,6 @@ namespace QualRazorCore.Controls.Buttons.Core
         [Parameter]
         public RenderFragment? IconContent { get; set; }
         [Parameter]
-        public RenderFragment? Content { get; set; }
+        public RenderFragment? ButtonContent { get; set; }
     }
 }

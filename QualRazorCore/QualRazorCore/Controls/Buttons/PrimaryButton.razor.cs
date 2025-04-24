@@ -11,6 +11,5 @@ namespace QualRazorCore.Controls.Buttons
 {
     public partial class PrimaryButton:ButtonCore
     {
-        
     }
 }

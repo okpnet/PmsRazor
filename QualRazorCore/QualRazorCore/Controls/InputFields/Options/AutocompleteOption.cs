@@ -1,22 +1,17 @@
-﻿using BlazorCustomInput.Components;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace QualRazorCore.Controls.InputFields.Options
 {
     public class AutocompleteOption<T> : StringOption
     {
         public Func<T, string> GetValue { get; set; } = default!;
-        public Func<T?, Task<T[]>> FindItemTask { get; set; }
 
-        public RenderFragment<IEnumerable<AutocompleteArg<T>>> AutocompleteFrames { get; set; }
-
-        public RenderFragment LoadingTemplae { get; set; }
+        public Func<T?, Task<T[]>> FindItemTask { get; set; } = default!;
 
         public EventCallback LoadCompleteEvent { get; set; }
+
+        public AutocompleteOption(string? placeHolder, Func<T, string> getValue, Func<T?, Task<T[]>> findItemTask, EventCallback loadCompleteEvent) : base(placeHolder, false)
+        {
+        }
     }
 }

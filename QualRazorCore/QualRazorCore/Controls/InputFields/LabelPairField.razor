@@ -1,5 +1,6 @@
-﻿@inherits FieldCore
+﻿@inherits FieldCore<T>
 @typeparam T
+
 <div class="field" disabled="@DisabledValue">
     @PreContent
     <label class="label">@PreContent</label>
@@ -49,23 +50,7 @@
             break;
 
         case StringOption stringOption:
-            switch (stringOption)
-            {
-                case AutocompleteOption<T> autocompleteOption:
-                    <EditerAutocomplete Tval="T"
-                                        AdditionalAttributes="@AdditionalAttributes"
-                                        ValueExpression="@ValueExpression"
-                                        PlaceHolder="@Option.PlaceHolder"
-                                        EditType="@stringOption.TextEditType"
-                                        AutocompleteFrame="@autocompleteOption.AutocompleteFrames"
-                                        LoadingTemplate="@autocompleteOption.LoadingTemplae"
-                                        GetText="@autocompleteOption.GetValue"
-                                        CompleteCallBack="@autocompleteOption.LoadCompleteEvent"
-                                        
-                                        GetAutocomleteItems="@autocompleteOption.FindItemTask"></EditerAutocomplete>
-                    break;
-                default:
-                    if (stringOption.IsMutiLine)
+            if (stringOption.IsMutiLine)
                     {
                         <EditerTextArea Tval="T"
                                         AdditionalAttributes="@AdditionalAttributes"
@@ -82,8 +67,6 @@
                         EditType="@stringOption.TextEditType"></EditerText>
                     }
                     break;
-            }
-
             break;
         case SelectOption<T> selectOption:
             <div class="select">
@@ -96,6 +79,9 @@
                                     ChoosePromptContents="@selectOption.ChoosePrompt"
                 ></EditerSelect>
             </div>
+            break;
+        default:
+            throw new NotImplementedException($"'{Option}' is not implemented to switch cases.")
             break;
     }
 </div>

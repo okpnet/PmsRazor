@@ -5,13 +5,7 @@ using System.Linq.Expressions;
 
 namespace QualRazorCore.Controls.InputFields
 {
-    public partial class LabelPairField<T>:FieldCore
+    public partial class LabelPairField<T>:FieldCore<T>
     {
-
-        [Parameter, EditorRequired]
-        public OptionBase Option { get; set; } = default!;
-
-        [Parameter, EditorRequired]
-        public Expression<Func<T>> ValueExpression { get; set; } = default!;
     }
 }

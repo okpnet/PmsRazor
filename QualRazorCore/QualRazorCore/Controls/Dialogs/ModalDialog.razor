@@ -1,11 +1,13 @@
-﻿<div class="modal @DialogModel.ActiveClass">
+﻿@inherits RazorCore
+
+<div class="modal @DialogModel.ActiveClass">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
             <p class="modal-card-title">@DialogTitle</p>
-            @if (Model.ButtonStyle.IsCloseButton())
+            @if (Options.IsCloseButton)
             {
-                <button class="delete" type="button" aria-label="close" @onclick="OnCloseBtnClickAsync"></button>
+                <button class="delete" type="button" aria-label="close" @onclick="OnClose"></button>
             }
         </header>
         <section class="modal-card-body">
@@ -14,13 +16,38 @@
             </div>
         </section>
         <footer class="modal-card-foot">
-            @if (Model.ButtonStyle.IsOkButton())
+            @if (PrimaryButtonContent is not null || PrimaryButtonIconContent is not null)
             {
-                <button class="button is-success" type="@(Model.IsOkButtonType.ToString())" @onclick="OnOkBtnClickAsync">OK</button>
+                <PrimaryButton type="@(PrimarySubmitButton?"submit":"button")" ButtonClick="OnPrimaryClick">
+                    <ButtonContent>
+                        @PrimaryButtonContent
+                    </ButtonContent>
+                    <IconContent>
+                        @PrimaryButtonIconContent
+                    </IconContent>
+                </PrimaryButton>
             }
-            @if (Model.ButtonStyle.IsCancelButton())
+            @if (SecondaryButtonContent is not null || SecondaryButtonIconContent is not null)
             {
-                <button class="button" type="button" @onclick="OnCancelBtnClickAsync">Cancel</button>
+                <SecondaryButton ButtonClick="OnSecondaryClick">
+                    <ButtonContent>
+                        @SecondaryButtonContent
+                    </ButtonContent>
+                    <IconContent>
+                        @SecondaryButtonIconContent
+                    </IconContent>
+                </SecondaryButton>
+            }
+            @if (TertiaryButtonContent is not null || TertiaryButtonIconContent is not null)
+            {
+                <TertiaryButton ButtonClick="OnTertiaryClick">
+                    <ButtonContent>
+                        @TertiaryButtonContent
+                    </ButtonContent>
+                    <IconContent>
+                        @TertiaryButtonIconContent
+                    </IconContent>
+                </TertiaryButton>
             }
         </footer>
     </div>

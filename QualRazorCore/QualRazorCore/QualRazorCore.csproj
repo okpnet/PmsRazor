@@ -19,4 +19,8 @@
     <ProjectReference Include="..\..\..\..\BlazorTools\BlazorCustomInput\BlazorCustomInput\BlazorCustomInput.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controls\Toasts\" />
+  </ItemGroup>
+
 </Project>
