@@ -34,11 +34,11 @@ namespace QualRazorCore
 
         public static class Message
         {
-            public static string MESSAGE_SUCCESS => ClassDefine.INFO_SUCCESS;
+            public static string MESSAGE_SUCCESS => INFO_SUCCESS;
 
-            public static string MESSAGE_WARNING => ClassDefine.INFO_WARNING;
+            public static string MESSAGE_WARNING => INFO_WARNING;
 
-            public static string MESSAGE_DANGER => ClassDefine.INFO_DANGER;
+            public static string MESSAGE_DANGER => INFO_DANGER;
         }
     }
 }

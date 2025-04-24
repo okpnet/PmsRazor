@@ -1,4 +1,6 @@
-﻿@inherits ButtonCore
+﻿@using QualRazorCore
+@using QualRazorCore.Defines
+@inherits ButtonCore
 
 <button disabled="@DisabledValue" @attributes="AdditionalAttributes" class="button @ClassDefine.Button.SECONDARY" @onclick="ButtonClick" @onmouseup="ButtonUp" @onmousedown="ButtonDown">
     @if (IconContent is not null)
