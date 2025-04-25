@@ -1,0 +1,29 @@
+﻿
+@inherits RazorCore
+@typeparam TModel
+
+<div class="container">
+    <div class="is-flex-desktop is-justify-content-space-between is-align-items-center is-flex-wrap-wrap">
+        <div class="m-2 ">
+            <span class="icon">
+                <i class="gg-chevron-down"></i>
+            </span>
+            <span class="is-size-5 ml-2">
+                @EditTitleContent
+            </span>
+        </div>
+        <div class="is-flex is-align-items-flex-end is-flex-direction-column-touch">
+            <PrimaryButton ButtonClick="OnSaveClickAsync">
+               <IconContent>
+                   <i class="@CssGGIconDefine.Check"/>
+               </IconContent>
+               <ButtonContent>
+                   @SaveButtonContetn
+               </ButtonContent>
+            </PrimaryButton>
+        </div>
+    </div>
+    <EditForm OnSubmit="SubmitEvent" @ref="_editform" Model="Model">
+        @FormContent(new(_editform, Model))
+    </EditForm>
+</div>

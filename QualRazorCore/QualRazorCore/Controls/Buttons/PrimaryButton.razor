@@ -1,9 +1,19 @@
-﻿@using QualRazorCore
-@using QualRazorCore.Defines
-@inherits ButtonCore
-
-<button disabled="@DisabledValue" @attributes="AdditionalAttributes" class="button @ClassDefine.Button.PRIMARY" @onclick="ButtonClick" @onmouseup="ButtonUp" @onmousedown="ButtonDown">
+﻿@inherits ButtonCore
+@* デスクトップ *@
+<button disabled="@DisabledValue" @attributes="AdditionalAttributes" class="@ClassDefine.Button.STYLE @ClassDefine.Button.DESCTOP @ClassDefine.Button.PRIMARY" @onclick="ButtonClick" @onmouseup="ButtonUp" @onmousedown="ButtonDown">
     @if(IconContent is not null)
+    {
+        <span class="icon">
+            @IconContent
+        </span>
+    }
+    <span>
+        @ButtonContent
+    </span>
+</button>
+@* モバイル *@
+<button disabled="@DisabledValue" @attributes="AdditionalAttributes" class="@ClassDefine.Button.STYLE @ClassDefine.Button.MOBILE @ClassDefine.Button.PRIMARY" @onclick="ButtonClick" @onmouseup="ButtonUp" @onmousedown="ButtonDown">
+    @if (IconContent is not null)
     {
         <span class="icon">
             @IconContent

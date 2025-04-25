@@ -16,9 +16,7 @@
                     Degit="@numberOption.NumberOfDigit"
                     MaxValue="@numberOption.MaxValue"
                     MinValue="@numberOption.MinValue"
-                    
             ></EditerNumber>
-
             break;
         case BoolOption<T> boolOption:
             <EditerBool 
@@ -82,6 +80,5 @@
             break;
         default:
             throw new NotImplementedException($"'{Option}' is not implemented to switch cases.");
-            break;
     }
 </div>

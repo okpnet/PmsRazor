@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Containers\Headers\" />
+    <Folder Include="Containers\Helpers\" />
     <Folder Include="Services\Helpers\" />
   </ItemGroup>
 

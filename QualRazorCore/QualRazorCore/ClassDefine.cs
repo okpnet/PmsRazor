@@ -16,6 +16,9 @@ namespace QualRazorCore
         public const string INFO_SUCCESS = "is-success";
         public const string INFO_WARNING = "is-warning";
         public const string INFO_DANGER = "is-danger";
+        public const string STYLE_TO_MOBILE = "is-fullwidth is-hidden-desktop";
+        public const string STYLE_TO_DESKTOP = "is-hidden-touch";
+
         public static class Modal
         {
             public static string SHOW_ACTIVE => ClassDefine.SHOW_ACTIVE;
@@ -30,6 +33,10 @@ namespace QualRazorCore
 
             public static string TERTIARY=> $"is-text";
 
+            public static string MOBILE => ClassDefine.STYLE_TO_MOBILE;
+            public static string DESCTOP => ClassDefine.STYLE_TO_DESKTOP;
+
+            public static string STYLE => "button";
         }
 
         public static class Message

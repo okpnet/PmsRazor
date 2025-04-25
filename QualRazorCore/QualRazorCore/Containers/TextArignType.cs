@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorCore.Controls.InputFields
+namespace QualRazorCore.Containers
 {
-    internal class ParameterOptionHelper
+    public enum TextArignType
     {
+        Center,
+        Left,
+        Right
     }
 }
