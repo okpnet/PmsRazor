@@ -44,5 +44,8 @@ namespace QualRazorCore.Core
 
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object>? AdditionalAttributes { get; set; }
+
+        [Parameter]
+        public RenderFragment? LoadingContent { get; set; }
     }
 }

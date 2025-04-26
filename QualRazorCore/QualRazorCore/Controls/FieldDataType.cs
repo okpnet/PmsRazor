@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QualRazorCore.Controls
+﻿namespace QualRazorCore.Controls
 {
-    public enum FieldDataType
+    [Flags]
+    public enum FieldDataType:byte
     {
-        String,
-        Number,
-        Decimal,
-
+        None = 0,
+        String=1<<0,
+        Number=1<<1,
+        Decimal=1<<2,
     }
 }
