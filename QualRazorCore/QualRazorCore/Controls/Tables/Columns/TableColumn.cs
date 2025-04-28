@@ -1,11 +1,27 @@
 ﻿using QualRazorCore.Containers;
+using QualRazorCore.Controls.Filters;
 using QualRazorCore.Core;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace QualRazorCore.Controls.Tables.Columns
 {
-    public class TableColumn : NotifyCore, ITableColumn
+    public class TableColumn<TModel,TResult> : PropertyAccessCore<TModel,TResult>, ITableColumn<TModel>, ITableColumn
     {
-        public Guid Key { get; } = Guid.NewGuid();
+        protected SortType _sortStaetus = SortType.None;
+        public SortType SortStatus
+        {
+            get => _sortStaetus;
+            set
+            {
+                if (_sortStaetus == value)
+                {
+                    return;
+                }
+                _sortStaetus = value;
+                OnPropertyChanged(nameof(SortStatus));
+            }
+        }
 
         protected Func<string> _getColumnNameInvoke = default!;
         public Func<string> GetColumnNameInvoke
@@ -31,40 +47,25 @@ namespace QualRazorCore.Controls.Tables.Columns
                 _textArignType = value;
                 OnPropertyChanged(nameof(TextArign));
             }
-
         }
-    }
 
-    public class TableColumn<TModel> : TableColumn, ITableColumn<TModel>, ITableColumn
-    {
-        
+        public Func<TModel, string> GetPropertyValueStringInvoke => (t) => Getter?.Invoke(t)?.ToString()??Key.ToString();
 
-        Func<TModel, string> _getPropertyValueInvoke = default!;
-        public Func<TModel, string> GetPropertyValueInvoke
+        public TableColumn(
+            Expression<Func<string>> getColumnNameInvoke,
+            string propertyName,
+            Expression<Func<TModel, TResult>> propertyExpression,
+            Expression<Action<TModel, TResult>>? oprionExpresiion = null) : base(propertyName, propertyExpression, oprionExpresiion)
         {
-            get => _getPropertyValueInvoke;
-            set
-            {
-                _getPropertyValueInvoke = value;
-                OnPropertyChanged(nameof(GetPropertyValueInvoke));
-            }
+            _getColumnNameInvoke = getColumnNameInvoke.Compile();
+            _textArignType = GetTextAlignType(typeof(TResult));
         }
 
-
-        public TableColumn(Func<TModel, string> getPropertyValueInvoke, Func<string> getColumnNameInvoke, Type valueType)
+        public TableColumn(Expression<Func<string>> getColumnNameInvoke, PropertyInfo propertyInfo) : base(propertyInfo)
         {
-            _getPropertyValueInvoke = getPropertyValueInvoke;
-            _getColumnNameInvoke = getColumnNameInvoke;
-            _textArignType = GetTextAlignType(valueType);
+            _getColumnNameInvoke = getColumnNameInvoke.Compile();
+            _textArignType = GetTextAlignType(typeof(TResult));
         }
-
-        public TableColumn(Func<TModel, string> getPropertyValueInvoke, Func<string> getColumnNameInvoke, TextArignType textArignType)
-        {
-            _getPropertyValueInvoke = getPropertyValueInvoke;
-            _getColumnNameInvoke = getColumnNameInvoke;
-            _textArignType = textArignType;
-        }
-
 
         TextArignType GetTextAlignType(Type valueType)
         {

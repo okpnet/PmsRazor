@@ -15,5 +15,10 @@ namespace QualRazorCore
         public static string Check => "gg-check";
 
         public static string Danger => "gg-danger";
+
+        public static string AscArrow => "gg-chevron-up";
+
+        public static string DescArrow => "gg-chevron-down";
+
     }
 }

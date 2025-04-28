@@ -18,7 +18,7 @@ namespace QualRazorCore
         public const string INFO_DANGER = "is-danger";
         public const string STYLE_TO_MOBILE = "is-fullwidth is-hidden-desktop";
         public const string STYLE_TO_DESKTOP = "is-hidden-touch";
-
+        public const string STYLE_FREX_CENTER = "is-flex is-align-items-center";
         public static class Modal
         {
             public static string SHOW_ACTIVE => ClassDefine.SHOW_ACTIVE;
@@ -46,6 +46,11 @@ namespace QualRazorCore
             public static string MESSAGE_WARNING => INFO_WARNING;
 
             public static string MESSAGE_DANGER => INFO_DANGER;
+        }
+
+        public static class Table
+        {
+            public static string SORT_COLUMN => STYLE_FREX_CENTER;
         }
     }
 }

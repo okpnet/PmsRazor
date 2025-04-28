@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
+    <PackageReference Include="TalkLib" Version="0.18.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Conditions\Core\" />
     <Folder Include="Containers\Core\" />
     <Folder Include="Controls\Dialogs\Core\" />
     <Folder Include="Controls\Tables\Core\" />

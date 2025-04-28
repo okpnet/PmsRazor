@@ -6,11 +6,63 @@
         <tr>
             @foreach (var column in Columns)
             {
-                <th>@((MarkupString)column.GetColumnNameInvoke())</th>
+                <th>
+                    @switch (column.SortStatus)
+                    {
+                        case Filters.SortType.None:
+                            @((MarkupString)column.GetColumnNameInvoke())
+                        break;
+                        case Filters.SortType.ASC:
+                        <div class="@ClassDefine.Table.SORT_COLUMN">
+                            <span>
+                                    @((MarkupString)column.GetColumnNameInvoke())
+                            </span>
+                            <span class="icon">
+                                <i class="@CssGGIconDefine.AscArrow"></i>
+                            </span>
+                        </div>
+                        break;
+                        case Filters.SortType.DESC:
+                            <div class="@ClassDefine.Table.SORT_COLUMN">
+                                <span>
+                                    @((MarkupString)column.GetColumnNameInvoke())
+                                </span>
+                                <span class="icon">
+                                    <i class="@CssGGIconDefine.DescArrow"></i>
+                                </span>
+                            </div>
+                        break;
+                    }
+                </th>
             }
         </tr>
     </thead>
-    <tbody>
+    <tfoot>
+        <tr>
+            <th colspan="6">
+                <div class="is-flex-desktop is-justify-content-space-between is-align-items-center is-flex-wrap-wrap">
+                    <div class="m-2 has-text-grey">
+                        表示中: 101 - 120件 / 全 354件
+                    </div>
+                    <div class="buttons is-flex is-align-items-flex-end is-flex-direction-column-touch">
+                        <button class="button is-small">前へ</button>
+                        <button class="button is-small">1</button>
+                        <button class="button is-small">...</button>
+                        <button class="button is-small">3</button>
+                        <button class="button is-small">4</button>
+                        <button class="button is-link">5</button>
+                        <button class="button is-small">6</button>
+                        <button class="button is-small">7</button>
+                        <button class="button is-small">...</button>
+                        <button class="button is-small">12</button>
+                        <button class="button is-small">次へ</button>
+                    </div>
+                </div>
+            </th>
 
+        </tr>
+    </tfoot>
+    <tbody>
+        
     </tbody>
 </table>

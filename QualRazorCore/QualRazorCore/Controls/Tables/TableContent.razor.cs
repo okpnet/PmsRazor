@@ -3,21 +3,15 @@ using QualRazorCore.Controls.Tables.Argments;
 using QualRazorCore.Controls.Tables.Columns;
 using QualRazorCore.Controls.Tables.Options;
 using QualRazorCore.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace QualRazorCore.Controls.Tables
 {
-    public partial class TableContent<TModel>:RazorCore
+    public partial class TableContent<TModel>:RazorCore where TModel : class
     {
         [Parameter,EditorRequired]
         public TableSchemaOption<TModel> Option { get; set; } = default!;
 
-        protected IEnumerable<TableColumn<TModel>> Columns =>Option.Columns.OfType<TableColumn<TModel>>();
+        IEnumerable<ITableColumn<TModel>> Columns=>Option.Columns.OfType<ITableColumn<TModel>>();
 
         protected IEnumerable<PagenationArg> GetPagenation()
         {
