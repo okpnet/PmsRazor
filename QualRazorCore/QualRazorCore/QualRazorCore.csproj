@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Containers\Core\" />
+    <Folder Include="Controls\Dialogs\Core\" />
     <Folder Include="Controls\Tables\Core\" />
     <Folder Include="Services\Helpers\" />
   </ItemGroup>

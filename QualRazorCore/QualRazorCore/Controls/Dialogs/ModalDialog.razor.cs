@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Controls.Buttons;
-using QualRazorCore.Controls.Dialogs.Core;
 using QualRazorCore.Controls.Dialogs.Options;
 using QualRazorCore.Core;
 using System;

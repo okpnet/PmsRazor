@@ -1,5 +1,4 @@
-﻿using QualRazorCore.Controls.Dialogs.Core;
-using QualRazorCore.Core;
+﻿using QualRazorCore.Core;
 using System.ComponentModel;
 
 namespace QualRazorCore.Controls.Dialogs.Options
