@@ -2,11 +2,27 @@
 using QualRazorCore.Controls.Tables.Rows;
 using QualRazorCore.Core;
 using System.Collections.ObjectModel;
+using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorCore.Controls.Tables.Options
 {
-    public class TableSchemaOption<TModel> : NotifyCore
+    public class TableSchemaOption<TModel> : NotifyCore where TModel : class
     {
+        protected ITalkPageResult<TModel>? _viewTableModel=default!;
+        public ITalkPageResult<TModel>? ViewTableModel
+        {
+            get=> _viewTableModel;
+            set
+            {
+                if (Equals(_viewTableModel,value)) 
+                {
+                    return;
+                }
+                _viewTableModel = value;
+                OnPropertyChanged(nameof(ViewTableModel));
+            }
+        }
+
         ObservableCollection<ITableColumn> _columns = new();
         public ObservableCollection<ITableColumn> Columns => _columns;
 

@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using QualRazorCore.Containers;
+﻿using QualRazorCore.Containers;
+using QualRazorCore.Controls.Filters;
 
 namespace QualRazorCore.Controls.Tables.Columns
 {
     public interface ITableColumn
     {
         Guid Key { get; }
+
+        SortType SortStatus { get; }
     }
 
-    public interface ITableColumn<TModel>
+    public interface ITableColumn<TModel>: ITableColumn
     {
-        Func<TModel, string> GetPropertyValueInvoke { get; }
+        Func<TModel, string> GetPropertyValueStringInvoke { get; }
         Func<string> GetColumnNameInvoke { get; }
         TextArignType TextArign { get; }
     }
