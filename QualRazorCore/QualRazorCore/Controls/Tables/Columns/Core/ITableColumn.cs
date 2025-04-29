@@ -1,7 +1,7 @@
 ﻿using QualRazorCore.Containers;
 using QualRazorCore.Controls.Filters;
 
-namespace QualRazorCore.Controls.Tables.Columns
+namespace QualRazorCore.Controls.Tables.Columns.Core
 {
     public interface ITableColumn
     {

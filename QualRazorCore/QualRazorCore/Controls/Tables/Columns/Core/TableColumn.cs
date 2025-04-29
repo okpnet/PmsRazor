@@ -4,7 +4,7 @@ using QualRazorCore.Core;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace QualRazorCore.Controls.Tables.Columns
+namespace QualRazorCore.Controls.Tables.Columns.Core
 {
     public class TableColumn<TModel,TResult> : PropertyAccessCore<TModel,TResult>, ITableColumn<TModel>, ITableColumn
     {

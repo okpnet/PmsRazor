@@ -1,0 +1,22 @@
+﻿@inherits RazorCore
+
+<div class="@ClassDefine.Table.INFORMATION">
+    <div class="@ClassDefine.MARGIN_ALL @ClassDefine.TEXT_GREY">
+        @((MarkupString)Option.InformationContentInvoke(CreatePageInformationArg()))
+    </div>
+    <div class="@ClassDefine.Table.PAGE_BUTTON_GROUP">
+        @foreach(var page in GetPagenation())
+        {
+            if (page.CurrentPageNumber == 0)
+            {
+                <span>@((MarkupString)page.GetLabelInvoke())</span>
+            }
+            else
+            {
+                <button class="@(page.Active ? ClassDefine.Table.PAGE_CURRENT_BUTTON : ClassDefine.Table.PAGE_BUTTON)" @onclick="EventCallback.Factory.Create(this,()=>Option.PageMoveInvoke.InvokeAsync(page.CurrentPageNumber))">
+                    @((MarkupString)page.GetLabelInvoke())
+                </button>
+            }
+        }
+    </div>
+</div>
