@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorCore.Containers
+namespace QualRazorCore.Controls.Tables.Argments
 {
-    public enum TextArignType
+    public class TableRowTemplateArg
     {
-        Center,
-        Left,
-        Right
+
     }
 }

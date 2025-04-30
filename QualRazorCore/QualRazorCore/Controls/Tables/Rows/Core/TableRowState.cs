@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorCore.Controls.Tables.Rows
+namespace QualRazorCore.Controls.Tables.Rows.Core
 {
     public abstract class TableRowState : NotifyCore, ITableRowState
     {
@@ -25,6 +25,26 @@ namespace QualRazorCore.Controls.Tables.Rows
                 _status = value;
                 OnPropertyChanged(nameof(Status));
             }
+        }
+
+        int _rowIndex = 0;
+        public int RowIndex
+        {
+            get => _rowIndex;
+            protected set
+            {
+                if (_rowIndex == value)
+                {
+                    return;
+                }
+                _rowIndex = value;
+                OnPropertyChanged(nameof(RowIndex));
+            }
+        }
+
+        protected TableRowState(int rowIndex)
+        {
+            _rowIndex = rowIndex;
         }
     }
 
@@ -47,5 +67,10 @@ namespace QualRazorCore.Controls.Tables.Rows
         }
 
         public override object BaseModel => _model;
+
+        public TableRowState(int index, TModel model, RowStatus rowStatus = RowStatus.None) : base(index)
+        {
+            _model = model;
+        }
     }
 }

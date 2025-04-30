@@ -9,26 +9,9 @@ namespace QualRazorCore.Controls.Tables
 {
     public abstract class TableSourceParamter:NotifyCore
     {
-        public abstract object BaseRow { get; }
-    }
-    public class TableSourceParamter<TModel>: TableSourceParamter
-    {
-        public override object BaseRow => Row??default!;
+        public Guid Key { get; }=Guid.NewGuid();
 
-        protected TModel _row = default!;
-        public TModel Row
-        {
-            get => _row;
-            set
-            {
-                if (Equals( _row , value))
-                {
-                    return;
-                }
-                _row = value;
-                OnPropertyChanged(nameof(Row));
-            }
-        }
+        public abstract object BaseRow { get; }
 
         protected bool _isSelected;
         public bool IsSelected
@@ -45,6 +28,51 @@ namespace QualRazorCore.Controls.Tables
             }
         }
 
+        protected int _rowindex=-1;
+        public int RowIndex
+        {
+            get => _rowindex;
+            protected set
+            {
+                if (_rowindex == value)
+                {
+                    return;
+                }
+                OnPropertyChanged(nameof(RowIndex));
+            }
+        }
 
+        protected TableSourceParamter(bool isSelected, int rowindex)
+        {
+            _isSelected = isSelected;
+            _rowindex = rowindex;
+        }
+    }
+    public class TableSourceParamter<TModel>: TableSourceParamter
+    {
+        public override object BaseRow => Row??default!;
+
+        protected TModel _row = default!;
+
+
+
+        public TModel Row
+        {
+            get => _row;
+            set
+            {
+                if (Equals( _row , value))
+                {
+                    return;
+                }
+                _row = value;
+                OnPropertyChanged(nameof(Row));
+            }
+        }
+
+        public TableSourceParamter(bool isSelected, int rowindex,TModel row) : base(isSelected, rowindex)
+        {
+            _row= row;
+        }
     }
 }

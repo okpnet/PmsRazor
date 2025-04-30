@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace QualRazorCore
 {
@@ -31,11 +32,22 @@ namespace QualRazorCore
         public const string MARGIN_ALL = "m-2";
 
         public const string TEXT_GREY = "has-text-grey";
+        public const string TEXT_LEFT = "has-text-left";
+        public const string TEXT_RIGHT = "has-text-right";
+        public const string TEXT_CENTER = "has-text-center";
 
         public const string BUTTON = "button";
         public const string BUTTONS = "buttons";
         public const string TEXT_BUTTON = "is-text";
         public const string OUTLINE_BUTTON = "is-outlined";
+
+        public static class Text
+        {
+            public static string LEFT =>TEXT_LEFT;
+            public static string RIGHT =>TEXT_RIGHT;
+            public static string CENTER => TEXT_CENTER;
+        }
+
         public static class Modal
         {
             public static string SHOW_ACTIVE => ClassDefine.SHOW_ACTIVE;

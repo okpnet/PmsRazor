@@ -1,13 +1,7 @@
 ﻿using QualRazorCore.Controls.Tables.Columns.Core;
 using QualRazorCore.Controls.Tables.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using QualRazorCore.Controls.Tables.Rows.Core;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using static QualRazorCore.ClassDefine;
 
 namespace QualRazorCore.Controls.Tables.Helpers
 {
@@ -22,6 +16,21 @@ namespace QualRazorCore.Controls.Tables.Helpers
             var column = new TableColumn<TModel,TProperty>(columnNameExpression, propertyName,proertyExpression);
             tables.Columns.Add(column);
             return column;
+        }
+
+        public static IEnumerable<TableRowState<TModel>> GenerateSource<TModel>(this TableSchemaOption<TModel> option) where TModel : class
+        {
+            if (!option.PageResult.Records.Any())
+            {
+                yield break;
+            }
+            foreach(var row in option.PageResult.Records.Select((model, index) =>
+            {
+                return new TableRowState<TModel>(index, model);
+            }))
+            {
+                yield return row;
+            }
         }
     }
 }

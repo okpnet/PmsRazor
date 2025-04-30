@@ -1,5 +1,4 @@
-﻿using QualRazorCore.Containers;
-using QualRazorCore.Controls.Filters;
+﻿using QualRazorCore.Controls.Filters;
 
 namespace QualRazorCore.Controls.Tables.Columns.Core
 {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QualRazorCore.Core
 {
-    public abstract class RazorCore: ComponentBase, INotifyPropertyChanged
+    public abstract class RazorCore: OwningComponentBase, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

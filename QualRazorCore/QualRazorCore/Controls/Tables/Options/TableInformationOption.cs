@@ -4,6 +4,10 @@ using QualRazorCore.Core;
 
 namespace QualRazorCore.Controls.Tables.Options
 {
+    /// <summary>
+    /// テーブルの情報をビューへ提供する表示オプションクラス
+    /// ユーザーとは対話しない
+    /// </summary>
     public class TableInformationOption:NotifyCore
     {
         Func<PageInformationArg, string> _informationContentInvoke=default!;
