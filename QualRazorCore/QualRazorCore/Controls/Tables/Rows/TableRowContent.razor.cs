@@ -8,7 +8,7 @@ namespace QualRazorCore.Controls.Tables.Rows
     public partial class TableRowContent<TModel> : RazorCore where TModel : class
     {
         [Parameter, EditorRequired]
-        public TableRowState<TModel> Model { get; set; } = default!;
+        public TableRowState<TModel> Row { get; set; } = default!;
 
         [Parameter, EditorRequired]
         public IEnumerable<ITableColumn<TModel>> Columns { get; set; } = default!;
