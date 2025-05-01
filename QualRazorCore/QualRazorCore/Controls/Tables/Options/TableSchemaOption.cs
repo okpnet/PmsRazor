@@ -40,5 +40,19 @@ namespace QualRazorCore.Controls.Tables.Options
                 OnPropertyChanged(nameof(InformationOption));
             }
         }
+        protected Dictionary<string, object> _tableAdditionalAttributes=new();
+        public Dictionary<string, object> TableAdditionalAttributes 
+        {
+            get => _tableAdditionalAttributes;
+            set
+            {
+                if (_tableAdditionalAttributes == value)
+                {
+                    return;
+                }
+                _tableAdditionalAttributes = value;
+                OnPropertyChanged(nameof(TableAdditionalAttributes));
+            }
+        }
     }
 }

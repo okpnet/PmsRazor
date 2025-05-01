@@ -1,7 +1,7 @@
 ﻿@inherits RazorCore
 @typeparam TModel
 
-<table class="table is-hoverable is-fullwidth">
+<table class="table is-hoverable is-fullwidth" @attributes="Option.TableAdditionalAttributes">
     <thead>
         <tr>
             @foreach (var column in Columns)
