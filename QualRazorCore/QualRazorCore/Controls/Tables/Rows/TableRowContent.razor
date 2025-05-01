@@ -1,7 +1,10 @@
 ﻿@inherits RazorCore
 @typeparam TModel
 
-@foreach(var column in Columns)
+<tr>
+    @switch(Rows)
+    @foreach(var column in Columns)
 {
     <TableRowCellContent Col
 }
+</tr>

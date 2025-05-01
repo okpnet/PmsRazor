@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using QualRazorCore.Observers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace QualRazorCore.Core
 {
-    public abstract class RazorCore: OwningComponentBase, INotifyPropertyChanged
+    public abstract class RazorCore: OwningComponentBase, INotifyPropertyChanged,IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected readonly DisposableCollection disposables = new();
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -47,5 +50,11 @@ namespace QualRazorCore.Core
 
         [Parameter]
         public RenderFragment? LoadingContent { get; set; }
+
+        protected override void Dispose(bool disposing)
+        {
+            disposables.Clear();
+            base.Dispose(disposing); 
+        }
     }
 }

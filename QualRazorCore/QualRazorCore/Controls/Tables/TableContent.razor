@@ -47,12 +47,7 @@
     <tbody>
         @foreach(var row in Source)
         {
-            <tr>
-                @foreach (var column in Columns)
-                {
-                    
-                }
-            </tr>
+            <TableRowContent Columns="Columns" Model="row" ></TableRowContent>
         }
     </tbody>
 </table>

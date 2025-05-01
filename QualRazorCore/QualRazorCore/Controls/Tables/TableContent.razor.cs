@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Controls.Tables.Columns.Core;
 using QualRazorCore.Controls.Tables.Extensions;
+using QualRazorCore.Controls.Tables.Helpers;
 using QualRazorCore.Controls.Tables.Informatios;
 using QualRazorCore.Controls.Tables.Options;
 using QualRazorCore.Controls.Tables.Rows.Core;
 using QualRazorCore.Core;
+using QualRazorCore.Observers;
 
 namespace QualRazorCore.Controls.Tables
 {
@@ -32,6 +34,15 @@ namespace QualRazorCore.Controls.Tables
         protected override void OnInitialized()
         {
             _notifier = new(Option, (array) => Source = array);
+            disposables.Add(
+                PropertyChangedRelay<TableSchemaOption<TModel>, IEnumerable<TableRowState<TModel>>>.Create
+                (
+                    Option,
+                    nameof(Option.PageResult),
+                    src => Option.GenerateSource(),
+                    sources => Source=sources
+                    )
+                );
         }
     }
 }
