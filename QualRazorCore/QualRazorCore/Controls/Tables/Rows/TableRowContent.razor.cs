@@ -2,6 +2,7 @@
 using QualRazorCore.Controls.Tables.Columns.Core;
 using QualRazorCore.Controls.Tables.Rows.Core;
 using QualRazorCore.Core;
+using QualRazorCore.Observers;
 
 namespace QualRazorCore.Controls.Tables.Rows
 {
@@ -12,5 +13,9 @@ namespace QualRazorCore.Controls.Tables.Rows
 
         [Parameter, EditorRequired]
         public IEnumerable<ITableColumn<TModel>> Columns { get; set; } = default!;
+
+        string RowColumnString { get; set; }
+
+
     }
 }
