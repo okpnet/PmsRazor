@@ -1,10 +1,14 @@
 ﻿@inherits RazorCore
-@typeparam TModel
+@typeparam TModel where TModel :class   
 
-<tr>
-    @switch(Rows)
-    @foreach(var column in Columns)
+@switch (Row.Status)
 {
-    <TableRowCellContent Col
+    case RowStatus.Edit:
+        break;
+    default:
+        @foreach(var column in Columns)
+        {
+            <TableRowCellContent Column="column" AdditionalAttributes="AdditionalAttributes" StringValue=""></TableRowCellContent>
+        }
+        break;
 }
-</tr>
