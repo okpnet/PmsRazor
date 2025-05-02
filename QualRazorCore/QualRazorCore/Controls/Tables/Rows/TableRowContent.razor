@@ -1,15 +1,17 @@
 ﻿@inherits RazorCore
 @typeparam TModel where TModel :class   
 
-@switch (Row.Status)
-{
-    case RowStatus.Edit:
-        <TableRowEditCellContent Row="Row" Columns="Columns"></TableRowEditCellContent>
-        break;
-    default:
-        @foreach(var column in Columns)
-        {
-            <TableRowCellContent Column="column" AdditionalAttributes="AdditionalAttributes" Row="Row"></TableRowCellContent>
-        }
-        break;
-}
+<tr @attributes="MergedAttributes">
+    @switch (Row.Status)
+    {
+        case RowStatus.Edit:
+            <TableRowEditCellContent Row="Row" Columns="Columns"></TableRowEditCellContent>
+            break;
+        default:
+            @foreach (var column in Columns)
+            {
+                <TableRowCellContent Column="column" Row="Row"></TableRowCellContent>
+            }
+            break;
+    }
+</tr>

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace QualRazorCore.Observers
 {
+    /// <summary>
+    /// プロパティ変更イベントを監視します
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     public class PropertyChangedRelay<TSource, TResult> : IDisposable where TSource : INotifyPropertyChanged
     {
         private readonly TSource _source;
@@ -42,7 +42,14 @@ namespace QualRazorCore.Observers
         {
             _source.PropertyChanged -= _handler;
         }
-
+        /// <summary>
+        /// イベント監視するデリゲートを生成
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="valueSelector"></param>
+        /// <param name="onChanged"></param>
+        /// <returns></returns>
         public static IDisposable Create(TSource source,
             string propertyName,
             Func<TSource, TResult> valueSelector,

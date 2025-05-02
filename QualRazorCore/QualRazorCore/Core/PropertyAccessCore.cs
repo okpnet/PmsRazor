@@ -88,7 +88,5 @@ namespace QualRazorCore.Core
                 _setter=oprionExpresiion.Compile();
             }
         }
-
-
     }
 }

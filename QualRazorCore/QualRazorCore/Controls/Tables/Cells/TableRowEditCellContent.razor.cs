@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using QualRazorCore.Controls.Tables.Columns.Core;
+using QualRazorCore.Controls.Tables.Options;
 using QualRazorCore.Controls.Tables.Rows.Core;
 using QualRazorCore.Core;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QualRazorCore.Extenssions;
 
 namespace QualRazorCore.Controls.Tables.Cells
 {
@@ -23,6 +19,16 @@ namespace QualRazorCore.Controls.Tables.Cells
         public IEnumerable<ITableColumn<TModel>> Columns { get; set; } = default!;
 
         int ColumnsCount => Columns.Count();
+
+        [CascadingParameter(Name = "CellOption"), EditorRequired]
+        public TableCellOption Option { get; set; } = new();
+
+        Dictionary<string, object> MergeAttribue => HtmlAttributeHelper.PurgeAttributes(
+            Option.CellAdditionalAttributes,
+            new([
+                new("colspan", ColumnsCount.ToString())
+                ])
+            );
 
         protected override void OnInitialized()
         {

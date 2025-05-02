@@ -1,17 +1,21 @@
-﻿using Microsoft.AspNetCore.Components;
-using QualRazorCore.Controls.Tables.Argments;
+﻿using QualRazorCore.Controls.Tables.Argments;
 using QualRazorCore.Controls.Tables.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorCore.Controls.Tables.Helpers
 {
+    /// <summary>
+    /// テーブルインフォメーションのページネーションヘルパ
+    /// </summary>
     public static class PaginationBuilder
     {
+        /// <summary>
+        /// テーブルインフォメーションのページネーションボタン情報を生成
+        /// </summary>
+        /// <param name="option"></param>
+        /// <param name="pageResult"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static IEnumerable<PagenationArg> Build(TableInformationOption option, ITalkPageResult pageResult)
         {
             if (pageResult.NumberOfPage == 1)

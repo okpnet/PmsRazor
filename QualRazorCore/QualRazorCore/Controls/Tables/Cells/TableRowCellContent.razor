@@ -1,5 +1,5 @@
 ﻿@inherits RazorCore
 @typeparam TModel where TModel:class
-<td class=" @Column.TextArign.ToCssClasses()">
-    @((MarkupString)StringValue)
+<td @attributes="MergedAttributes">
+    @Option.CellContent(StringValue)
 </td>

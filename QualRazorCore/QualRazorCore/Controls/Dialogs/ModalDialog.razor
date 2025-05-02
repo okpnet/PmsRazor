@@ -1,21 +1,19 @@
 ﻿@inherits RazorCore
 
-<div class="modal @Options.ActiveClass">
+<div @attributes="MergeDialogAttributes">
     <div class="modal-background"></div>
-    <div class="modal-card">
-        <header class="modal-card-head">
-            <p class="modal-card-title">@DialogTitle</p>
+    <div @attributes="MergeContainerAttributes">
+        <header @attributes="MergeHeaderAttributes">
+            <p @attributes="MergeTitleAttributes">@DialogTitle</p>
             @if (Options.IsCloseButton)
             {
-                <button class="delete" type="button" aria-label="close" @onclick="OnClose"></button>
+                <button @attributes="MergeCloseButtonAttributes"></button>
             }
         </header>
-        <section class="modal-card-body">
-            <div class="message-body">
-                @DialogContents
-            </div>
+        <section @attributes="MergeBodyAttributes">
+            @DialogContents
         </section>
-        <footer class="modal-card-foot">
+        <footer @attributes="MergeFooterAttributes">
             @if (PrimaryButtonContent is not null || PrimaryButtonIconContent is not null)
             {
                 <PrimaryButton type="@(PrimarySubmitButton?"submit":"button")" ButtonClick="OnPrimaryClick">

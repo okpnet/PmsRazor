@@ -2,6 +2,7 @@
 using QualRazorCore.Controls.Buttons;
 using QualRazorCore.Controls.Dialogs.Options;
 using QualRazorCore.Core;
+using QualRazorCore.Extenssions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,61 @@ namespace QualRazorCore.Controls.Dialogs
         [Parameter]
         public bool PrimarySubmitButton { get; set; }
 
+        protected Dictionary<string, object> MergeDialogAttributes =>
+            HtmlAttributeHelper.PurgeAttributes(
+                Options.DialogAdditionalAttributes,
+                new([
+                    new("disabled",DisabledValue!),
+                    new("class",$"modal {Options.ActiveClass}")
+                    ])
+                );
+
+        protected Dictionary<string, object> MergeHeaderAttributes =>
+            HtmlAttributeHelper.PurgeAttributes(
+                Options.HeaderAdditionalAttributes,
+                new([
+                    new("class","modal-card-head")
+                    ])
+                );
+        protected Dictionary<string, object> MergeFooterAttributes =>
+            HtmlAttributeHelper.PurgeAttributes(
+                Options.FooterAdditionalAttributes,
+                new([
+                    new("class","modal-card-foot")
+                    ])
+                );
+
+        protected Dictionary<string, object> MergeBodyAttributes =>
+            HtmlAttributeHelper.PurgeAttributes(
+                Options.BodyAdditionalAttributes,
+                new([
+                    new("class","modal-card-body")
+                    ])
+                );
+        protected Dictionary<string, object> MergeContainerAttributes =>
+            HtmlAttributeHelper.PurgeAttributes(
+                Options.ContainerAdditionalAttributes,
+                new([
+                    new("class","modal-card")
+                    ])
+                );
+        protected Dictionary<string, object> MergeTitleAttributes =>
+            HtmlAttributeHelper.PurgeAttributes(
+                Options.TitleAdditionalAttributes,
+                new([
+                    new("class","modal-card-title")
+                    ])
+                );
+        protected Dictionary<string, object> MergeCloseButtonAttributes =>
+            HtmlAttributeHelper.PurgeAttributes(
+                Options.CloseButtonAdditionalAttributes,
+                new([
+                    new("class","delete"),
+                    new("type","button"),
+                    new("aria-label","close"),
+                    new("onclick",EventCallback.Factory.Create(this,OnClose))
+                    ])
+                );
         protected async Task OnClose() => await InvokeAsync(()=> Options.CloseDialog(DialogResult.Close));
 
         protected async Task OnPrimaryClick() => await InvokeAsync(() => Options.CloseDialog(DialogResult.Primary));

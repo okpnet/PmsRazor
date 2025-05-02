@@ -28,7 +28,6 @@ namespace QualRazorCore
         public const string STYLE_TO_HIDDEN_DESKTOP = "is-hidden-desktop";
         public const string STYLE_FLEX_ALIGNITEMSEND = "is-align-items-flex-end";
         public const string STYLE_FLEX_DIRECTION_COLUMN_TOUCH="is-flex-direction-column-touch";
-
         public const string MARGIN_ALL = "m-2";
 
         public const string TEXT_GREY = "has-text-grey";
@@ -41,6 +40,10 @@ namespace QualRazorCore
         public const string TEXT_BUTTON = "is-text";
         public const string OUTLINE_BUTTON = "is-outlined";
 
+        public const string TABLE="table";
+        public const string TABLE_ROW_HOVER = "is-hoverable";
+
+        public const string TYPE_ICON = "icon";
         public static class Text
         {
             public static string LEFT =>TEXT_LEFT;
@@ -79,6 +82,8 @@ namespace QualRazorCore
 
         public static class Table
         {
+            public static string STYLE => $"{TABLE} {STYLE_FULLWIDTH} {TABLE_ROW_HOVER}";
+
             public static string SORT_COLUMN => $"{STYLE_FLEX} {STYLE_ITEM_CENTER}";
 
             public static string INFORMATION => $"{STYLE_FLEX_DESKTOP} {STYLE_JUSTFY_CONTENT_SPACE_BETWEEN} {STYLE_ITEM_CENTER} {STYLE_FLEX_WWRAP}";

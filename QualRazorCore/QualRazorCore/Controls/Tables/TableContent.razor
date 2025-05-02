@@ -1,39 +1,12 @@
 ﻿@inherits RazorCore
 @typeparam TModel
 
-<table class="table is-hoverable is-fullwidth" @attributes="Option.TableAdditionalAttributes">
+<table @attributes="Option.TableAdditionalAttributes">
     <thead>
         <tr>
             @foreach (var column in Columns)
             {
-                <th>
-                    @switch (column.SortStatus)
-                    {
-                        case Filters.SortType.None:
-                            @((MarkupString)column.GetColumnNameInvoke())
-                        break;
-                        case Filters.SortType.ASC:
-                        <div class="@ClassDefine.Table.SORT_COLUMN">
-                            <span>
-                                    @((MarkupString)column.GetColumnNameInvoke())
-                            </span>
-                            <span class="icon">
-                                <i class="@CssGGIconDefine.AscArrow"></i>
-                            </span>
-                        </div>
-                        break;
-                        case Filters.SortType.DESC:
-                            <div class="@ClassDefine.Table.SORT_COLUMN">
-                                <span>
-                                    @((MarkupString)column.GetColumnNameInvoke())
-                                </span>
-                                <span class="icon">
-                                    <i class="@CssGGIconDefine.DescArrow"></i>
-                                </span>
-                            </div>
-                        break;
-                    }
-                </th>
+                <TableColumnContent Column="column" Option="Option.ColumnOption"></TableColumnContent>
             }
         </tr>
     </thead>
@@ -45,9 +18,11 @@
         </tr>
     </tfoot>
     <tbody>
-        @foreach(var row in Source)
-        {
-            <TableRowContent Columns="Columns" Model="row" ></TableRowContent>
-        }
+        <CascadingValue Value="Option.CellOption" Name="CellOption">
+            @foreach (var row in Source)
+            {
+                <TableRowContent Columns="Columns" Row="row" Option="Option.RowOption"></TableRowContent>
+            }
+        </CascadingValue>
     </tbody>
 </table>

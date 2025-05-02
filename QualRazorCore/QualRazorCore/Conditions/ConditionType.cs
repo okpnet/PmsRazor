@@ -1,13 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 using TalkLib.Expressions.Conditions;
-using TalkViewLib.JsonConverters;
 
 namespace TalkViewLib.Types
 {
     /// <summary>
     /// 条件タイプ
     /// </summary>
-    [JsonConverter(typeof(ConditionTypeConverter))]
     public enum ConditionType : byte
     {
         EQ = 0x0,

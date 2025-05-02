@@ -1,5 +1,5 @@
-﻿using QualRazorCore.Controls.Tables.Columns.Core;
-using QualRazorCore.Controls.Tables.Rows;
+﻿using Microsoft.AspNetCore.Components;
+using QualRazorCore.Controls.Tables.Columns.Core;
 using QualRazorCore.Core;
 using System.Collections.ObjectModel;
 using TalkLib.Pages.Results.ResultItems;
@@ -17,7 +17,7 @@ namespace QualRazorCore.Controls.Tables.Options
             get => _pageResult;
             set
             {
-                if (_pageResult == value)
+                if (Equals(_pageResult , value))
                 {
                     return;
                 }
@@ -26,13 +26,13 @@ namespace QualRazorCore.Controls.Tables.Options
             }
         }
 
-        protected TableInformationOption _informationOption=default!;
+        protected TableInformationOption _informationOption=new();
         public TableInformationOption InformationOption
         {
             get => _informationOption;
             set
             {
-                if (_informationOption == value)
+                if (Equals(_informationOption , value))
                 {
                     return;
                 }
@@ -40,6 +40,53 @@ namespace QualRazorCore.Controls.Tables.Options
                 OnPropertyChanged(nameof(InformationOption));
             }
         }
+
+        protected TableColumnOption _columnOption = new();
+
+        public TableColumnOption ColumnOption
+        {
+            get => _columnOption;
+            set
+            {
+                if(Equals( _columnOption,value))
+                {
+                    return;
+                }
+                _columnOption = value;
+                OnPropertyChanged(nameof(ColumnOption));
+            }
+        }
+
+        protected TableRowOption _rowOption = new();
+        public TableRowOption RowOption
+        {
+            get => _rowOption;
+            set
+            {
+                if( Equals(_rowOption,value))
+                {
+                    return;
+                }
+                _rowOption = value;
+                OnPropertyChanged(nameof(RowOption));
+            }
+        }
+
+        protected TableCellOption _cellOption = new();
+        public TableCellOption CellOption
+        {
+            get => _cellOption;
+            set
+            {
+                if (Equals(_cellOption, value))
+                {
+                    return;
+                }
+                _cellOption = value;
+                OnPropertyChanged(nameof(CellOption));
+            }
+        }
+
         protected Dictionary<string, object> _tableAdditionalAttributes=new();
         public Dictionary<string, object> TableAdditionalAttributes 
         {

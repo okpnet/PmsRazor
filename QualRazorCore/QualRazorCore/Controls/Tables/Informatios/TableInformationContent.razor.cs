@@ -2,13 +2,8 @@
 using QualRazorCore.Controls.Tables.Argments;
 using QualRazorCore.Controls.Tables.Options;
 using QualRazorCore.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QualRazorCore.Extenssions;
 using TalkLib.Pages.Results.ResultItems;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace QualRazorCore.Controls.Tables.Informatios
 {
@@ -20,81 +15,72 @@ namespace QualRazorCore.Controls.Tables.Informatios
         [Parameter,EditorRequired]
         public ITalkPageNumberResult PageNumberResult { get; set; } = default!;
 
-        ITalkPageResult PageResult => (ITalkPageResult)PageNumberResult;
+        protected ITalkPageResult PageResult => (ITalkPageResult)PageNumberResult;
 
-        public  PageInformationArg CreatePageInformationArg()
+        /// <summary>
+        /// インフォメーションDIVの属性
+        /// </summary>
+        protected Dictionary<string, object> MeargeContainerAttribute =>
+            HtmlAttributeHelper.PurgeAttributes(
+                Option.ContainerAdditionalAttributes,
+                new([
+                    new("class",ClassDefine.Table.INFORMATION)
+                    ])
+                );
+        /// <summary>
+        /// テーブルインフォメーションメッセージの属性
+        /// </summary>
+        protected Dictionary<string, object> MergeInformationAttribute =>
+            HtmlAttributeHelper.PurgeAttributes(
+                Option.InformationAdditionalAttributes,
+                new([
+                    new("class",$"{ClassDefine.MARGIN_ALL} {ClassDefine.TEXT_GREY}")
+                    ])
+                );
+        /// <summary>
+        /// ページボタングループの属性
+        /// </summary>
+        protected Dictionary<string, object> MergeButtonGroupAttribute =>
+            HtmlAttributeHelper.PurgeAttributes(Option.ButtonGroupAdditionalAttributes, 
+                new([
+                    new("class",ClassDefine.Table.PAGE_BUTTON_GROUP)
+                    ])
+                );
+
+        /// <summary>
+        /// ページネーションボタンの属性取得
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        Dictionary<string, object> GetMergeButtonAttribute(PagenationArg page)
+        {
+            return page.Active ?
+                HtmlAttributeHelper.PurgeAttributes(
+                    Option.ActiveButtonAdditionalAttributes,
+                    new([
+                        new("class",ClassDefine.Table.PAGE_CURRENT_BUTTON),
+                        new("onclick",EventCallback.Factory.Create(this,()=>Option.PageMoveInvoke.InvokeAsync(page.CurrentPageNumber)))
+                        ])) :
+                HtmlAttributeHelper.PurgeAttributes(
+                    Option.ActiveButtonAdditionalAttributes,
+                    new([
+                        new("class",ClassDefine.Table.PAGE_BUTTON),
+                        new("onclick",EventCallback.Factory.Create(this,()=>Option.PageMoveInvoke.InvokeAsync(page.CurrentPageNumber)))
+                        ]));
+        }
+
+        /// <summary>
+        /// テーブルインフォメーション引数を生成
+        /// </summary>
+        /// <returns></returns>
+        public PageInformationArg CreatePageInformationArg()
         {
             return new PageInformationArg(PageNumberResult.NumberOfRecords, PageNumberResult.NumberOfMatchedRecords, PageNumberResult.NumberOfPage, PageNumberResult.PageNumber);    
         }
-
+        /// <summary>
+        /// ページネーションボタンの引数配列を生成
+        /// </summary>
+        /// <returns></returns>
         protected IEnumerable<PagenationArg> GetPagenation()=>Helpers.PaginationBuilder.Build(Option, PageResult);
-
-        protected async IAsyncEnumerable<PagenationArg> GetPagenationAsync()
-        {
-            if (PageResult.NumberOfPage == 1)
-            {
-                yield break;
-            }
-            if (Option.MaxPageCount > PageResult.NumberOfPage)
-            {//次と前のボタン無し
-                //yield return new PagenationArg(PageResult.PageNumber > 1, Option.PrevLabelInvoke,1);
-                for (var page = 1; PageResult.NumberOfPage >= page; page++)
-                {
-                    var currentPage = page;
-                    yield return new PagenationArg(PageResult.PageNumber == currentPage, () => currentPage.ToString(), currentPage);
-                }
-                //yield return new PagenationArg(PageResult.NumberOfPage > PageResult.PageNumber, Option.NextLabelInvoke,PageNumberResult.NumberOfPage);
-            }
-            else
-            {
-                var _bothSideCount=Option.MaxPageCount / 2;
-                var start = 1;
-                var end = start + _bothSideCount * 2;
-                var isPrev = false;
-                var isNext = false;
-                if (_bothSideCount + 1 >= PageResult.PageNumber)
-                {
-                    isPrev = false; isNext = true;
-                    start = 1;
-                }
-                else if (PageResult.NumberOfPage - PageResult.PageNumber > _bothSideCount)
-                {
-                    isPrev = true; isNext = true;
-                    start = PageResult.PageNumber - _bothSideCount;
-                    end = start + _bothSideCount * 2;
-                }
-                else
-                {
-                    isPrev = true; isNext = false;
-                    start = PageResult.NumberOfPage - _bothSideCount * 2 + 1;
-                    end = PageResult.NumberOfPage;
-                }
-
-                if (start > end)
-                {
-                    throw new ArgumentException("end must be greater then start.");
-                }
-
-                yield return new PagenationArg(isPrev, Option.PrevLabelInvoke, start-1);
-
-                if(start > 1)
-                {
-                    yield return new PagenationArg(true, ()=>"…", 0);
-                }
-
-                for (var page = start; end >= page; page++)
-                {
-                    var currentPage = page;
-                    yield return new PagenationArg(true,() => currentPage.ToString(), currentPage);
-                }
-
-                if (PageResult.NumberOfPage > end)
-                {
-                    yield return new PagenationArg(true, () => "…", 0);
-                }
-
-                yield return new PagenationArg(isNext, Option.NextLabelInvoke, end+1);
-            }
-        }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Controls.Tables.Columns.Core;
+using QualRazorCore.Controls.Tables.Options;
 using QualRazorCore.Controls.Tables.Rows.Core;
 using QualRazorCore.Core;
-using QualRazorCore.Observers;
+using QualRazorCore.Extenssions;
 
 namespace QualRazorCore.Controls.Tables.Rows
 {
@@ -14,8 +15,14 @@ namespace QualRazorCore.Controls.Tables.Rows
         [Parameter, EditorRequired]
         public IEnumerable<ITableColumn<TModel>> Columns { get; set; } = default!;
 
-        string RowColumnString { get; set; }
+        [Parameter,EditorRequired]
+        public TableRowOption Option { get; set; } = default!;
 
-
+        protected Dictionary<string, object> MergedAttributes =>
+        HtmlAttributeHelper.PurgeAttributes(
+            Option.RowAdditionalAttributes,
+            new([
+                ])
+            );
     }
 }

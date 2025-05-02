@@ -6,6 +6,7 @@ using QualRazorCore.Controls.Tables.Informatios;
 using QualRazorCore.Controls.Tables.Options;
 using QualRazorCore.Controls.Tables.Rows.Core;
 using QualRazorCore.Core;
+using QualRazorCore.Extenssions;
 using QualRazorCore.Observers;
 
 namespace QualRazorCore.Controls.Tables
@@ -29,7 +30,15 @@ namespace QualRazorCore.Controls.Tables
         /// <summary>
         /// イベント中継インスタンス
         /// </summary>
-        protected TableSchemaOptionNotifier<TModel> _notifier=default!; 
+        protected TableSchemaOptionNotifier<TModel> _notifier=default!;
+
+        protected Dictionary<string, object> MergedAttributes =>
+            HtmlAttributeHelper.PurgeAttributes(
+                Option.TableAdditionalAttributes, 
+                new([
+                    new("class",ClassDefine.Table.STYLE)
+                    ])
+                );
 
         protected override void OnInitialized()
         {

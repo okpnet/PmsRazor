@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace QualRazorCore.Controls.Tables.Columns.Core
 {
-    public class TableColumn<TModel,TResult> : PropertyAccessCore<TModel,TResult>, ITableColumn<TModel>, ITableColumn
+    public class TableColumn<TModel,TResult> : PropertyAccessCore<TModel,TResult>, ITableColumn<TModel>, ITableColumn, IOrderChange
     {
         protected SortType _sortStaetus = SortType.None;
         public SortType SortStatus
@@ -50,6 +50,8 @@ namespace QualRazorCore.Controls.Tables.Columns.Core
 
         public Func<TModel, string> GetPropertyValueStringInvoke => (t) => Getter?.Invoke(t)?.ToString()??Key.ToString();
 
+        public string ColumnName => _propertyName;
+
         public TableColumn(
             Expression<Func<string>> getColumnNameInvoke,
             string propertyName,
@@ -78,6 +80,11 @@ namespace QualRazorCore.Controls.Tables.Columns.Core
                 return TextArignType.Center;
             }
             return TextArignType.Right;
+        }
+
+        public void OrderChange(SortType changeSortType)
+        {
+            SortStatus = changeSortType;
         }
     }
 }

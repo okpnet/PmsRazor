@@ -17,7 +17,6 @@ namespace QualRazorCore.Controls.InputFields.Core
         [Parameter]
         public RenderFragment LabelContent { get; set; } = default!;
 
-
         [Parameter, EditorRequired]
         public OptionBase Option { get; set; } = default!;
     }

@@ -1,9 +1,9 @@
 ﻿@inherits FieldCore<T>
 @typeparam T
 
-<div class="field" disabled="@DisabledValue">
+<div @attributes="MergeFieldAttributes">
     @PreContent
-    <label class="label">@LabelContent</label>
+    <label @attributes="MergeFieldLabelAttributes">@LabelContent</label>
     @switch (Option)
     {
         case NumberOption<T> numberOption:
