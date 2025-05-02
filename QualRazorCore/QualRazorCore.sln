@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorCustomInput", "..\..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorToaster", "..\..\..\BlazorTools\BlazorToaster\BlazorToaster\BlazorToaster.csproj", "{75E1DB34-E5CA-4CFC-A1B6-A31FEA7C699F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QualRazorCore.test", "QualRazorCore.test\QualRazorCore.test.csproj", "{0C233894-0313-5E21-1DB7-372DE79232CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{75E1DB34-E5CA-4CFC-A1B6-A31FEA7C699F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75E1DB34-E5CA-4CFC-A1B6-A31FEA7C699F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75E1DB34-E5CA-4CFC-A1B6-A31FEA7C699F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C233894-0313-5E21-1DB7-372DE79232CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C233894-0313-5E21-1DB7-372DE79232CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C233894-0313-5E21-1DB7-372DE79232CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C233894-0313-5E21-1DB7-372DE79232CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
