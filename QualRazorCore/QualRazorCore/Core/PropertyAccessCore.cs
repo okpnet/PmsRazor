@@ -23,6 +23,8 @@ namespace QualRazorCore.Core
                 OnPropertyChanged(nameof(PropertyName));
             }
         }
+
+        public abstract Type PropertyValueType { get; }
     }
 
     public abstract class PropertyAccessCore<TModel,TResult> : PropertyAccessCore, INotifyPropertyChanged
@@ -58,7 +60,7 @@ namespace QualRazorCore.Core
                 OnPropertyChanged(nameof(Setter));
             }
         }
-
+        public override Type PropertyValueType =>typeof(TResult);
         public PropertyAccessCore(PropertyInfo propertyInfo)
         {
             if (propertyInfo == null)
