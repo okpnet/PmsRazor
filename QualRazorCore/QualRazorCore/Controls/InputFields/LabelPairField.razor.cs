@@ -25,5 +25,6 @@ namespace QualRazorCore.Controls.InputFields
                     new("class","label")
                     ])
                 );
+
     }
 }

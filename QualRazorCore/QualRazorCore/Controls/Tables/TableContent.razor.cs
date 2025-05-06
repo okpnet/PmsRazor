@@ -27,10 +27,6 @@ namespace QualRazorCore.Controls.Tables
 
 
         protected IEnumerable<TableRowState<TModel>> Source { get; set; } = [];
-        /// <summary>
-        /// イベント中継インスタンス
-        /// </summary>
-        protected TableSchemaOptionNotifier<TModel> _notifier=default!;
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
@@ -42,7 +38,6 @@ namespace QualRazorCore.Controls.Tables
 
         protected override void OnInitialized()
         {
-            _notifier = new(Option, (array) => Source = array);
             disposables.Add(
                 PropertyChangedRelay<TableSchemaOption<TModel>, IEnumerable<TableRowState<TModel>>>.Create
                 (

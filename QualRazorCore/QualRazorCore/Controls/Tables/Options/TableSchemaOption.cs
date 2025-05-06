@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Controls.Tables.Columns.Core;
 using QualRazorCore.Core;
+using QualRazorCore.Options;
 using System.Collections.ObjectModel;
 using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorCore.Controls.Tables.Options
 {
-    public class TableSchemaOption<TModel> : NotifyCore where TModel:class
+    public class TableSchemaOption<TModel> : NotifyCore, IOption where TModel:class
     {
         ObservableCollection<ITableColumn> _columns = new();
         public ObservableCollection<ITableColumn> Columns => _columns;
