@@ -1,11 +1,12 @@
 ﻿using QualRazorCore.Controls.Filters;
 using QualRazorCore.Core;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace QualRazorCore.Controls.Tables.Columns.Core
 {
-    public class TableColumn<TModel,TResult> : PropertyAccessCore<TModel,TResult>, ITableColumn<TModel>, ITableColumn, IOrderChange
+    public class TableColumn<TModel,TResult> : PropertyAccessCore<TModel,TResult>, ITableColumn<TModel>, ITableColumn, IOrderChange,INotifyPropertyChanged
     {
         protected SortType _sortStaetus = SortType.None;
         public SortType SortStatus

@@ -1,14 +1,16 @@
 ﻿using QualRazorCore.Controls.InputFields.Options.Core;
+using QualRazorCore.Options;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace QualRazorCore.Controls.InputFields.Options
 {
-    public class SelectOption<T>:OptionBase
+    public class SelectOption<T>:OptionBase, IOption, INotifyPropertyChanged
     {
         ObservableCollection<T> _collection=new();
         public IEnumerable<T> Source

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QualRazorCore.Controls.InputFields.Options.Core;
+using QualRazorCore.Options;
 
 namespace QualRazorCore.Controls.InputFields.Options
 {
-    public class NumberOption<T>:OptionBase
+    public class NumberOption<T>:OptionBase, IOption, INotifyPropertyChanged
     {
         bool _isComma;
         public bool IsComma

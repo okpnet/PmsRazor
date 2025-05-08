@@ -1,13 +1,15 @@
 ﻿using QualRazorCore.Controls.InputFields.Options.Core;
+using QualRazorCore.Options;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace QualRazorCore.Controls.InputFields.Options
 {
-    public class BoolOption<T>:OptionBase
+    public class BoolOption<T>:OptionBase, IOption, INotifyPropertyChanged
     {
         T _trueVale=default!;
         public T TrueValue

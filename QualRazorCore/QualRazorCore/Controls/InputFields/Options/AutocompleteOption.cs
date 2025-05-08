@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
+using QualRazorCore.Options;
+using System.ComponentModel;
 
 namespace QualRazorCore.Controls.InputFields.Options
 {
-    public class AutocompleteOption<T> : StringOption
+    public class AutocompleteOption<T> : StringOption, IOption, INotifyPropertyChanged
     {
         public Func<T, string> GetValue { get; set; } = default!;
 

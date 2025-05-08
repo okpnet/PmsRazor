@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using QualRazorCore.Controls.InputFields.Options.Core;
+using QualRazorCore.Options;
+using System.ComponentModel;
 
 namespace QualRazorCore.Controls.InputFields.Options
 {
-    public class DateTimeOption : OptionBase
+    public class DateTimeOption : OptionBase, IOption, INotifyPropertyChanged
     {
         bool _isTimeSpan = false;
         public bool IsTimeSpan 

@@ -1,9 +1,10 @@
 ﻿using QualRazorCore.Core;
+using QualRazorCore.Options;
 using System.ComponentModel;
 
 namespace QualRazorCore.Controls.InputFields.Options.Core
 {
-    public abstract class OptionBase : NotifyCore, INotifyPropertyChanged
+    public abstract class OptionBase : NotifyCore, IOption, INotifyPropertyChanged
     {
         protected string? _placeHolder;
         public string? PlaceHolder 

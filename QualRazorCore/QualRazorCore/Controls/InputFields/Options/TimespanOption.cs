@@ -1,14 +1,16 @@
 ﻿using BlazorCustomInput.Components;
 using QualRazorCore.Controls.InputFields.Options.Core;
+using QualRazorCore.Options;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace QualRazorCore.Controls.InputFields.Options
 {
-    public class TimespanOption:OptionBase
+    public class TimespanOption:OptionBase,IOption, INotifyPropertyChanged
     {
         bool _isComma;
         public bool IsComma

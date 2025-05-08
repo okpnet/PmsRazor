@@ -1,4 +1,5 @@
-﻿using QualRazorCore.Controls.Tables.Options;
+﻿using QualRazorCore.Controls.InputFields.Options;
+using QualRazorCore.Controls.Tables.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,13 @@ namespace QualRazorCore.Options
             return result;
         }
 
+        public static IOption CreateLabelPairFieldOption<T>(string placeholder)
+        {
+            if (typeof(T) == typeof(bool))
+            {
+                return new BoolOption<bool>(placeholder, true, false); 
+            }
+            if()
+        }
     }
 }
