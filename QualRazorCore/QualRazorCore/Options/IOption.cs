@@ -9,4 +9,7 @@ namespace QualRazorCore.Options
     public interface IOption
     {
     }
+    public interface IOption<TProperty>:IOption
+    {
+    }
 }

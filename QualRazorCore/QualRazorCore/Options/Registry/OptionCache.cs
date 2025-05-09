@@ -1,11 +1,11 @@
-﻿using QualRazorCore.Controls.InputFields.Options.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QualRazorCore.Options.Defaults.Core;
 
-namespace QualRazorCore.Options.Provider
+namespace QualRazorCore.Options.Registry
 {
     internal class OptionCache
     {

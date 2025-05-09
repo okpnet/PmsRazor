@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorCore.Options
+namespace QualRazorCore.Options.Registry
 {
     public interface IOptionKey
     {
@@ -12,7 +12,7 @@ namespace QualRazorCore.Options
         Type ValueType { get; }
     }
 
-    public interface IOptionKey<T>: IOptionKey
+    public interface IOptionKey<T> : IOptionKey
     {
     }
 }

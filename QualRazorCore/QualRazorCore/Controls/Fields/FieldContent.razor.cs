@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Core;
-using QualRazorCore.Options.Provider;
+using QualRazorCore.Options.Registry;
 using System;
 using System.Collections.Generic;
 using System.Linq;

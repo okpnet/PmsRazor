@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
-using QualRazorCore.Controls.InputFields.Options.Core;
-using QualRazorCore.Options;
+using QualRazorCore.Options.Defaults.Core;
 using System.ComponentModel;
 
-namespace QualRazorCore.Controls.InputFields.Options
+namespace QualRazorCore.Options.Defaults
 {
     public class DateTimeOption : OptionBase, IOption, INotifyPropertyChanged
     {
         bool _isTimeSpan = false;
-        public bool IsTimeSpan 
+        public bool IsTimeSpan
         {
             get => _isTimeSpan;
             set
@@ -22,7 +21,7 @@ namespace QualRazorCore.Controls.InputFields.Options
             }
         }
 
-        InputDateType _dateType;
+        InputDateType _dateType=InputDateType.Date;
         public InputDateType DateType
         {
             get => _dateType;
@@ -44,7 +43,7 @@ namespace QualRazorCore.Controls.InputFields.Options
             get => _parseFormat;
             set
             {
-                if(value == _parseFormat)
+                if (value == _parseFormat)
                 {
                     return;
                 }
@@ -53,7 +52,7 @@ namespace QualRazorCore.Controls.InputFields.Options
             }
         }
 
-        public DateTimeOption(string? placeHolder,bool isTimeSpan, InputDateType dateType, string? parseFormat):base(placeHolder) 
+        public DateTimeOption(string? placeHolder, bool isTimeSpan, InputDateType dateType, string? parseFormat) : base(placeHolder)
         {
             _isTimeSpan = isTimeSpan;
             _dateType = dateType;

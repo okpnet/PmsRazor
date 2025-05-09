@@ -1,25 +1,19 @@
-﻿using QualRazorCore.Controls.InputFields.Options.Core;
-using QualRazorCore.Options;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using QualRazorCore.Options.Defaults.Core;
 
-namespace QualRazorCore.Controls.InputFields.Options
+namespace QualRazorCore.Options.Defaults
 {
-    public class BoolOption<T>:OptionBase, IOption, INotifyPropertyChanged
+    public class BoolOption<T> : FieldOption<T>, IOption<T>,IOption, INotifyPropertyChanged
     {
-        T _trueVale=default!;
+        T _trueVale = default!;
         public T TrueValue
         {
             get => _trueVale;
             set
             {
-                if(Equals(value, _trueVale)) 
+                if (Equals(value, _trueVale))
                 {
-                    return; 
+                    return;
                 }
                 _trueVale = value;
                 OnPropertyChanged(nameof(TrueValue));
@@ -40,7 +34,11 @@ namespace QualRazorCore.Controls.InputFields.Options
             }
         }
 
-        public BoolOption(string? placeHolder, T trueVale, T falseVale):base(placeHolder)
+        public BoolOption():base()
+        {
+        }
+
+        public BoolOption(string? placeHolder, T trueVale, T falseVale) : base()
         {
             _trueVale = trueVale;
             _falseVale = falseVale;

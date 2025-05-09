@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
-using QualRazorCore.Options;
 using System.ComponentModel;
 
-namespace QualRazorCore.Controls.InputFields.Options
+namespace QualRazorCore.Options.Defaults
 {
     public class AutocompleteOption<T> : StringOption, IOption, INotifyPropertyChanged
     {

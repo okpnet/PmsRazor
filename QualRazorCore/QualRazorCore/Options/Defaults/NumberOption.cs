@@ -1,18 +1,16 @@
-﻿using BlazorCustomInput.Components;
-using QualRazorCore.Controls.InputFields.Options.Core;
-using QualRazorCore.Options;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QualRazorCore.Options.Defaults.Core;
 
-namespace QualRazorCore.Controls.InputFields.Options
+namespace QualRazorCore.Options.Defaults
 {
-    public class TimespanOption:OptionBase,IOption, INotifyPropertyChanged
+    public class NumberOption<T> : FieldOption, IOption, INotifyPropertyChanged
     {
-        bool _isComma;
+        bool _isComma=false;
         public bool IsComma
         {
             get => _isComma;
@@ -27,7 +25,7 @@ namespace QualRazorCore.Controls.InputFields.Options
             }
         }
 
-        int _numberOfDigit;
+        int _numberOfDigit=0;
         public int NumberOfDigit
         {
             get => _numberOfDigit;
@@ -57,27 +55,32 @@ namespace QualRazorCore.Controls.InputFields.Options
             }
         }
 
-        Unit _unit;
-        public Unit Unit
+        decimal? _minValue;
+        public decimal? MinValue
         {
-            get => _unit;
+            get => _minValue;
             set
             {
-                if (_unit == value)
+                if (MinValue == value)
                 {
                     return;
                 }
-                _unit = value;
-                OnPropertyChanged(nameof(Unit));
+                _minValue = value;
+                OnPropertyChanged(nameof(MinValue));
             }
         }
-
-        public TimespanOption(string? placeHolder, bool isComma, int numberOfDigit, decimal? maxValue, Unit unit):base(placeHolder)
+        public NumberOption():base()
         {
+
+        }
+
+        public NumberOption(string? placeHolder, bool isComma, int numberOfDigit, decimal? maxValue, decimal? minValue) : this()
+        {
+            _p = placeHolder;
             _isComma = isComma;
             _numberOfDigit = numberOfDigit;
             _maxValue = maxValue;
-            _unit = unit;
+            _minValue = minValue;
         }
     }
 }

@@ -1,25 +1,24 @@
-﻿using QualRazorCore.Controls.InputFields.Options.Core;
-using QualRazorCore.Options;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QualRazorCore.Options.Defaults.Core;
 
-namespace QualRazorCore.Controls.InputFields.Options
+namespace QualRazorCore.Options.Defaults
 {
-    public class SelectOption<T>:OptionBase, IOption, INotifyPropertyChanged
+    public class SelectOption<T> : OptionBase, IOption, INotifyPropertyChanged
     {
-        ObservableCollection<T> _collection=new();
+        ObservableCollection<T> _collection = new();
         public IEnumerable<T> Source
         {
             get => _collection;
             set
             {
                 _collection.Clear();
-                foreach(var item in value)
+                foreach (var item in value)
                 {
                     _collection.Add(item);
                 }
@@ -31,7 +30,7 @@ namespace QualRazorCore.Controls.InputFields.Options
             get => _getOptionText;
             set
             {
-                if(_getOptionText == value)
+                if (_getOptionText == value)
                 {
                     return;
                 }
@@ -46,7 +45,7 @@ namespace QualRazorCore.Controls.InputFields.Options
             get => _chosePrompt;
             set
             {
-                if(value == _chosePrompt)
+                if (value == _chosePrompt)
                 {
                     return;
                 }
@@ -55,7 +54,7 @@ namespace QualRazorCore.Controls.InputFields.Options
             }
         }
 
-        public SelectOption(string? placeHolder, Func<T, string> getOptionText, string chosePrompt):base(placeHolder)
+        public SelectOption(string? placeHolder, Func<T, string> getOptionText, string chosePrompt) : base(placeHolder)
         {
             _getOptionText = getOptionText;
             _chosePrompt = chosePrompt;

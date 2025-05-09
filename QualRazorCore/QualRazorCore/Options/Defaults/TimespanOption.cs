@@ -1,15 +1,15 @@
-﻿using System;
+﻿using BlazorCustomInput.Components;
+using QualRazorCore.Options.Defaults.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using QualRazorCore.Controls.InputFields.Options.Core;
-using QualRazorCore.Options;
 
-namespace QualRazorCore.Controls.InputFields.Options
+namespace QualRazorCore.Options.Defaults
 {
-    public class NumberOption<T>:OptionBase, IOption, INotifyPropertyChanged
+    public class TimespanOption : OptionBase, IOption, INotifyPropertyChanged
     {
         bool _isComma;
         public bool IsComma
@@ -32,7 +32,7 @@ namespace QualRazorCore.Controls.InputFields.Options
             get => _numberOfDigit;
             set
             {
-                if(_numberOfDigit == value)
+                if (_numberOfDigit == value)
                 {
                     return;
                 }
@@ -56,27 +56,27 @@ namespace QualRazorCore.Controls.InputFields.Options
             }
         }
 
-        decimal? _minValue;
-        public decimal? MinValue
+        Unit _unit;
+        public Unit Unit
         {
-            get => _minValue;
+            get => _unit;
             set
             {
-                if (MinValue == value)
+                if (_unit == value)
                 {
                     return;
                 }
-                _minValue = value;
-                OnPropertyChanged(nameof(MinValue));
+                _unit = value;
+                OnPropertyChanged(nameof(Unit));
             }
         }
 
-        public NumberOption(string? placeHolder, bool isComma, int numberOfDigit, decimal? maxValue, decimal? minValue):base(placeHolder)
+        public TimespanOption(string? placeHolder, bool isComma, int numberOfDigit, decimal? maxValue, Unit unit) : base()
         {
             _isComma = isComma;
             _numberOfDigit = numberOfDigit;
             _maxValue = maxValue;
-            _minValue = minValue;
+            _unit = unit;
         }
     }
 }

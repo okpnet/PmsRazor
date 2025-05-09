@@ -1,5 +1,4 @@
 ﻿using BlazorCustomInput.Components;
-using QualRazorCore.Options;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorCore.Controls.InputFields.Options
+namespace QualRazorCore.Options.Defaults
 {
-    public class StringPasswordOption:StringOption, IOption, INotifyPropertyChanged
+    public class StringPasswordOption : StringOption, IOption, INotifyPropertyChanged
     {
         public override TextEditType TextEditType => TextEditType.Password;
         public StringPasswordOption(string? placeHolder) : base(placeHolder, false)

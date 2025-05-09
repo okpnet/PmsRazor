@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorCustomInput.Components;
-using QualRazorCore.Controls.InputFields.Options.Core;
-using QualRazorCore.Options;
+using QualRazorCore.Options.Defaults.Core;
 
-namespace QualRazorCore.Controls.InputFields.Options
+namespace QualRazorCore.Options.Defaults
 {
-    public class StringOption:OptionBase, IOption, INotifyPropertyChanged
+    public class StringOption : OptionBase, IOption, INotifyPropertyChanged
     {
         bool _isMultiLine;
         public bool IsMutiLine
@@ -29,7 +28,7 @@ namespace QualRazorCore.Controls.InputFields.Options
 
         public virtual TextEditType TextEditType => TextEditType.Text;
 
-        public StringOption(string? placeHolder, bool isMultiLine):base(placeHolder)
+        public StringOption(string? placeHolder, bool isMultiLine) : base(placeHolder)
         {
             _isMultiLine = isMultiLine;
         }

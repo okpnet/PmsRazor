@@ -24,7 +24,9 @@
   <ItemGroup>
     <Folder Include="Containers\Core\" />
     <Folder Include="Controls\Dialogs\Core\" />
+    <Folder Include="Controls\InputFields\Options\Core\" />
     <Folder Include="Controls\Tables\Core\" />
+    <Folder Include="Options\InputOptions\" />
     <Folder Include="Services\Helpers\" />
   </ItemGroup>
 

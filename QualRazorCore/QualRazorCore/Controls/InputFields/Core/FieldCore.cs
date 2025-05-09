@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using QualRazorCore.Controls.InputFields.Options.Core;
 using QualRazorCore.Core;
+using QualRazorCore.Options.Defaults.Core;
 using System.Linq.Expressions;
 
 namespace QualRazorCore.Controls.InputFields.Core
