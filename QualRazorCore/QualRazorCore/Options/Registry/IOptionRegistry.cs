@@ -31,8 +31,7 @@ namespace QualRazorCore.Options.Registry
 
         bool TryGet(IOptionKey key, out IOption? option);
 
-        IOptionKey RegisterFromExpression<TOwner, TPropertyType>(
-            Expression<Func<TOwner, TPropertyType>> propertyExpression,
-            IOption option);
+        IOptionKey RegisterFromExpression<TOwner, TOptionType>(Expression<Func<TOwner, TOptionType>> propertyExpression);
+
     }
 }

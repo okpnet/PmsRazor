@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlazorCustomInput.Components;
+﻿using BlazorCustomInput.Components;
 using QualRazorCore.Options.Defaults.Core;
+using System.ComponentModel;
 
 namespace QualRazorCore.Options.Defaults
 {
-    public class StringOption : OptionBase, IOption, INotifyPropertyChanged
+    public class StringOption : FieldOption, IOption, INotifyPropertyChanged
     {
         bool _isMultiLine;
         public bool IsMutiLine
@@ -28,8 +23,9 @@ namespace QualRazorCore.Options.Defaults
 
         public virtual TextEditType TextEditType => TextEditType.Text;
 
-        public StringOption(string? placeHolder, bool isMultiLine) : base(placeHolder)
+        public StringOption(string? placeHolder, bool isMultiLine) : base()
         {
+            _placeHolder = placeHolder;
             _isMultiLine = isMultiLine;
         }
     }

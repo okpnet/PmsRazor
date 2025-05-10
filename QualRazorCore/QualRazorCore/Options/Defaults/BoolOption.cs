@@ -3,7 +3,7 @@ using QualRazorCore.Options.Defaults.Core;
 
 namespace QualRazorCore.Options.Defaults
 {
-    public class BoolOption<T> : FieldOption<T>, IOption<T>,IOption, INotifyPropertyChanged
+    public class BoolOption<T> : FieldOption,IOption, INotifyPropertyChanged
     {
         T _trueVale = default!;
         public T TrueValue

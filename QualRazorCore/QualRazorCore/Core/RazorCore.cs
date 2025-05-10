@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Observers;
+using QualRazorCore.Options.Registry;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ namespace QualRazorCore.Core
 {
     public abstract class RazorCore: OwningComponentBase, INotifyPropertyChanged,IDisposable
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected readonly DisposableCollection disposables = new();
 

@@ -9,7 +9,7 @@ using QualRazorCore.Options.Defaults.Core;
 
 namespace QualRazorCore.Options.Defaults
 {
-    public class SelectOption<T> : OptionBase, IOption, INotifyPropertyChanged
+    public class SelectOption<T> : FieldOption, IOption, INotifyPropertyChanged
     {
         ObservableCollection<T> _collection = new();
         public IEnumerable<T> Source

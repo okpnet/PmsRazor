@@ -1,45 +1,72 @@
 ﻿
+using QualRazorCore.Controls.Dialogs;
+using QualRazorCore.Controls.Tables;
+using QualRazorCore.Controls.Tables.Options;
+using QualRazorCore.Core;
 using QualRazorCore.Options.Defaults;
+using System.Reflection;
+using System.Linq.Expressions;
+using QualRazorCore.Controls.Fields;
+using ResultLib;
+using QualRazorCore.Options.Defaults.Core;
 
 namespace QualRazorCore.Options.Helpers
 {
+    /// <summary>
+    /// IOptionFactoryがサービスに登録されていないときに使用する標準のOptionパラメーターを生成するクラス
+    /// </summary>
     public class DefaultOptionFactory : IOptionFactory
     {
-        public IOption? CreateFromProperty(Type targetType)
+        /// <summary>
+        /// Type別の生成辞書
+        /// OptionFactoryの標準を使用して型がないときはここに追加する
+        /// </summary>
+        private static readonly Dictionary<Type, Func<Type,IOption?>> _optionMap = new()
         {
-            if (targetType == typeof(int))
+            [typeof(int)] = (t) => new NumberOption<int>("", true, 0, null,null),
+            [typeof(double)] = (t) => new NumberOption<double>("", false, 1, null, null),
+            [typeof(bool)] = (t) => new BoolOption<bool>(),
+            [typeof(decimal)]=(t)=> new NumberOption<decimal>(string.Empty, true, 1, null, null),
+            [typeof(DateTime)]=(t)=>new DateTimeOption(string.Empty,false,Microsoft.AspNetCore.Components.Forms.InputDateType.Date,null),
+            [typeof(TimeSpan)] = (t) => new TimespanOption(string.Empty, false, 0, null, BlazorCustomInput.Components.Unit.Hour),
+            [typeof(string)] = (t) => new StringOption(string.Empty, false),
+            [typeof(ModalDialogContent)] = (t) => new ModalDialogOption(),
+            [typeof(TableContent<>)] = (t) =>
             {
-                return new NumberOption<int>(string.Empty, true, 0, null, null);
-            }
-            if (targetType == typeof(double))
+                var result = Activator.CreateInstance(
+                    typeof(TableSchemaOption<>).MakeGenericType(t.GenericTypeArguments),
+                    BindingFlags.Public | BindingFlags.Instance) as IOption;
+                return result!;
+            },
+            [typeof(FieldContent<,>)] = (t) =>
             {
-                return new NumberOption<double>(string.Empty,false,1,null,null);
-            }
-            if (targetType == typeof(decimal))
-            {
-                return new NumberOption<decimal>(string.Empty, true, 1, null, null);
-            }
-            if (targetType == typeof(bool))
-            {
-                return new BoolOption<bool>();
-            }
-            if (targetType == typeof(DateTime))
-            {
-                return new DateTimeOption(string.Empty,false,Microsoft.AspNetCore.Components.Forms.InputDateType.Date,null);
-            }
-            if (targetType == typeof(TimeSpan))
-            {
-                return new TimespanOption(string.Empty,false,0,null,BlazorCustomInput.Components.Unit.Hour);
-            }
-            if (targetType == typeof(string))
-            {
-                return new StringOption(string.Empty,false);
-            }
+                ArgumentOutOfRangeException.ThrowIfEqual(t.GenericTypeArguments.Length,2);
 
-            return null;
+                var target = t.GenericTypeArguments.First();
+                var result=Activator.CreateInstance(
+                    typeof(PropertyFieldOption<,>).MakeGenericType(t.GenericTypeArguments),
+                    BindingFlags.Public | BindingFlags.Instance) as IFieldOption;
+                if(result is not null && _optionMap is not null)
+                {
+                    result.FieldOption = _optionMap[target].Invoke(target)!;
+                }
+                return result;
+            }
+        };
+        /// <summary>
+        /// 指定された型に対応する Option を生成する。
+        /// ジェネリック型は型定義に基づいて判定される（例: TableContent&lt;T&gt;）。
+        /// </summary>
+        /// <param name="targetType">生成対象の型</param>
+        /// <returns>生成された Option。未定義の場合は null。</returns>
+        public IOption? Create(Type targetType)
+        {
+            var keyType = targetType.IsGenericType ? targetType.GetGenericTypeDefinition() : targetType;
+            if (!_optionMap.TryGetValue(keyType, out var function))
+            {
+                return null;
+            }
+            return function.Invoke(targetType);
         }
-
-        public IOption? CreateFromOption<TOption>() where TOption : IOption,new() => new TOption();
-
     }
 }

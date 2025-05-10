@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using QualRazorCore.Options.Defaults.Core;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using QualRazorCore.Options.Defaults.Core;
 
 namespace QualRazorCore.Options.Defaults
 {
@@ -46,7 +41,7 @@ namespace QualRazorCore.Options.Defaults
             get => _maxValue;
             set
             {
-                if (_maxValue == value)
+                if (Equals(_maxValue, value))
                 {
                     return;
                 }
@@ -61,7 +56,7 @@ namespace QualRazorCore.Options.Defaults
             get => _minValue;
             set
             {
-                if (MinValue == value)
+                if (Equals(MinValue,value))
                 {
                     return;
                 }
@@ -69,14 +64,10 @@ namespace QualRazorCore.Options.Defaults
                 OnPropertyChanged(nameof(MinValue));
             }
         }
-        public NumberOption():base()
-        {
 
-        }
-
-        public NumberOption(string? placeHolder, bool isComma, int numberOfDigit, decimal? maxValue, decimal? minValue) : this()
+        public NumberOption(string? placeHolder, bool isComma, int numberOfDigit, decimal? maxValue, decimal? minValue) 
         {
-            _p = placeHolder;
+            _placeHolder = placeHolder;
             _isComma = isComma;
             _numberOfDigit = numberOfDigit;
             _maxValue = maxValue;

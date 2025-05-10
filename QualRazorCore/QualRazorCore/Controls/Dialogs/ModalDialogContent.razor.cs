@@ -1,18 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
-using QualRazorCore.Controls.Buttons;
-using QualRazorCore.Controls.Dialogs.Options;
 using QualRazorCore.Core;
 using QualRazorCore.Extenssions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QualRazorCore.Options.Defaults;
 
 namespace QualRazorCore.Controls.Dialogs
 {
-    public partial class ModalDialog:RazorCore
-    {   
+    public partial class ModalDialogContent:OptionParameterRazorCore
+    {
         protected TaskCompletionSource<bool>? _taskCompletionSource = default!;
 
         [Parameter]
@@ -21,16 +15,15 @@ namespace QualRazorCore.Controls.Dialogs
         [Parameter]
         public string DialogTitle { get; set; } = string.Empty;
 
-        [Parameter,EditorRequired]
-        public ModalDialogOption Options { get; set; } = default!;
-
         [Parameter]
         public RenderFragment? PrimaryButtonContent { get; set; }
+
         [Parameter]
         public RenderFragment? PrimaryButtonIconContent { get; set; }
 
         [Parameter]
         public RenderFragment? SecondaryButtonContent { get; set; }
+
         [Parameter]
         public RenderFragment? SecondaryButtonIconContent { get; set; }
 
@@ -42,6 +35,18 @@ namespace QualRazorCore.Controls.Dialogs
 
         [Parameter]
         public bool PrimarySubmitButton { get; set; }
+        /// <summary>
+        /// 取得したOptionをModalDialogOptionに変更する
+        /// </summary>
+        protected ModalDialogOption Options
+        {
+            get
+            {
+                var result = BaseOptions as ModalDialogOption;
+                ArgumentNullException.ThrowIfNull(result);
+                return result;
+            }
+        }
 
         protected Dictionary<string, object> MergeDialogAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
@@ -98,7 +103,7 @@ namespace QualRazorCore.Controls.Dialogs
                     new("onclick",EventCallback.Factory.Create(this,OnClose))
                     ])
                 );
-        protected async Task OnClose() => await InvokeAsync(()=> Options.CloseDialog(DialogResult.Close));
+        protected async Task OnClose() => await InvokeAsync(() => Options.CloseDialog(DialogResult.Close));
 
         protected async Task OnPrimaryClick() => await InvokeAsync(() => Options.CloseDialog(DialogResult.Primary));
 

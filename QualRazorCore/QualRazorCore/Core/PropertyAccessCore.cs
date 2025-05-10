@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using QualRazorCore.Extenssions;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -61,34 +63,39 @@ namespace QualRazorCore.Core
             }
         }
         public override Type PropertyValueType =>typeof(TResult);
-        public PropertyAccessCore(PropertyInfo propertyInfo)
+
+        protected PropertyAccessCore()
         {
-            if (propertyInfo == null)
-                throw new ArgumentNullException(nameof(propertyInfo));
-
-            _propertyName = propertyInfo.Name;
-            var instance = Expression.Parameter(typeof(TModel), "instance");
-            var propertyAccess = Expression.Property(instance, propertyInfo);
-
-            _getter = Expression.Lambda<Func<TModel, TResult>>(propertyAccess, instance).Compile();
-            if(propertyInfo.GetSetMethod() is not null)
-            {
-                _setter= Expression.Lambda<Action<TModel, TResult>>(propertyAccess, instance).Compile();
-            }
         }
 
-        public PropertyAccessCore(string propertyName,Expression<Func<TModel,TResult>> propertyExpression,Expression<Action<TModel,TResult>>? oprionExpresiion=null)
+        protected PropertyAccessCore(Expression<Func<TModel, TResult>> propertyExpression)
+        {
+            if (propertyExpression == null)
+                throw new ArgumentNullException(nameof(propertyExpression));
+
+            _propertyName = ExpressionHelper.GetPropertyPath(propertyExpression);
+            _getter = ExpressionHelper.BuildGetter(propertyExpression);
+            _setter = ExpressionHelper.BuildSetter(propertyExpression);
+        }
+
+        protected PropertyAccessCore(string propertyName,Expression<Func<TModel,TResult>> propertyExpression)
         {
             if (propertyExpression == null)
                 throw new ArgumentNullException(nameof(propertyExpression));
 
             _propertyName = propertyName;
-            _getter = propertyExpression.Compile();
+            _getter = ExpressionHelper.BuildGetter(propertyExpression);
+            _setter = ExpressionHelper.BuildSetter(propertyExpression);
+        }
 
-            if(oprionExpresiion is not null)
-            {
-                _setter=oprionExpresiion.Compile();
-            }
+        public void Init(Expression<Func<TModel, TResult>> propertyExpression, string? propertyName=null)
+        {
+            if (propertyExpression == null)
+                throw new ArgumentNullException(nameof(propertyExpression));
+
+            _propertyName = propertyName??ExpressionHelper.GetPropertyPath(propertyExpression);
+            _getter = ExpressionHelper.BuildGetter(propertyExpression);
+            _setter = ExpressionHelper.BuildSetter(propertyExpression);
         }
     }
 }

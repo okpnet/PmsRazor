@@ -1,9 +1,10 @@
-﻿using QualRazorCore.Core;
+﻿using QualRazorCore.Controls;
+using QualRazorCore.Core;
 using System.ComponentModel;
 
-namespace QualRazorCore.Controls.Dialogs.Options
+namespace QualRazorCore.Options.Defaults
 {
-    public class ModalDialogOption: NotifyCore,INotifyPropertyChanged
+    public class ModalDialogOption : NotifyCore, INotifyPropertyChanged,IOption
     {
 
         protected TaskCompletionSource<DialogResult>? _taskCompletionSource = default!;
@@ -163,7 +164,7 @@ namespace QualRazorCore.Controls.Dialogs.Options
         public void CloseDialog(DialogResult dialogResult)
         {
             IsShow = false;
-            if(_taskCompletionSource is null)
+            if (_taskCompletionSource is null)
             {
                 return;
             }

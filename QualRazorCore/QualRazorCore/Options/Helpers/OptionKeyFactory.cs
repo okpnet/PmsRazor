@@ -10,12 +10,7 @@ namespace QualRazorCore.Options.Helpers
 {
     public static class OptionKeyFactory
     {
-        public static OptionKey<TResult> FromExpression<T, TResult>(
-                Expression<Func<T, TResult>> propertyExpression,
-                string? category = null,
-                string? description = null,
-                string? scope = null)
-                where TResult : class
+        public static OptionKey<TResult> FromExpression<T, TResult>(Expression<Func<T, TResult>> propertyExpression)
         {
             if (propertyExpression == null)
                 throw new ArgumentNullException(nameof(propertyExpression));
@@ -36,6 +31,5 @@ namespace QualRazorCore.Options.Helpers
 
             return string.Join(".", stack);
         }
-
     }
 }

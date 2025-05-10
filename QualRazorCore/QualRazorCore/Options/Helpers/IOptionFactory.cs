@@ -1,5 +1,9 @@
 ﻿namespace QualRazorCore.Options.Helpers
 {
+    /// <summary>
+    /// 指定された型に応じた OptionBase インスタンスを生成するサービスインターフェイス。
+    /// サービスに登録するOptionを生成するクラスがあるときは、このインターフェイスを継承する。
+    /// </summary>
     public interface IOptionFactory
     {
         /// <summary>
@@ -9,7 +13,5 @@
         /// <param name="targetType">対象のプロパティ型</param>
         /// <returns>生成された OptionBase</returns>
         IOption? Create(Type targetType);
-
-        IOption? Create<TOption>() where TOption:IOption,new(); 
     }
 }

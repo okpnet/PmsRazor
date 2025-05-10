@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
+using QualRazorCore.Controls.Forms;
 using QualRazorCore.Core;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace QualRazorCore.Controls.Fields.Options
 {
-    public class PropertyValueOption<TModel, TResult> : PropertyAccessCore<TModel, TResult>, INotifyPropertyChanged where TModel : class
+    public class PropertyValueOption<TModel, TResult> : PropertyAccessCore<TModel, TResult>, INotifyPropertyChanged, IPropertyValueOption where TModel : class
     {
         EditContext _editContext;
         public EditContext CascadingEditContext
@@ -31,7 +32,10 @@ namespace QualRazorCore.Controls.Fields.Options
             get => Getter(ChangeObject());
             set
             {
-                
+                if(Setter is null)
+                {
+                    return;
+                }
                 Setter(ChangeObject(), value);
             }
         }

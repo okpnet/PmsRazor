@@ -6,6 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Controls\Dialogs\Core\**" />
+    <Content Remove="Controls\Dialogs\Core\**" />
+    <EmbeddedResource Remove="Controls\Dialogs\Core\**" />
+    <None Remove="Controls\Dialogs\Core\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -23,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="Containers\Core\" />
-    <Folder Include="Controls\Dialogs\Core\" />
     <Folder Include="Controls\InputFields\Options\Core\" />
     <Folder Include="Controls\Tables\Core\" />
     <Folder Include="Options\InputOptions\" />

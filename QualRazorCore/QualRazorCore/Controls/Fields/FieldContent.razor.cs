@@ -1,31 +1,53 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using QualRazorCore.Core;
+using QualRazorCore.Options.Defaults.Core;
 using QualRazorCore.Options.Registry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace QualRazorCore.Controls.Fields
 {
-    public partial class FieldContent:RazorCore
+    public partial class FieldContent<TModel,TProperty>:OptionParameterRazorCore where TModel:class
     {
-        [Inject]
-        public OptionRegistry OptionRegistry { get; set; } = default!;
+        /// <summary>
+        /// 
+        /// </summary>
+        [CascadingParameter]
+        EditContext? CascadedEditContext { get; set; }
 
         [Parameter]
         public string Name { get; set; } = string.Empty;
 
+        [Parameter, EditorRequired]
+        public Expression<Func<TModel, TProperty>> PathExpression { get; set; } = default!;
+
+        [Parameter]
+        public TProperty Value { get; set; } = default!;
+
+        protected PropertyFieldOption<TModel, TProperty> FieldOption
+        {
+            get
+            {
+                var result = BaseOptions as PropertyFieldOption<TModel, TProperty>;
+                ArgumentNullException.ThrowIfNull(result);
+                return result;
+            }
+        }
+
+        protected TModel ConvertedModel
+        {
+            get
+            {
+                var result = CascadedEditContext?.Model as  TModel;
+                ArgumentNullException.ThrowIfNull(result);
+                return result;
+            }
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
-        }
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-            OptionRegistry.Resolve()
+            FieldOption.Init(PathExpression);
         }
     }
 }
