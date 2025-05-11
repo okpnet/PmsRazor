@@ -1,37 +1,55 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using QualRazorCore.Core;
-using QualRazorCore.Options.Core;
-using QualRazorCore.Options.Registration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QualRazorCore.Options.BuiltIn;
+using System.Linq.Expressions;
 
 namespace QualRazorCore.Controls.Fields
 {
-    public partial class FieldContent:RazorCore
+    public partial class FieldContent<TModel,TProperty>: OptionParameterRazorCore where TModel : class
     {
-        [Inject]
-        public IOptionRegistry OptionRegistry { get; set; } = default!;
+        [CascadingParameter]
+        EditContext? CascadedEditContext { get; set; }
 
         [Parameter]
-        public string Name { get; set; } = string.Empty;
+        public TModel Model { get; set; } = default!;
 
-        [Parameter, EditorRequired]
-        public IOptionKey OptionKey { get; set; } = default!;
+        [Parameter]
+        public string? Name { get; set; }
+
+        [Parameter,EditorRequired]
+        public Expression<Func<TModel, TProperty>>? Property { get; set; }
+
+        protected Expression<Func<TProperty>> PropertyExpression=>()=>GetPropertyValue();
+
+        protected PropertyFieldOption<TModel, TProperty> PropertyFieldOption
+        {
+            get
+            {
+                if(BaseOptions is not PropertyFieldOption<TModel, TProperty> propertyFieldOption)
+                {
+                    throw new InvalidCastException($"PropertyFieldOption cannot be cast '{typeof(PropertyFieldOption<TModel, TProperty>).Name}'");
+                }
+                return propertyFieldOption;
+            }
+        }
+
+        protected bool _isInitialize = false;
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            ArgumentNullException.ThrowIfNull(OptionKey);
-
+            ArgumentNullException.ThrowIfNull(PropertyFieldOption);
         }
 
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-            OptionRegistry.Resolve()
+        protected TProperty GetPropertyValue()
+        {//EditContextかModelのどちらかが必要
+            if (CascadedEditContext?.Model is TModel model)
+            {
+                return PropertyFieldOption.Getter.Invoke(model);
+            }
+            
+            return Model is null? default!:PropertyFieldOption.Getter.Invoke(Model);
         }
     }
 }

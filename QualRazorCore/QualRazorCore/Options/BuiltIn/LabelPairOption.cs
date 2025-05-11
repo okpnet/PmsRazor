@@ -1,10 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using QualRazorCore.Options.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QualRazorCore.Options.Core;
 
 namespace QualRazorCore.Options.BuiltIn
 {
@@ -27,19 +21,19 @@ namespace QualRazorCore.Options.BuiltIn
             }
         }
 
-        protected IOption<TProperty> _fieldOption=default!;
+        protected Dictionary<string, object> _fieldContainerAdditionalAttributes = new();
 
-        public IOption<TProperty> FieldOption
+        public Dictionary<string, object> FieldContainerAdditionalAttributes
         {
-            get => _fieldOption;
+            get => _fieldContainerAdditionalAttributes;
             set
             {
-                if(Equals(_fieldOption, value))
+                if (_fieldContainerAdditionalAttributes == value)
                 {
                     return;
                 }
-                _fieldOption = value;
-                OnPropertyChanged(nameof(FieldOption));
+                _fieldContainerAdditionalAttributes = value;
+                OnPropertyChanged(nameof(FieldContainerAdditionalAttributes));
             }
         }
     }

@@ -1,0 +1,8 @@
+﻿@inherits OptionParameterRazorCore
+@typeparam TModel where TModel : class
+@typeparam TProperty
+
+<div @attributes="MergeFieldAttributes">
+    @PreContent
+    <label @attributes="MergeFieldLabelAttributes">@LabelOption.FieldOption</label>
+</div>

@@ -127,8 +127,8 @@ namespace QualRazorCore.Options.Registration
         {
             var name = ExpressionHelper.GetPropertyPath(propertyExpression);
             var key = OptionKey<TPropertyType>.Create(name);
-            var option = _optionFactory.Create(typeof(TPropertyType))
-                ?? throw new ArgumentNullException($"{typeof(TPropertyType).Name} of type {nameof(IOptionFactory)} is result null.");
+            var option = _optionFactory is IExtendOptionFactory extendOption ? extendOption.Create(propertyExpression) : _optionFactory.Create(typeof(TPropertyType));
+            ArgumentNullException.ThrowIfNull(option);
             Register(key, option);
             return key;
         }

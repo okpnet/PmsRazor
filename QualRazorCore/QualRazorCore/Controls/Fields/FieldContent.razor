@@ -11,7 +11,7 @@
             ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
                       AdditionalAttributes="@numberOption.FieldAdditionalAttributes"
                       PlaceHolder="@numberOption.PlaceHolder"
-                      ValueExpression="()=>FieldOption.Getter(ConvertedModel)"
+                      ValueExpression="PropertyExpression"
                       Comma="@numberOption.IsComma"
                       Degit="@numberOption.NumberOfDigit"
                       MaxValue="@numberOption.MaxValue"
@@ -21,7 +21,7 @@
         <EditerBool AdditionalAttributes="@boolOption.FieldAdditionalAttributes"
                     Value="@Value"
                     ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
-                    ValueExpression="()=>FieldOption.Getter(ConvertedModel)"
+                    ValueExpression="PropertyExpression"
                     PlaceHolder="@boolOption.PlaceHolder"
                     TrueValue="@boolOption.TrueValue"
                     FalseValue="@boolOption.FalseValue"></EditerBool>
@@ -31,7 +31,7 @@
         <EditerDate AdditionalAttributes="@AdditionalAttributes"
                     Value="@Value"
                     ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
-                    ValueExpression="()=>FieldOption.Getter(ConvertedModel)"
+                    ValueExpression="PropertyExpression"
                     DateType="@dateTimeOption.DateType"
                     CustomParseFormat="@dateTimeOption.ParseFormat"></EditerDate>
         break;
@@ -40,7 +40,7 @@
         <EditerTimeSpan AdditionalAttributes="@AdditionalAttributes"
                         Value="@Value"
                         ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
-                        ValueExpression="()=>FieldOption.Getter(ConvertedModel)"
+                        ValueExpression="PropertyExpression"
                         Comma="@timespanOption.IsComma"
                         MaxValue="@timespanOption.MaxValue"
                         Degit="@timespanOption.NumberOfDigit"
@@ -53,7 +53,7 @@
             <EditerTextArea AdditionalAttributes="@AdditionalAttributes"
                             Value="@Value"
                             ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
-                            ValueExpression="()=>FieldOption.Getter(ConvertedModel)"
+                            ValueExpression="PropertyExpression"
                             PlaceHolder="@stringOption.PlaceHolder"></EditerTextArea>
         }
         else
@@ -61,7 +61,7 @@
             <EditerText AdditionalAttributes="@AdditionalAttributes"
                         Value="@Value"
                         ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
-                        ValueExpression="()=>FieldOption.Getter(ConvertedModel)"
+                        ValueExpression="PropertyExpression"
                         PlaceHolder="@stringOption.PlaceHolder"
                         EditType="@stringOption.TextEditType"></EditerText>
         }
@@ -71,7 +71,7 @@
             <EditerSelect AdditionalAttributes="@AdditionalAttributes"
                           Value="@Value"
                           ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
-                          ValueExpression="()=>FieldOption.Getter(ConvertedModel)"
+                          ValueExpression="PropertyExpression"
                           PlaceHolder="@Option.PlaceHolder"
                           Source="@(()=>selectOption.Source)"
                           OptionContents="@selectOption.GetOptionText"

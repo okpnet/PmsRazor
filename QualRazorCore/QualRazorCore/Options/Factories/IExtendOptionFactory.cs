@@ -3,11 +3,7 @@ using System.Linq.Expressions;
 
 namespace QualRazorCore.Options.Factories
 {
-    /// <summary>
-    /// 指定された型に応じた OptionBase インスタンスを生成するサービスインターフェイス。
-    /// サービスに登録するOptionを生成するクラスがあるときは、このインターフェイスを継承する。
-    /// </summary>
-    public interface IOptionFactory
+    public interface IExtendOptionFactory
     {
         /// <summary>
         /// 指定された型に応じた OptionBase インスタンスを生成します。
@@ -15,10 +11,6 @@ namespace QualRazorCore.Options.Factories
         /// </summary>
         /// <param name="targetType">対象のプロパティ型</param>
         /// <returns>生成された OptionBase</returns>
-        IOption? Create(Type targetType);
-
-
+        IOption? Create<TModel, TProperty>(Expression<Func<TModel, TProperty>> expression);
     }
-
-
 }

@@ -40,21 +40,6 @@ namespace QualRazorCore.Options.BuiltIn
             }
         }
 
-        Expression<Func<TResult>> _valueExpression = default!;
-
-        public Expression<Func<TResult>> ValueExpressions
-        {
-            get => _valueExpression;
-            set
-            {
-                if (Equals(_valueExpression, value))
-                {
-                    return;
-                }
-                _valueExpression = value;
-                OnPropertyChanged(nameof(ValueExpressions));
-            }
-        }
 
         public IOption FieldOption { get; set; }
 
