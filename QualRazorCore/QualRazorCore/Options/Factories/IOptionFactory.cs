@@ -1,4 +1,6 @@
-﻿namespace QualRazorCore.Options.Helpers
+﻿using QualRazorCore.Options.Core;
+
+namespace QualRazorCore.Options.Factories
 {
     /// <summary>
     /// 指定された型に応じた OptionBase インスタンスを生成するサービスインターフェイス。

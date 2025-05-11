@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.Metrics;
 using System.Linq.Expressions;
 
-namespace QualRazorCore.Options
+namespace QualRazorCore.Options.Core
 {
     public interface IFieldOption : IOption
     {

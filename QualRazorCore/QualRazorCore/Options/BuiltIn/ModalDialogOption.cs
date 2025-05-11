@@ -1,8 +1,9 @@
 ﻿using QualRazorCore.Controls;
 using QualRazorCore.Core;
+using QualRazorCore.Options.Core;
 using System.ComponentModel;
 
-namespace QualRazorCore.Options.Defaults
+namespace QualRazorCore.Options.BuiltIn
 {
     public class ModalDialogOption : NotifyCore, INotifyPropertyChanged,IOption
     {

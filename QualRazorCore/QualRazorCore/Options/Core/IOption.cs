@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorCore.Options
+namespace QualRazorCore.Options.Core
 {
     public interface IOption
     {

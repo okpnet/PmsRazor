@@ -1,11 +1,17 @@
-﻿using QualRazorCore.Options.Defaults.Core;
+﻿using BlazorCustomInput.Components;
+using QualRazorCore.Options.Core;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace QualRazorCore.Options.Defaults
+namespace QualRazorCore.Options.BuiltIn
 {
-    public class NumberOption<T> : FieldOption, IOption, INotifyPropertyChanged
+    public class TimespanOption : OptionBase, IOption, INotifyPropertyChanged
     {
-        bool _isComma=false;
+        bool _isComma;
         public bool IsComma
         {
             get => _isComma;
@@ -20,7 +26,7 @@ namespace QualRazorCore.Options.Defaults
             }
         }
 
-        int _numberOfDigit=0;
+        int _numberOfDigit;
         public int NumberOfDigit
         {
             get => _numberOfDigit;
@@ -41,7 +47,7 @@ namespace QualRazorCore.Options.Defaults
             get => _maxValue;
             set
             {
-                if (Equals(_maxValue, value))
+                if (_maxValue == value)
                 {
                     return;
                 }
@@ -50,28 +56,27 @@ namespace QualRazorCore.Options.Defaults
             }
         }
 
-        decimal? _minValue;
-        public decimal? MinValue
+        Unit _unit;
+        public Unit Unit
         {
-            get => _minValue;
+            get => _unit;
             set
             {
-                if (Equals(MinValue,value))
+                if (_unit == value)
                 {
                     return;
                 }
-                _minValue = value;
-                OnPropertyChanged(nameof(MinValue));
+                _unit = value;
+                OnPropertyChanged(nameof(Unit));
             }
         }
 
-        public NumberOption(string? placeHolder, bool isComma, int numberOfDigit, decimal? maxValue, decimal? minValue) 
+        public TimespanOption(string? placeHolder, bool isComma, int numberOfDigit, decimal? maxValue, Unit unit) : base()
         {
-            _placeHolder = placeHolder;
             _isComma = isComma;
             _numberOfDigit = numberOfDigit;
             _maxValue = maxValue;
-            _minValue = minValue;
+            _unit = unit;
         }
     }
 }

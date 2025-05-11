@@ -4,9 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using QualRazorCore.Options.Registry;
+using QualRazorCore.Options.Core;
 
-namespace QualRazorCore.Options.Helpers
+namespace QualRazorCore.Options.Factories
 {
     public static class OptionKeyFactory
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
-using QualRazorCore.Options.Defaults.Core;
+using QualRazorCore.Options.Core;
 using System.ComponentModel;
 
-namespace QualRazorCore.Options.Defaults
+namespace QualRazorCore.Options.BuiltIn
 {
     public class DateTimeOption : OptionBase, IOption, INotifyPropertyChanged
     {

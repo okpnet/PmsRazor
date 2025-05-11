@@ -1,15 +1,29 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using QualRazorCore.Options.Registry;
+using QualRazorCore.Options.Factories;
+using QualRazorCore.Options.Registration;
 
 namespace QualRazorCore.Services
 {
     public static class OptionRegistryService
     {
-        public static IServiceCollection AddOptionRegistry(this IServiceCollection services)
+        public static IServiceCollection AddOptionRegistry(this IServiceCollection services, Action<CompositeOptionFactory>? configureFactories = null)
         {
-            services.AddScoped<IOptionRegistry, OptionRegistry>();
-            //カスタムしたOptionFactoryを登録するときは、これを参考にして。
-            //services.AddScoped<IOptionFactory, DefaultOptionFactory>();
+            services.AddScoped((provider) =>
+            {
+                var factory =new CompositeOptionFactory();
+                factory.AddFactory(new DefaultOptionFactory());
+                factory.AddFactory(new PropertyFieldOptionFactory());
+
+                // 利用者が任意の Factory を追加できるようにする
+                configureFactories?.Invoke(factory);
+                return factory;
+            });
+            services.AddScoped<IOptionRegistry, FactoryBackedOptionRegistry>((provider) =>
+            {
+                var compositeFactory = provider.GetRequiredService<CompositeOptionFactory>();
+                var factory=new FactoryBackedOptionRegistry(compositeFactory);
+                return factory;
+            });
             return services;
         }
     }

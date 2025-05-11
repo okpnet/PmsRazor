@@ -5,9 +5,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using QualRazorCore.Options.Defaults.Core;
+using QualRazorCore.Options.Core;
 
-namespace QualRazorCore.Options.Defaults
+namespace QualRazorCore.Options.BuiltIn
 {
     public class SelectOption<T> : FieldOption, IOption, INotifyPropertyChanged
     {

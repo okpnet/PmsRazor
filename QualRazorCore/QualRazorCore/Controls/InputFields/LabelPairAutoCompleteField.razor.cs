@@ -1,7 +1,7 @@
 ﻿using BlazorCustomInput.Components;
 using Microsoft.AspNetCore.Components;
 using QualRazorCore.Controls.InputFields.Core;
-using QualRazorCore.Options.Defaults;
+using QualRazorCore.Options.BuiltIn;
 
 namespace QualRazorCore.Controls.InputFields
 {

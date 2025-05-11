@@ -1,6 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿using QualRazorCore.Options.Core;
+using System.Linq.Expressions;
 
-namespace QualRazorCore.Options.Registry
+namespace QualRazorCore.Options.Registration
 {
     public interface IOptionRegistry
     {
@@ -31,7 +32,11 @@ namespace QualRazorCore.Options.Registry
 
         bool TryGet(IOptionKey key, out IOption? option);
 
-        IOptionKey RegisterFromExpression<TOwner, TOptionType>(Expression<Func<TOwner, TOptionType>> propertyExpression);
+        IOptionKey RegisterFromExpression<TOwner, TPropertyType>(
+            Expression<Func<TOwner, TPropertyType>> propertyExpression);
 
+        IOptionKey RegisterFromExpression<TOwner, TPropertyType>(
+            Expression<Func<TOwner, TPropertyType>> propertyExpression,
+            IOption custumOption);
     }
 }

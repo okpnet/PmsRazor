@@ -1,8 +1,8 @@
 ﻿using BlazorCustomInput.Components;
-using QualRazorCore.Options.Defaults.Core;
+using QualRazorCore.Options.Core;
 using System.ComponentModel;
 
-namespace QualRazorCore.Options.Defaults
+namespace QualRazorCore.Options.BuiltIn
 {
     public class StringOption : FieldOption, IOption, INotifyPropertyChanged
     {

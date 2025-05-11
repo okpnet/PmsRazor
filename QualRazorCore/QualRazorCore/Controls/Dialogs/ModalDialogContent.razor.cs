@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Core;
 using QualRazorCore.Extenssions;
-using QualRazorCore.Options.Defaults;
+using QualRazorCore.Options.BuiltIn;
 
 namespace QualRazorCore.Controls.Dialogs
 {

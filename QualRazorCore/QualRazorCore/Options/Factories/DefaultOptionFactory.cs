@@ -1,16 +1,13 @@
 ﻿
 using QualRazorCore.Controls.Dialogs;
+using QualRazorCore.Controls.Fields;
 using QualRazorCore.Controls.Tables;
 using QualRazorCore.Controls.Tables.Options;
-using QualRazorCore.Core;
-using QualRazorCore.Options.Defaults;
+using QualRazorCore.Options.BuiltIn;
+using QualRazorCore.Options.Core;
 using System.Reflection;
-using System.Linq.Expressions;
-using QualRazorCore.Controls.Fields;
-using ResultLib;
-using QualRazorCore.Options.Defaults.Core;
 
-namespace QualRazorCore.Options.Helpers
+namespace QualRazorCore.Options.Factories
 {
     /// <summary>
     /// IOptionFactoryがサービスに登録されていないときに使用する標準のOptionパラメーターを生成するクラス
@@ -37,20 +34,6 @@ namespace QualRazorCore.Options.Helpers
                     typeof(TableSchemaOption<>).MakeGenericType(t.GenericTypeArguments),
                     BindingFlags.Public | BindingFlags.Instance) as IOption;
                 return result!;
-            },
-            [typeof(FieldContent<,>)] = (t) =>
-            {
-                ArgumentOutOfRangeException.ThrowIfEqual(t.GenericTypeArguments.Length,2);
-
-                var target = t.GenericTypeArguments.First();
-                var result=Activator.CreateInstance(
-                    typeof(PropertyFieldOption<,>).MakeGenericType(t.GenericTypeArguments),
-                    BindingFlags.Public | BindingFlags.Instance) as IFieldOption;
-                if(result is not null && _optionMap is not null)
-                {
-                    result.FieldOption = _optionMap[target].Invoke(target)!;
-                }
-                return result;
             }
         };
         /// <summary>

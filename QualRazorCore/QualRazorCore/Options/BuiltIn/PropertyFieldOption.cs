@@ -1,8 +1,9 @@
 ﻿using QualRazorCore.Core;
+using QualRazorCore.Options.Core;
 using System.ComponentModel;
 using System.Linq.Expressions;
 
-namespace QualRazorCore.Options.Defaults.Core
+namespace QualRazorCore.Options.BuiltIn
 {
     public class PropertyFieldOption<TModel, TResult> : PropertyAccessCore<TModel, TResult>, INotifyPropertyChanged,IPropertyOption<TModel, TResult>,IPropertyOption, IFieldOption<TResult>, IFieldOption, IOption where TModel : class
     {

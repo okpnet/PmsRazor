@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorCore.Options.Registry
+namespace QualRazorCore.Options.Core
 {
     public interface IOptionKey
     {
         string Name { get; }
-        Type ValueType { get; }
+        Type TargetType { get; }
     }
 
     public interface IOptionKey<T> : IOptionKey

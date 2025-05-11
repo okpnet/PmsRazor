@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorCore.Options.Defaults.Core
+namespace QualRazorCore.Options.Core
 {
     public abstract class FieldOption:OptionBase
     {

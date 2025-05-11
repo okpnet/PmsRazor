@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using QualRazorCore.Options;
-using QualRazorCore.Options.Registry;
+using QualRazorCore.Options.Core;
+using QualRazorCore.Options.Registration;
 using System.ComponentModel;
 
 namespace QualRazorCore.Core

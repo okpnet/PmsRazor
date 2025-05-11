@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
-using QualRazorCore.Options.Defaults.Core;
+using QualRazorCore.Options.Core;
 
-namespace QualRazorCore.Options.Defaults
+namespace QualRazorCore.Options.BuiltIn
 {
     public class BoolOption<T> : FieldOption,IOption, INotifyPropertyChanged
     {

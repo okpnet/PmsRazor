@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Controls.Tables.Columns.Core;
 using QualRazorCore.Core;
-using QualRazorCore.Options;
+using QualRazorCore.Options.Core;
 using System.Collections.ObjectModel;
 using TalkLib.Pages.Results.ResultItems;
 

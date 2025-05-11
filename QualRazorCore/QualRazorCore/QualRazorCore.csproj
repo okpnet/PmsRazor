@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="Controls\Dialogs\Core\**" />
+    <Compile Remove="Options\InputOptions\**" />
     <Content Remove="Controls\Dialogs\Core\**" />
+    <Content Remove="Options\InputOptions\**" />
     <EmbeddedResource Remove="Controls\Dialogs\Core\**" />
+    <EmbeddedResource Remove="Options\InputOptions\**" />
     <None Remove="Controls\Dialogs\Core\**" />
+    <None Remove="Options\InputOptions\**" />
   </ItemGroup>
 
 
@@ -32,7 +36,6 @@
     <Folder Include="Containers\Core\" />
     <Folder Include="Controls\InputFields\Options\Core\" />
     <Folder Include="Controls\Tables\Core\" />
-    <Folder Include="Options\InputOptions\" />
     <Folder Include="Services\Helpers\" />
   </ItemGroup>
 

@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Options;
-using QualRazorCore.Options.Defaults.Core;
+using QualRazorCore.Options.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorCore.Options.Defaults
+namespace QualRazorCore.Options.BuiltIn
 {
     public class LabelPairOption<TProperty>:OptionBase,IOption
     {
