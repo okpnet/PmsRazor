@@ -1,4 +1,5 @@
-﻿using QualRazorCore.Options.Core;
+﻿using QualRazorCore.Core;
+using QualRazorCore.Options.Core;
 using QualRazorCore.Options.Factories;
 
 namespace QualRazorCore.Options.Registration

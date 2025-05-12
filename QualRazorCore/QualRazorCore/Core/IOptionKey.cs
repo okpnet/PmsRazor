@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorCore.Options.Core
+namespace QualRazorCore.Core
 {
     public interface IOptionKey
     {

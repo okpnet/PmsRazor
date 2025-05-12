@@ -33,8 +33,11 @@ namespace QualRazorCore.Options.Registration
 
         bool TryGet(IOptionKey key, out IOption? option);
 
-        IOptionKey RegisterFromExpression<TOwner, TRazozCore>(Expression<Func<TOwner, TRazozCore>> propertyExpression) where TRazozCore : RazorCore;
+        IOptionKey RegisterFromExpression<TOwner, TPropertyType>(
+            Expression<Func<TOwner, TPropertyType>> propertyExpression);
 
-        IOptionKey RegisterFromExpression<TRazozCore>() where TRazozCore : RazorCore;
+        IOptionKey RegisterFromExpression<TOwner, TPropertyType>(
+            Expression<Func<TOwner, TPropertyType>> propertyExpression,
+            IOption custumOption);
     }
 }

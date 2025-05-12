@@ -1,4 +1,4 @@
-﻿namespace QualRazorCore.Options.Core
+﻿namespace QualRazorCore.Core
 {
     /// <summary>
     /// OptionKeyは、オプションのキーを表すクラスです。
@@ -18,7 +18,7 @@
         /// OptionKeyのコンストラクタ
         /// </summary>
         /// <param name="name"></param>
-        public OptionKey(string name)
+        private OptionKey(string name)
         {
             Name = name;
         }
