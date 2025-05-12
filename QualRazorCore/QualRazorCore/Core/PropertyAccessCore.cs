@@ -64,9 +64,6 @@ namespace QualRazorCore.Core
         }
         public override Type PropertyValueType =>typeof(TResult);
 
-        protected PropertyAccessCore()
-        {
-        }
 
         protected PropertyAccessCore(Expression<Func<TModel, TResult>> propertyExpression)
         {

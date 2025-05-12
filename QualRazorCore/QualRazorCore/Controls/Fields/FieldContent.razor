@@ -8,7 +8,7 @@
     case NumberOption<TProperty> numberOption:
         <EditerNumber 
             Value="@Value"
-            ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
+            ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
                       AdditionalAttributes="@numberOption.FieldAdditionalAttributes"
                       PlaceHolder="@numberOption.PlaceHolder"
                       ValueExpression="PropertyExpression"
@@ -20,7 +20,7 @@
     case BoolOption<TProperty> boolOption:
         <EditerBool AdditionalAttributes="@boolOption.FieldAdditionalAttributes"
                     Value="@Value"
-                    ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
+                    ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
                     ValueExpression="PropertyExpression"
                     PlaceHolder="@boolOption.PlaceHolder"
                     TrueValue="@boolOption.TrueValue"
@@ -30,7 +30,7 @@
     case DateTimeOption dateTimeOption:
         <EditerDate AdditionalAttributes="@AdditionalAttributes"
                     Value="@Value"
-                    ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
+                    ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
                     ValueExpression="PropertyExpression"
                     DateType="@dateTimeOption.DateType"
                     CustomParseFormat="@dateTimeOption.ParseFormat"></EditerDate>
@@ -39,7 +39,7 @@
     case TimespanOption timespanOption:
         <EditerTimeSpan AdditionalAttributes="@AdditionalAttributes"
                         Value="@Value"
-                        ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
+                        ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
                         ValueExpression="PropertyExpression"
                         Comma="@timespanOption.IsComma"
                         MaxValue="@timespanOption.MaxValue"
@@ -52,7 +52,7 @@
         {
             <EditerTextArea AdditionalAttributes="@AdditionalAttributes"
                             Value="@Value"
-                            ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
+                            ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
                             ValueExpression="PropertyExpression"
                             PlaceHolder="@stringOption.PlaceHolder"></EditerTextArea>
         }
@@ -60,7 +60,7 @@
         {
             <EditerText AdditionalAttributes="@AdditionalAttributes"
                         Value="@Value"
-                        ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
+                        ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
                         ValueExpression="PropertyExpression"
                         PlaceHolder="@stringOption.PlaceHolder"
                         EditType="@stringOption.TextEditType"></EditerText>
@@ -70,7 +70,7 @@
         <div class="select">
             <EditerSelect AdditionalAttributes="@AdditionalAttributes"
                           Value="@Value"
-                          ValueChanged="EventCallback.Factory.Create<TProperty>(this, (t)=>FieldOption.Setter?.Invoke(ConvertedModel,t))"
+                          ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
                           ValueExpression="PropertyExpression"
                           PlaceHolder="@Option.PlaceHolder"
                           Source="@(()=>selectOption.Source)"

@@ -3,8 +3,10 @@ using QualRazorCore.Controls.Dialogs;
 using QualRazorCore.Controls.Fields;
 using QualRazorCore.Controls.Tables;
 using QualRazorCore.Controls.Tables.Options;
+using QualRazorCore.Core;
 using QualRazorCore.Options.BuiltIn;
 using QualRazorCore.Options.Core;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace QualRazorCore.Options.Factories
@@ -42,10 +44,20 @@ namespace QualRazorCore.Options.Factories
         /// </summary>
         /// <param name="targetType">生成対象の型</param>
         /// <returns>生成された Option。未定義の場合は null。</returns>
-        public IOption? Create(Type targetType)
+        public IOption? Create<TRzorType>() where TRzorType : RazorCore
         {
-            var keyType = targetType.IsGenericType ? targetType.GetGenericTypeDefinition() : targetType;
-            if (!_optionMap.TryGetValue(keyType, out var function))
+            var targetType= typeof(TRzorType);
+            Type? keytype = null;
+            if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(FieldContent<,>))    
+            {
+                keytype = targetType.GenericTypeArguments[1];
+            }
+            if(targetType == typeof(ModalDialogContent))
+            {
+                keytype = typeof(ModalDialogContent);
+            }
+
+            if (keytype is null || !_optionMap.TryGetValue(keytype, out var function))
             {
                 return null;
             }

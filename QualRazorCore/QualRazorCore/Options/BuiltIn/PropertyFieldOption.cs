@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace QualRazorCore.Options.BuiltIn
 {
-    public class PropertyFieldOption<TModel, TResult> : PropertyAccessCore<TModel, TResult>, INotifyPropertyChanged,IPropertyOption<TModel, TResult>,IPropertyOption, IFieldOption<TResult>, IFieldOption, IOption where TModel : class
+    public class PropertyFieldOption<TModel, TResult> : PropertyAccessCore<TModel, TResult>, INotifyPropertyChanged,IPropertyOption<TModel, TResult>,IPropertyOption,  IFieldOption, IOption where TModel : class
     {
 
 
@@ -38,13 +38,6 @@ namespace QualRazorCore.Options.BuiltIn
                 _fieldAdditionalAttributes = value;
                 OnPropertyChanged(nameof(FieldAdditionalAttributes));
             }
-        }
-
-
-        public IOption FieldOption { get; set; }
-
-        public PropertyFieldOption() : base()
-        {
         }
 
         public PropertyFieldOption(string propertyName,

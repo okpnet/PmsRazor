@@ -2,7 +2,7 @@
 @typeparam TModel where TModel : class
 @typeparam TProperty
 
-<div @attributes="MergeFieldAttributes">
-    @PreContent
-    <label @attributes="MergeFieldLabelAttributes">@LabelOption.FieldOption</label>
+<div @attributes="MergePairContainerAttributes">
+    <label @attributes="MergeFieldLabelAttributes">@ChildContent</label>
+    <FieldContent Property="ExpressionProperty" Model="Model" OptionKey="LabelPairOption.FieldOptionKey" ></FieldContent>
 </div>

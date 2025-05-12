@@ -11,6 +11,6 @@ namespace QualRazorCore.Options.Factories
         /// </summary>
         /// <param name="targetType">対象のプロパティ型</param>
         /// <returns>生成された OptionBase</returns>
-        IOption? Create<TModel, TProperty>(Expression<Func<TModel, TProperty>> expression);
+        IOption? Create<TModel, TProperty>(Type targetType,Expression<Func<TModel, TProperty>> expression);
     }
 }

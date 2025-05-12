@@ -26,13 +26,6 @@ namespace QualRazorCore.Options.Factories
             var result = Activator.CreateInstance(
                 typeof(PropertyFieldOption<,>).MakeGenericType(typeArgs)) as IFieldOption;
 
-            if (result is IFieldOption fieldOpt)
-            {
-                var fieldType = typeArgs[1];
-                var fallback = new DefaultOptionFactory();
-                fieldOpt.FieldOption = fallback.Create(fieldType)!;
-            }
-
             return result;
         }
         /// <summary>
@@ -42,17 +35,13 @@ namespace QualRazorCore.Options.Factories
         /// <typeparam name="TProperty"></typeparam>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public IOption? Create<TModel, TProperty>(Expression<Func<TModel, TProperty>> expression)
+        public IOption? Create<TModel, TProperty>(Type targetType,Expression<Func<TModel, TProperty>> expression)
         {
-            var result = Activator.CreateInstance(
-                typeof(PropertyFieldOption<,>).MakeGenericType(typeof(TModel), typeof(TProperty)), expression) as IFieldOption;
+            if (!targetType.IsGenericType || targetType.GetGenericTypeDefinition() != typeof(FieldContent<,>))
+                return null;
 
-            if (result is IFieldOption fieldOpt)
-            {
-                var fieldType = typeof(TProperty);
-                var fallback = new DefaultOptionFactory();
-                fieldOpt.FieldOption = fallback.Create(fieldType)!;
-            }
+            var result = Activator.CreateInstance(
+                typeof(PropertyFieldOption<,>).MakeGenericType(typeof(TModel), typeof(TProperty)), expression) as IOption;
 
             return result;
         }

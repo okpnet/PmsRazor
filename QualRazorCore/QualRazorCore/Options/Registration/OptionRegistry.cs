@@ -1,4 +1,5 @@
-﻿using QualRazorCore.Extenssions;
+﻿using QualRazorCore.Core;
+using QualRazorCore.Extenssions;
 using QualRazorCore.Options.Core;
 using QualRazorCore.Options.Factories;
 using System.Linq.Expressions;
@@ -116,18 +117,18 @@ namespace QualRazorCore.Options.Registration
             return false;
         }
         /// <summary>
-        /// プロパティの式を指定して、Option を登録します。
+        /// Razorコンテンツのインスタンスを指定して、Optionを登録します。
         /// </summary>
         /// <typeparam name="TOwner"></typeparam>
         /// <typeparam name="TPropertyType"></typeparam>
         /// <param name="propertyExpression"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public IOptionKey RegisterFromExpression<TOwner, TPropertyType>(Expression<Func<TOwner, TPropertyType>> propertyExpression)
+        public IOptionKey RegisterFromExpression<TOwner, TRazozCore>(Expression<Func<TOwner, TRazozCore>> propertyExpression) where TRazozCore : RazorCore
         {
             var name = ExpressionHelper.GetPropertyPath(propertyExpression);
-            var key = OptionKey<TPropertyType>.Create(name);
-            var option = _optionFactory is IExtendOptionFactory extendOption ? extendOption.Create(propertyExpression) : _optionFactory.Create(typeof(TPropertyType));
+            var key = OptionKey<TRazozCore>.Create(name);
+            var option =  _optionFactory.Create<TRazozCore>();
             ArgumentNullException.ThrowIfNull(option);
             Register(key, option);
             return key;
@@ -140,11 +141,14 @@ namespace QualRazorCore.Options.Registration
         /// <param name="propertyExpression"></param>
         /// <param name="custumOption"></param>
         /// <returns></returns>
-        public IOptionKey RegisterFromExpression<TOwner, TPropertyType>(Expression<Func<TOwner, TPropertyType>> propertyExpression,IOption custumOption)
+        public IOptionKey RegisterFromExpression<TRazozCore>() where TRazozCore : RazorCore
         {
-            var name = ExpressionHelper.GetPropertyPath(propertyExpression);
-            var key = OptionKey<TPropertyType>.Create(name);
-            Register(key, custumOption);
+            var name = typeof(TRazozCore).Name;
+            var key = OptionKey<TRazozCore>.Create(name);
+            var option = _optionFactory.Create<TRazozCore>();
+
+            ArgumentNullException.ThrowIfNull(option);
+            Register(key, option);
             return key;
         }
     }

@@ -18,7 +18,7 @@
         /// OptionKeyのコンストラクタ
         /// </summary>
         /// <param name="name"></param>
-        private OptionKey(string name)
+        public OptionKey(string name)
         {
             Name = name;
         }

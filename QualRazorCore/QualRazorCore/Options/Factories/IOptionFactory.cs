@@ -1,4 +1,6 @@
-﻿using QualRazorCore.Options.Core;
+﻿using BlazorToaster.Core;
+using QualRazorCore.Core;
+using QualRazorCore.Options.Core;
 using System.Linq.Expressions;
 
 namespace QualRazorCore.Options.Factories
@@ -15,9 +17,7 @@ namespace QualRazorCore.Options.Factories
         /// </summary>
         /// <param name="targetType">対象のプロパティ型</param>
         /// <returns>生成された OptionBase</returns>
-        IOption? Create(Type targetType);
-
-
+        IOption? Create<TRazorType>() where TRazorType:RazorCore;
     }
 
 

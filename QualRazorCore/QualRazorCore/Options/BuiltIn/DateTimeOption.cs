@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace QualRazorCore.Options.BuiltIn
 {
-    public class DateTimeOption : OptionBase, IOption, INotifyPropertyChanged
+    public class DateTimeOption : FieldOption, IOption, INotifyPropertyChanged
     {
         bool _isTimeSpan = false;
         public bool IsTimeSpan

@@ -1,4 +1,5 @@
-﻿using QualRazorCore.Options.Core;
+﻿using QualRazorCore.Core;
+using QualRazorCore.Options.Core;
 using System.Linq.Expressions;
 
 namespace QualRazorCore.Options.Registration
@@ -32,11 +33,8 @@ namespace QualRazorCore.Options.Registration
 
         bool TryGet(IOptionKey key, out IOption? option);
 
-        IOptionKey RegisterFromExpression<TOwner, TPropertyType>(
-            Expression<Func<TOwner, TPropertyType>> propertyExpression);
+        IOptionKey RegisterFromExpression<TOwner, TRazozCore>(Expression<Func<TOwner, TRazozCore>> propertyExpression) where TRazozCore : RazorCore;
 
-        IOptionKey RegisterFromExpression<TOwner, TPropertyType>(
-            Expression<Func<TOwner, TPropertyType>> propertyExpression,
-            IOption custumOption);
+        IOptionKey RegisterFromExpression<TRazozCore>() where TRazozCore : RazorCore;
     }
 }

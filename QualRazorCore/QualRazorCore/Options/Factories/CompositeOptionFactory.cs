@@ -1,4 +1,6 @@
-﻿using QualRazorCore.Options.Core;
+﻿using QualRazorCore.Core;
+using QualRazorCore.Options.Core;
+using System.Linq.Expressions;
 
 namespace QualRazorCore.Options.Factories
 {
@@ -16,31 +18,54 @@ namespace QualRazorCore.Options.Factories
         public IOptionFactory? FallbackFactory { get; set; }
 
         public IEnumerable<IOptionFactory> Factories => _factories.AsReadOnly();
-        /// <summary>
-        /// 指定された型に対応する Option を生成する。
-        /// オーバーライド → 優先リスト → fallback の順に探索される。
-        /// </summary>
-        public IOption? Create(Type targetType)
+
+        public IOption? Create<TRzorType>() where TRzorType : RazorCore
         {
             lock (_syncLock)
             {
+                var targetType=typeof(TRzorType);
                 if (_typeOverrides.TryGetValue(targetType, out var overrideFactory))
                 {
-                    return overrideFactory.Create(targetType);
+                    return overrideFactory.Create<TRzorType>();
                 }
 
                 foreach (var factory in _factories)
                 {
-                    var option = factory.Create(targetType);
+                    var option = factory.Create<TRzorType>();
                     if (option is not null)
                     {
                         return option;
                     }
                 }
 
-                return FallbackFactory?.Create(targetType);
+                return FallbackFactory?.Create<TRzorType>();
             }
         }
+        /// <summary>
+        /// 指定された型に対応する Option を生成する。
+        /// オーバーライド → 優先リスト → fallback の順に探索される。
+        /// </summary>
+        //public IOption? Create(Type targetType)
+        //{
+        //    lock (_syncLock)
+        //    {
+        //        if (_typeOverrides.TryGetValue(targetType, out var overrideFactory))
+        //        {
+        //            return overrideFactory.Create(targetType);
+        //        }
+
+        //        foreach (var factory in _factories)
+        //        {
+        //            var option = factory.Create(targetType);
+        //            if (option is not null)
+        //            {
+        //                return option;
+        //            }
+        //        }
+
+        //        return FallbackFactory?.Create(targetType);
+        //    }
+        //}
 
         /// <summary>
         /// 優先順にFactoryを追加（末尾追加）
