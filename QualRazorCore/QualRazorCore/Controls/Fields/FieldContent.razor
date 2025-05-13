@@ -1,42 +1,45 @@
-﻿@using QualRazorCore.Options.BuiltIn
-@inherits OptionParameterRazorCore
+﻿@inherits OptionParameterRazorCore
 @typeparam TModel where TModel:class
 @typeparam TProperty
 
-@switch (BaseOptions)
+@switch (FieldDataTypes)
 {
-    case NumberOption<TProperty> numberOption:
+    case FieldDataType.Number:
+        var numberOption = ConfigOption as NumberConfigOption<TProperty> ?? new();
+
         <EditerNumber 
             Value="@Value"
             ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
-                      AdditionalAttributes="@numberOption.FieldAdditionalAttributes"
-                      PlaceHolder="@numberOption.PlaceHolder"
+                      AdditionalAttributes="@AdditionalAttributes"
                       ValueExpression="PropertyExpression"
                       Comma="@numberOption.IsComma"
                       Degit="@numberOption.NumberOfDigit"
                       MaxValue="@numberOption.MaxValue"
-                      MinValue="@numberOption.MinValue"></EditerNumber>
+        MinValue="@numberOption.MinValue"></EditerNumber>
         break;
-    case BoolOption<TProperty> boolOption:
-        <EditerBool AdditionalAttributes="@boolOption.FieldAdditionalAttributes"
+    case FieldDataType.Check:
+        var checkOption = ConfigOption as CheckConfigOption<TProperty> ?? new();
+        <EditerBool AdditionalAttributes="@AdditionalAttributes"
                     Value="@Value"
                     ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
                     ValueExpression="PropertyExpression"
-                    PlaceHolder="@boolOption.PlaceHolder"
-                    TrueValue="@boolOption.TrueValue"
-                    FalseValue="@boolOption.FalseValue"></EditerBool>
+                    TrueValue="@checkOption.TrueValue"
+        FalseValue="@checkOption.FalseValue"></EditerBool>
         break;
 
-    case DateTimeOption dateTimeOption:
+    case FieldDataType.Date:
+        var dateOption = ConfigOption as DateConfigOption ?? new();
+
         <EditerDate AdditionalAttributes="@AdditionalAttributes"
                     Value="@Value"
                     ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
                     ValueExpression="PropertyExpression"
-                    DateType="@dateTimeOption.DateType"
-                    CustomParseFormat="@dateTimeOption.ParseFormat"></EditerDate>
+                    DateType="@dateOption.DateType"
+        CustomParseFormat="@dateOption.ParseFormat"></EditerDate>
         break;
 
-    case TimespanOption timespanOption:
+    case FieldDataType.TiemSpan:
+        var timespanOption = ConfigOption as TimespanConfigOption ?? new();
         <EditerTimeSpan AdditionalAttributes="@AdditionalAttributes"
                         Value="@Value"
                         ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
@@ -44,17 +47,19 @@
                         Comma="@timespanOption.IsComma"
                         MaxValue="@timespanOption.MaxValue"
                         Degit="@timespanOption.NumberOfDigit"
-                        TimeSpanUnit="@timespanOption.Unit"></EditerTimeSpan>
+        TimeSpanUnit="@timespanOption.Unit"></EditerTimeSpan>
         break;
 
-    case StringOption stringOption:
-        if (stringOption.IsMutiLine)
+    case FieldDataType.Text:
+        var textOption = ConfigOption as TextConfigOption ?? new();
+
+        if (textOption.IsMutiLine)
         {
             <EditerTextArea AdditionalAttributes="@AdditionalAttributes"
                             Value="@Value"
                             ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
-                            ValueExpression="PropertyExpression"
-                            PlaceHolder="@stringOption.PlaceHolder"></EditerTextArea>
+                            ValueExpression="PropertyExpression">
+                        </EditerTextArea>
         }
         else
         {
@@ -62,22 +67,21 @@
                         Value="@Value"
                         ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
                         ValueExpression="PropertyExpression"
-                        PlaceHolder="@stringOption.PlaceHolder"
-                        EditType="@stringOption.TextEditType"></EditerText>
+            EditType="@textOption.TextEditType"></EditerText>
         }
         break;
-    case SelectOption<TModel> selectOption:
+    case FieldDataType.Select:
+        var selectOption = ConfigOption as SelectConfgOption<TProperty> ?? new();
         <div class="select">
             <EditerSelect AdditionalAttributes="@AdditionalAttributes"
                           Value="@Value"
                           ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
                           ValueExpression="PropertyExpression"
-                          PlaceHolder="@Option.PlaceHolder"
                           Source="@(()=>selectOption.Source)"
                           OptionContents="@selectOption.GetOptionText"
                           ChoosePromptContents="@selectOption.ChoosePrompt"></EditerSelect>
         </div>
         break;
     default:
-        throw new NotImplementedException($"'{BaseOptions}' is not implemented to switch cases.");
+        throw new NotImplementedException($"'{FieldDataTypes}' is not implemented to switch cases.");
 }

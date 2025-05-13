@@ -85,14 +85,5 @@ namespace QualRazorCore.Core
             _setter = ExpressionHelper.BuildSetter(propertyExpression);
         }
 
-        public void Init(Expression<Func<TModel, TResult>> propertyExpression, string? propertyName=null)
-        {
-            if (propertyExpression == null)
-                throw new ArgumentNullException(nameof(propertyExpression));
-
-            _propertyName = propertyName??ExpressionHelper.GetPropertyPath(propertyExpression);
-            _getter = ExpressionHelper.BuildGetter(propertyExpression);
-            _setter = ExpressionHelper.BuildSetter(propertyExpression);
-        }
     }
 }

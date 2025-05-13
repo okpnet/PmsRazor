@@ -5,7 +5,7 @@ namespace QualRazorCore.Extenssions
 {
     public static class ExpressionHelper
     {
-        public static string GetPropertyPath<TOwner, TOptionType>(Expression<Func<TOwner, TOptionType>> propertyExpression)
+        public static string GetPropertyPath<TOwner, TProperty>(Expression<Func<TOwner, TProperty>> propertyExpression)
         {
             return GetFullPropertyPath(propertyExpression.Body);
         }

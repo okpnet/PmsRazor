@@ -1,58 +1,56 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using QualRazorCore.Core;
+using QualRazorCore.Extenssions;
+using QualRazorCore.Options.Configurations.Builtin;
+using QualRazorCore.Options.Core;
 
 namespace QualRazorCore.Controls.Buttons.Core
 {
-    public abstract class ButtonCore:RazorCore
+    public abstract class ButtonCore:OptionParameterRazorCore
     {
-        bool _isMini;
 
-        public bool IsMiniButton
-        {
-            get => _isMini;
-            set
-            {
-                if(_isMini == value)
-                {
-                    return;
-                }
-                _isMini = value;
-                OnPropertyChanged(nameof(IsMiniButton));
-            }
-        }
+        [Parameter]
+        public bool IsMiniButton { get; set; } = false;
 
-        LayerType _layerType;
-        public LayerType Layer
-        {
-            get => _layerType;
-            set
-            {
-                if( _layerType == value)
-                {
-                    return;
-                }
-                _layerType = value;
-                OnPropertyChanged(nameof(Layer));
-            }
-        }
+        [Parameter]
+        public LayerType Layer{ get; set; }
 
-        public string CssLayer => _layerType switch
+        public string CssLayer => Layer switch
         {
             LayerType.Primary => ClassDefine.Button.PRIMARY,
             LayerType.Secondary => ClassDefine.Button.SECONDARY,
             _ => ClassDefine.Button.TERTIARY,
         };
 
-        [Parameter]
-        public EventCallback<MouseEventArgs> ButtonUp { get; set; }
-        [Parameter]
-        public EventCallback ButtonClick { get; set; }
-        [Parameter]
-        public EventCallback<MouseEventArgs> ButtonDown { get; set; }
+
+        protected abstract IOptionKey DefaultConfigOptionKey { get; }
+
+        protected ButtonConfigOption ButtonOption
+        {
+            get
+            {
+                var key = ConfigOptionKey ?? DefaultConfigOptionKey;
+                var result = ConfigOptionRegistryService.Resolve(key) as ButtonConfigOption;
+                ArgumentNullException.ThrowIfNull(result);
+                return result;
+            }
+        }
+
         [Parameter]
         public RenderFragment? IconContent { get; set; }
         [Parameter]
         public RenderFragment? ButtonContent { get; set; }
+
+        protected Dictionary<string, object> MergeAttribute => HtmlAttributeHelper.MergeAttributes(
+            ViewOptions?.AdditionalAttributes,
+            new()
+            {
+                ["disabled"]=DisabledValue!,
+                ["onclick"]=ButtonOption.ButtonClick,
+                ["onmouseup"]=ButtonOption.ButtonUp,
+                ["onmousedown"] =ButtonOption.ButtonDown
+            }
+            );
     }
 }

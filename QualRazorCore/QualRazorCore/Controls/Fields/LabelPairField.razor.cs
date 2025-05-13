@@ -1,13 +1,18 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Core;
 using QualRazorCore.Extenssions;
-using QualRazorCore.Options.BuiltIn;
+using QualRazorCore.Options.Core;
+using QualRazorCore.Options.Helper;
 using System.Linq.Expressions;
 
 namespace QualRazorCore.Controls.Fields
 {
     public partial class LabelPairField<TModel,TProperty>: OptionParameterRazorCore where TModel:class
     {
+        public LabelContent? LabelContentRef { get; set; }
+
+        public FieldContent<TModel, TProperty>? FieldContentRef { get; set; }
+
         [Parameter]
         public RenderFragment ChildContent { get; set; } = default!;
 
@@ -17,44 +22,23 @@ namespace QualRazorCore.Controls.Fields
         [Parameter]
         public TModel Model { get; set; } = default!;
 
-        protected LabelFieldPairOption<TModel,TProperty> LabelPairOption
-        {
-            get
-            {
-                if (BaseOptions is not LabelFieldPairOption<TModel,TProperty> labelPairOption)
-                {
-                    throw new InvalidCastException($"LabelFieldPairOption cannot be cast '{typeof(LabelFieldPairOption<TModel, TProperty>).Name}'");
-                }
-                return labelPairOption;
-            }
-        }
+        [Parameter]
+        public FieldDataType? DataType { get; set; }
 
-        protected LabelOption LabelOption
-        {
-            get
-            {
-                if(OptionRegistryService.Resolve(LabelPairOption.LabelOptionKey) is not LabelOption labelOption)
-                {
-                    throw new InvalidCastException($"LabelOption cannot be cast '{typeof(LabelOption).Name}'");
-                }
-                return labelOption;
-            }
-        }
+        [Parameter]
+        public IOptionKey? FieldConfigOptionKey { get; set; }
 
-        protected Dictionary<string, object> MergePairContainerAttributes =>
+        /// <summary>
+        /// パラメーターのキーが割り当てられないときに、デフォルトの型のキーを使用してViewOptionを取得する
+        /// </summary>
+        protected override IOptionKey DefaultViewOptionKey => OptionKeyFactory.CreateDefaultKey<LabelPairField<TModel, TProperty>>();
+
+        protected Dictionary<string, object> MergeAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
-                LabelPairOption.PairAdditionalAttributes,
+                ViewOptions?.AdditionalAttributes,
                 new([
                     new("disabled",DisabledValue!),
                             new("class","field")
-                    ])
-                );
-
-        protected Dictionary<string, object> MergeLabelAttributes =>
-            HtmlAttributeHelper.PurgeAttributes(
-                LabelOption.LabelAdditionalAttributes,
-                new([
-                    new("class","label")
                     ])
                 );
     }

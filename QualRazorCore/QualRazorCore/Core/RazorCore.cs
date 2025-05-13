@@ -1,12 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Observers;
-using QualRazorCore.Options.Registry;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QualRazorCore.Core
 {

@@ -2,7 +2,6 @@
 using QualRazorCore.Core;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace QualRazorCore.Controls.Tables.Columns.Core
 {
@@ -56,14 +55,7 @@ namespace QualRazorCore.Controls.Tables.Columns.Core
         public TableColumn(
             Expression<Func<string>> getColumnNameInvoke,
             string propertyName,
-            Expression<Func<TModel, TResult>> propertyExpression,
-            Expression<Action<TModel, TResult>>? oprionExpresiion = null) : base(propertyName, propertyExpression, oprionExpresiion)
-        {
-            _getColumnNameInvoke = getColumnNameInvoke.Compile();
-            _textArignType = GetTextAlignType(typeof(TResult));
-        }
-
-        public TableColumn(Expression<Func<string>> getColumnNameInvoke, PropertyInfo propertyInfo) : base(propertyInfo)
+            Expression<Func<TModel, TResult>> propertyExpression) : base(propertyName, propertyExpression)
         {
             _getColumnNameInvoke = getColumnNameInvoke.Compile();
             _textArignType = GetTextAlignType(typeof(TResult));

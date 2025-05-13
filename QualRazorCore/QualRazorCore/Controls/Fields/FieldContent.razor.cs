@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Components.Forms;
 using QualRazorCore.Core;
 using QualRazorCore.Extenssions;
-using QualRazorCore.Options.BuiltIn;
+using QualRazorCore.Options.Configurations.Core;
+using QualRazorCore.Options.Core;
+using QualRazorCore.Options.Helper;
 using System.Linq.Expressions;
 
 namespace QualRazorCore.Controls.Fields
@@ -18,24 +20,25 @@ namespace QualRazorCore.Controls.Fields
         [Parameter,EditorRequired]
         public Expression<Func<TModel, TProperty>>? Property { get; set; }
 
+        [Parameter]
+        public FieldDataType? FieldDataTypes { get; set; }
+
+        [Parameter]
+        public IOptionKey? FieldConfigOptionKey { get; set; }
+
         protected Expression<Func<TProperty>> PropertyExpression=>()=>GetPropertyValue();
+
+        protected IConfigOption? ConfigOption => FieldConfigOptionKey is null ? null : ConfigOptionRegistryService.Resolve(FieldConfigOptionKey);
+
+        /// <summary>
+        /// パラメーターのキーが割り当てられないときに、デフォルトの型のキーを使用してViewOptionを取得する
+        /// </summary>
+        protected override IOptionKey DefaultViewOptionKey => OptionKeyFactory.CreateDefaultKey<FieldContent<TModel, TProperty>>();
 
         protected TProperty Value 
         { 
             get=>_getter.Invoke(Model);
             set=>_setter?.Invoke(Model, value);
-        }
-
-        protected PropertyFieldOption<TModel, TProperty> PropertyFieldOption
-        {
-            get
-            {
-                if(BaseOptions is not PropertyFieldOption<TModel, TProperty> propertyFieldOption)
-                {
-                    throw new InvalidCastException($"PropertyFieldOption cannot be cast '{typeof(PropertyFieldOption<TModel, TProperty>).Name}'");
-                }
-                return propertyFieldOption;
-            }
         }
 
         protected Action<TModel, TProperty>? _setter;
@@ -61,7 +64,13 @@ namespace QualRazorCore.Controls.Fields
                 {
                     _setter = null;
                 }
+
+                if (!parameters.TryGetValue<FieldDataType>(nameof(FieldDataTypes), out var types))
+                {
+                    FieldDataTypes = FieldDataTypeHelper.GetFieldType(typeof(TProperty));
+                }
             }
+
             return base.SetParametersAsync(parameters);
         }
 
