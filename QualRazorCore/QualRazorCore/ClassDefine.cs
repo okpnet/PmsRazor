@@ -82,7 +82,6 @@ namespace QualRazorCore
 
         public static class Table
         {
-            public static string STYLE => $"{TABLE} {STYLE_FULLWIDTH} {TABLE_ROW_HOVER}";
 
             public static string SORT_COLUMN => $"{STYLE_FLEX} {STYLE_ITEM_CENTER}";
 

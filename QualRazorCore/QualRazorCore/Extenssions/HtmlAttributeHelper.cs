@@ -61,6 +61,41 @@
 
             return result;
         }
+
+        public static Dictionary<string, object> MergeValuePairAttributes(Dictionary<string, object>? originalAttributes,params KeyValuePair<string, object>[] valuePairs)
+        {
+            var result = new Dictionary<string, object>(originalAttributes ?? new());
+
+            if (valuePairs is null)
+            {
+                return result;
+            }
+
+            foreach (var kvp in valuePairs)
+            {
+                var key = kvp.Key;
+                var value = kvp.Value;
+
+                if (string.IsNullOrWhiteSpace(key) || value is null)
+                {
+                    continue;
+                }
+
+                if (result.TryGetValue(key, out var existingObj)
+                    && value is string newStr
+                    && existingObj is string existingStr)
+                {
+                    result[key] = $"{newStr} {existingStr}".Trim();
+                }
+                else
+                {
+                    result[key] = value;
+                }
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// 複数の属性（キーと値）をオリジナルに存在するときパージします。
         /// 各属性について、既存の値がある場合は defaultValues 側の値を先頭に追加します（スペース区切り）。

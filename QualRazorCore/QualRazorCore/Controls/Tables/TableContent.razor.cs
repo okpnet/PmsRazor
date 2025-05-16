@@ -30,10 +30,11 @@ namespace QualRazorCore.Controls.Tables
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
-                Option.TableAdditionalAttributes, 
-                new([
-                    new("class",ClassDefine.Table.STYLE)
-                    ])
+                MeargeAttributeBase,
+                new()
+                {
+                    ["class"]=$"table is-fullwidth is-hoverable"
+                }
                 );
 
         protected override void OnInitialized()
@@ -47,6 +48,11 @@ namespace QualRazorCore.Controls.Tables
                     sources => Source=sources
                     )
                 );
+        }
+
+        public class ColumnTemplate:RazorCore
+        {
+
         }
     }
 }

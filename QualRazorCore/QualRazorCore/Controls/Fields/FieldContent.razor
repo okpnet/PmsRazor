@@ -1,11 +1,11 @@
-﻿@inherits OptionParameterRazorCore
+﻿@inherits RazorCore
 @typeparam TModel where TModel:class
 @typeparam TProperty
 
 @switch (FieldDataTypes)
 {
     case FieldDataType.Number:
-        var numberOption = ConfigOption as NumberConfigOption<TProperty> ?? new();
+        var numberOption = FieldOpion as NumberConfigOption<TProperty> ?? new();
 
         <EditerNumber 
             Value="@Value"
@@ -18,7 +18,7 @@
         MinValue="@numberOption.MinValue"></EditerNumber>
         break;
     case FieldDataType.Check:
-        var checkOption = ConfigOption as CheckConfigOption<TProperty> ?? new();
+        var checkOption = FieldOpion as CheckConfigOption<TProperty> ?? new();
         <EditerBool AdditionalAttributes="@AdditionalAttributes"
                     Value="@Value"
                     ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
@@ -28,7 +28,7 @@
         break;
 
     case FieldDataType.Date:
-        var dateOption = ConfigOption as DateConfigOption ?? new();
+        var dateOption = FieldOpion as DateConfigOption ?? new();
 
         <EditerDate AdditionalAttributes="@AdditionalAttributes"
                     Value="@Value"
@@ -39,7 +39,7 @@
         break;
 
     case FieldDataType.TiemSpan:
-        var timespanOption = ConfigOption as TimespanConfigOption ?? new();
+        var timespanOption = FieldOpion as TimespanConfigOption ?? new();
         <EditerTimeSpan AdditionalAttributes="@AdditionalAttributes"
                         Value="@Value"
                         ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
@@ -51,7 +51,7 @@
         break;
 
     case FieldDataType.Text:
-        var textOption = ConfigOption as TextConfigOption ?? new();
+        var textOption = FieldOpion as TextConfigOption ?? new();
 
         if (textOption.IsMutiLine)
         {
@@ -71,7 +71,7 @@
         }
         break;
     case FieldDataType.Select:
-        var selectOption = ConfigOption as SelectConfgOption<TProperty> ?? new();
+        var selectOption = FieldOpion as SelectConfgOption<TProperty> ?? new();
         <div class="select">
             <EditerSelect AdditionalAttributes="@AdditionalAttributes"
                           Value="@Value"

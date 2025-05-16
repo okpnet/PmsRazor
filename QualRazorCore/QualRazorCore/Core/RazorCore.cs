@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using QualRazorCore.Extenssions;
 using QualRazorCore.Observers;
 using System.ComponentModel;
 
@@ -9,6 +10,7 @@ namespace QualRazorCore.Core
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected readonly DisposableCollection disposables = new();
+
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -22,29 +24,48 @@ namespace QualRazorCore.Core
             }
         }
 
-        protected bool _isDisabled;
-        public bool IsDisable 
-        {
-            get => _isDisabled;
-            set 
-            {
-                if (_isDisabled == value)
-                {
-                    return;
-                }
-                _isDisabled = value;
-                OnPropertyChanged(nameof(IsDisable));
-                OnPropertyChanged(nameof(DisabledValue));
-            }
-        }
 
-        public string? DisabledValue => _isDisabled ? "disabled" : null;
 
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object>? AdditionalAttributes { get; set; }
 
         [Parameter]
         public RenderFragment? LoadingContent { get; set; }
+
+        protected bool _isDisabled=false;
+        public string? DisabledValue { get; protected set; } = null;
+        [Parameter]
+        public bool IsDisabled { get; set; }
+
+        protected bool _isHidden = true;
+        public string? HiddenValue { get; protected set; } = null;
+        [Parameter]
+        public bool IsHidden { get; set; } = false;
+
+
+        protected Dictionary<string, object> MeargeAttributeBase=> HtmlAttributeHelper.MergeAttributes(
+            AdditionalAttributes,
+            new()
+            {
+                ["disabled"] = DisabledValue!,
+                ["class"]= HiddenValue!,
+            });
+
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            if (_isDisabled != IsDisabled)
+            {//Disabledパラメーター
+                _isDisabled = IsDisabled;
+                DisabledValue=_isDisabled ? "disabled" : null;
+            }
+            if (_isHidden != IsHidden)
+            {//Hiddenパラメーター
+                _isHidden = IsHidden;
+                HiddenValue = _isHidden ? "is-hidden" : "";
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

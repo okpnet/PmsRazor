@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using QualRazorCore.Controls.Tables.Columns.Core;
+﻿using QualRazorCore.Controls.Tables.Columns.Core;
 using QualRazorCore.Core;
 using QualRazorCore.Options.Core;
 using System.Collections.ObjectModel;
@@ -88,19 +87,5 @@ namespace QualRazorCore.Controls.Tables.Options
             }
         }
 
-        protected Dictionary<string, object> _tableAdditionalAttributes=new();
-        public Dictionary<string, object> TableAdditionalAttributes 
-        {
-            get => _tableAdditionalAttributes;
-            set
-            {
-                if (_tableAdditionalAttributes == value)
-                {
-                    return;
-                }
-                _tableAdditionalAttributes = value;
-                OnPropertyChanged(nameof(TableAdditionalAttributes));
-            }
-        }
     }
 }

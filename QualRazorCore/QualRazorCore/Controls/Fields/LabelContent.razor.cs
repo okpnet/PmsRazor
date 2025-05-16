@@ -1,23 +1,20 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Core;
 using QualRazorCore.Extenssions;
-using QualRazorCore.Options.Core;
-using QualRazorCore.Options.Helper;
 
 namespace QualRazorCore.Controls.Fields
 {
-    public partial class LabelContent: OptionParameterRazorCore
+    public partial class LabelContent: RazorCore
     {
-
-
         [Parameter]
-        public RenderFragment? ChildContent { get; set; }
-
-        protected override IOptionKey DefaultViewOptionKey =>  OptionKeyFactory.CreateDefaultKey<LabelContent>();
+        public RenderFragment? Text { get; set; }
 
         protected Dictionary<string, object> MergeAttribute => HtmlAttributeHelper.MergeAttributes(
-            ViewOptions?.AdditionalAttributes ?? new(),
-            new());
+            MergeAttribute,
+            new()
+            {
+                ["class"]= "label"
+            });
 
     }
 }

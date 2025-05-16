@@ -1,11 +1,10 @@
-﻿using System.ComponentModel;
-using QualRazorCore.Core;
-using QualRazorCore.Options.Configurations.Core;
+﻿using QualRazorCore.Options.Configurations.Core;
 using QualRazorCore.Options.Core;
+using System.ComponentModel;
 
-namespace QualRazorCore.Options.Configurations.Builtin
+namespace QualRazorCore.Controls.Fields.Options
 {
-    public class CheckConfigOption<T> : ConfigOption, IConfigOption, IOption, INotifyPropertyChanged
+    public class CheckConfigOption<T> : FieldOpionBase, INotifyPropertyChanged
     {
         T _trueVale = default!;
         public T TrueValue

@@ -1,0 +1,58 @@
+﻿@inherits RazorCore
+<div @attributes="MergeDialogAttributes">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">@DialogTitle</p>
+            <button class="delete" type="button" aria-label="close" @onclick="OnClose"></button>
+        </header>
+        <section class="modal-card-body">
+            @DialogContents
+        </section>
+        <footer class="modal-card-foot">
+            <div class="buttons">
+                <CascadingValue Name="Parent" Value="this">
+                    <ErrorBoundary>
+                        <ChildContent>
+                            @if (PrimaryButtonsContent is not null)
+                            {
+                                <QualBtutton @attributes="@PrimaryButtonsContent.AdditionalAttributes"
+                                             IconClass="@PrimaryButtonsContent.IconClass"
+                                             IsDisabled="@PrimaryButtonsContent.IsDisabled"
+                                             IsHidden="@PrimaryButtonsContent.IsHidden"
+                                             IsMiniButton="@PrimaryButtonsContent.IsMiniButton"
+                                             OnClickEvent="OnPrimaryClick" 
+                                             Layer="@LayerType.Primary"
+                                             ></QualBtutton>
+                            }
+                            @if (SecondaryButtonsContent is not null)
+                            {
+                                <QualBtutton @attributes="@SecondaryButtonsContent.AdditionalAttributes"
+                                             IconClass="@SecondaryButtonsContent.IconClass"
+                                             IsDisabled="@SecondaryButtonsContent.IsDisabled"
+                                             IsHidden="@SecondaryButtonsContent.IsHidden"
+                                             IsMiniButton="@SecondaryButtonsContent.IsMiniButton"
+                                             OnClickEvent="OnSecondaryClick"
+                                             Layer="@LayerType.Secondary"></QualBtutton>
+                            }
+                            @if (TertiaryButtonsContent is not null)
+                            {
+                                <QualBtutton @attributes="@TertiaryButtonsContent.AdditionalAttributes"
+                                             IconClass="@TertiaryButtonsContent.IconClass"
+                                             IsDisabled="@TertiaryButtonsContent.IsDisabled"
+                                             IsHidden="@TertiaryButtonsContent.IsHidden"
+                                             IsMiniButton="@TertiaryButtonsContent.IsMiniButton"
+                                             OnClickEvent="OnTertiaryClick"
+                                             Layer="@LayerType.Tertiary"></QualBtutton>
+                            }
+                        </ChildContent>
+                        <ErrorContent>
+                            <span>ダイアログボタンエラー</span>
+                        </ErrorContent>
+                    </ErrorBoundary>
+
+                </CascadingValue>
+            </div>
+        </footer>
+    </div>
+</div>

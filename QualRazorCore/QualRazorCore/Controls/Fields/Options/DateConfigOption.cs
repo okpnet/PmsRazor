@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
-using QualRazorCore.Core;
-using QualRazorCore.Options.Configurations.Core;
-using QualRazorCore.Options.Core;
 using System.ComponentModel;
 
-namespace QualRazorCore.Options.Configurations.Builtin
+namespace QualRazorCore.Controls.Fields.Options
 {
-    public class DateConfigOption : ConfigOption, IConfigOption, IOption, INotifyPropertyChanged
+    public class DateConfigOption : FieldOpionBase, INotifyPropertyChanged
     {
         bool _isTimeSpan = false;
         public bool IsTimeSpan

@@ -1,0 +1,28 @@
+﻿@inherits RazorCore
+@typeparam TModel where TModel:class
+@typeparam TProperty
+
+<div @attributes="MergeAttribute">
+    <CascadingValue Name="Parent" Value="this">
+        <ErrorBoundary>
+            <ChildContent>
+                <LabelContent IsDisabled="labels.IsDisabled" IsHidden="labels.IsHidden" @attributes="@LabelAttribute">@LabelText</LabelContent>
+            </ChildContent>
+            <ErrorContent>
+                <span>ラベルエラー</span>
+                <span>@context.Message</span>
+            </ErrorContent>
+        </ErrorBoundary>
+        <div class="control">
+            <ErrorBoundary>
+                <ChildContent>
+                    <FieldContent Property="PropertyExpression" FieldOpion="@FieldOpion" FieldDataTypes="@FieldDataTypes" @attributes="FieldAttribute"></FieldContent>
+                </ChildContent>
+                <ErrorContent>
+                    <span>フィールドエラー</span>
+                    <span>@context.Message</span>
+                </ErrorContent>
+            </ErrorBoundary>
+        </div>
+    </CascadingValue>
+</div>

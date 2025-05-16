@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using QualRazorCore.Controls.Fields.Options;
 using QualRazorCore.Core;
 using QualRazorCore.Extenssions;
-using QualRazorCore.Options.Configurations.Core;
-using QualRazorCore.Options.Core;
-using QualRazorCore.Options.Helper;
 using System.Linq.Expressions;
 
 namespace QualRazorCore.Controls.Fields
 {
-    public partial class FieldContent<TModel,TProperty>: OptionParameterRazorCore where TModel : class
+    public partial class FieldContent<TModel,TProperty>:RazorCore where TModel : class
     {
         [CascadingParameter]
         EditContext? CascadedEditContext { get; set; }
@@ -23,17 +21,10 @@ namespace QualRazorCore.Controls.Fields
         [Parameter]
         public FieldDataType? FieldDataTypes { get; set; }
 
-        [Parameter]
-        public IOptionKey? FieldConfigOptionKey { get; set; }
+        [Parameter, EditorRequired]
+        public FieldOpionBase FieldOpion { get; set; } = default!;
 
         protected Expression<Func<TProperty>> PropertyExpression=>()=>GetPropertyValue();
-
-        protected IConfigOption? ConfigOption => FieldConfigOptionKey is null ? null : ConfigOptionRegistryService.Resolve(FieldConfigOptionKey);
-
-        /// <summary>
-        /// パラメーターのキーが割り当てられないときに、デフォルトの型のキーを使用してViewOptionを取得する
-        /// </summary>
-        protected override IOptionKey DefaultViewOptionKey => OptionKeyFactory.CreateDefaultKey<FieldContent<TModel, TProperty>>();
 
         protected TProperty Value 
         { 

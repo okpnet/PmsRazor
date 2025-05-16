@@ -1,13 +1,13 @@
-﻿using QualRazorCore.Core;
-using QualRazorCore.Options.Configurations.Core;
+﻿using BlazorCustomInput.Components;
+using QualRazorCore.Options.Configurations.Builtin;
 using QualRazorCore.Options.Core;
 using System.ComponentModel;
 
-namespace QualRazorCore.Options.Configurations.Builtin
+namespace QualRazorCore.Controls.Fields.Options
 {
-    public class NumberConfigOption<T> : ConfigOption, IConfigOption ,IOption, INotifyPropertyChanged
+    public class TimespanConfigOption : FieldOpionBase,  INotifyPropertyChanged
     {
-        bool _isComma = false;
+        bool _isComma;
         public bool IsComma
         {
             get => _isComma;
@@ -22,7 +22,7 @@ namespace QualRazorCore.Options.Configurations.Builtin
             }
         }
 
-        int _numberOfDigit = 0;
+        int _numberOfDigit;
         public int NumberOfDigit
         {
             get => _numberOfDigit;
@@ -43,7 +43,7 @@ namespace QualRazorCore.Options.Configurations.Builtin
             get => _maxValue;
             set
             {
-                if (Equals(_maxValue, value))
+                if (_maxValue == value)
                 {
                     return;
                 }
@@ -52,19 +52,20 @@ namespace QualRazorCore.Options.Configurations.Builtin
             }
         }
 
-        decimal? _minValue;
-        public decimal? MinValue
+        Unit _unit = Unit.Hour | Unit.Min;
+        public Unit Unit
         {
-            get => _minValue;
+            get => _unit;
             set
             {
-                if (Equals(MinValue, value))
+                if (_unit == value)
                 {
                     return;
                 }
-                _minValue = value;
-                OnPropertyChanged(nameof(MinValue));
+                _unit = value;
+                OnPropertyChanged(nameof(Unit));
             }
         }
+
     }
 }

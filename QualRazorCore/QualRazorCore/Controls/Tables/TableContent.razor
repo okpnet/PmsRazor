@@ -1,7 +1,7 @@
 ﻿@inherits RazorCore
 @typeparam TModel
 
-<table @attributes="Option.TableAdditionalAttributes">
+<table @attributes="MergedAttributes">
     <thead>
         <tr>
             @foreach (var column in Columns)

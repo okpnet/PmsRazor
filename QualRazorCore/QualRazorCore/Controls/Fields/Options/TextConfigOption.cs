@@ -1,12 +1,9 @@
 ﻿using BlazorCustomInput.Components;
-using QualRazorCore.Core;
-using QualRazorCore.Options.Configurations.Core;
-using QualRazorCore.Options.Core;
 using System.ComponentModel;
 
-namespace QualRazorCore.Options.Configurations.Builtin
+namespace QualRazorCore.Controls.Fields.Options
 {
-    public class TextConfigOption : ConfigOption, IConfigOption, IOption, INotifyPropertyChanged
+    public class TextConfigOption : FieldOpionBase, INotifyPropertyChanged
     {
         bool _isMultiLine;
         public bool IsMutiLine
@@ -29,7 +26,7 @@ namespace QualRazorCore.Options.Configurations.Builtin
             get => _textEditType;
             set
             {
-                if(_textEditType == value)
+                if (_textEditType == value)
                 {
                     return;
                 }

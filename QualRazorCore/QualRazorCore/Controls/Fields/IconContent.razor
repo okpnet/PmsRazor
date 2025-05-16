@@ -1,4 +1,7 @@
-﻿@inherits OptionParameterRazorCore
-<spna @attributes="MergeAtribute">
-    @ChildContent
-</spna>
+﻿@inherits RazorCore
+@if(IconClass is not (null or ""))
+{
+    <spna @attributes="MergeAtribute">
+        <i class="@IconClass"></i>
+    </spna>
+}

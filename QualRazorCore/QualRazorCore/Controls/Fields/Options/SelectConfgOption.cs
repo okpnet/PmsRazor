@@ -1,11 +1,9 @@
-﻿using QualRazorCore.Options.Configurations.Core;
-using QualRazorCore.Options.Core;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace QualRazorCore.Options.Configurations.Builtin
+namespace QualRazorCore.Controls.Fields.Options
 {
-    public class SelectConfgOption<T> : ConfigOption,IConfigOption, IOption, INotifyPropertyChanged
+    public class SelectConfgOption<T> : FieldOpionBase, INotifyPropertyChanged
     {
         ObservableCollection<T> _collection = new();
         public IEnumerable<T> Source
