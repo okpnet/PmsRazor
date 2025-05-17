@@ -1,28 +1,29 @@
 ﻿@inherits RazorCore
 @typeparam TModel
-
-<table @attributes="MergedAttributes">
-    <thead>
-        <tr>
-            @foreach (var column in Columns)
-            {
-                <TableColumnContent Column="column" Option="Option.ColumnOption"></TableColumnContent>
-            }
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <th colspan="@NumberOfColumn">
-                <TableInformationContent @ref="_informationContent" Option="Option.InformationOption" PageNumberResult="Option.PageResult"/>
-            </th>
-        </tr>
-    </tfoot>
-    <tbody>
-        <CascadingValue Value="Option.CellOption" Name="CellOption">
-            @foreach (var row in Source)
-            {
-                <TableRowContent Columns="Columns" Row="row" Option="Option.RowOption"></TableRowContent>
-            }
-        </CascadingValue>
-    </tbody>
-</table>
+<CascadingValue Name="TableContentParent" Value="this">
+    <table @attributes="MergedAttributes">
+        <thead>
+            <tr>
+                @foreach (var column in Columns)
+                {
+                    <TableColumnContent Column="column" Option="Option.ColumnOption"></TableColumnContent>
+                }
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th colspan="@NumberOfColumn">
+                    <TableInformationContent @ref="_informationContent" Option="Option.InformationOption" PageNumberResult="Option.PageResult" />
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <CascadingValue Value="Option.CellOption" Name="CellOption">
+                @foreach (var row in Source)
+                {
+                    <TableRowContent Columns="Columns" Row="row" Option="Option.RowOption"></TableRowContent>
+                }
+            </CascadingValue>
+        </tbody>
+    </table>
+</CascadingValue>

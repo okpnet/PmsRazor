@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 using QualRazorCore.Controls.Tables.Columns.Core;
 using QualRazorCore.Controls.Tables.Extensions;
 using QualRazorCore.Controls.Tables.Helpers;
@@ -8,6 +9,8 @@ using QualRazorCore.Controls.Tables.Rows.Core;
 using QualRazorCore.Core;
 using QualRazorCore.Extenssions;
 using QualRazorCore.Observers;
+using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 
 namespace QualRazorCore.Controls.Tables
 {
@@ -21,7 +24,7 @@ namespace QualRazorCore.Controls.Tables
         [Parameter,EditorRequired]
         public TableSchemaOption<TModel> Option { get; set; } = default!;
 
-        IEnumerable<ITableColumn<TModel>> Columns=>Option.Columns.OfType<ITableColumn<TModel>>();
+        IEnumerable<PropertyAccessCore> Columns { get; set; }=new ObservableCollection<PropertyAccessCore>();
 
         protected int NumberOfColumn => Columns.Count();
 
@@ -50,9 +53,40 @@ namespace QualRazorCore.Controls.Tables
                 );
         }
 
-        public class ColumnTemplate:RazorCore
+        public class Columns:RazorCore
         {
+            [CascadingParameter(Name = "TableContentParent")]
+            public TableContent<TModel> TableParent { get; set; } = default!;
+            [Parameter]
+            public RenderFragment? ChildContent { get; set; }
 
+            protected override void BuildRenderTree(RenderTreeBuilder builder)
+            {
+                builder.AddContent(0, ChildContent);
+            }
+        }
+
+        public class Column<TPorperty> : RazorCore
+        {
+            [CascadingParameter(Name = "TableContentParent")]
+            public TableContent<TModel> TableParent { get; set; } = default!;
+            [Parameter,EditorRequired]
+            public Expression<Func<TModel, TPorperty>>? Property { get; set; }
+
+            [Parameter]
+            public RenderFragment? HeaderTemplate { get; set; }
+
+            [Parameter]
+            public Func<TModel, RenderFragment>? CellTemplate { get; set; }
+
+            protected override void OnInitialized()
+            {
+                if (TableParent != null)
+                {
+
+                    TableParent.AddColumn(this);
+                }
+            }
         }
     }
 }
