@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using QualRazorCore.Controls.Tables.Columns;
 using QualRazorCore.Controls.Tables.Columns.Core;
 using QualRazorCore.Controls.Tables.Extensions;
 using QualRazorCore.Controls.Tables.Helpers;
 using QualRazorCore.Controls.Tables.Informatios;
 using QualRazorCore.Controls.Tables.Options;
+using QualRazorCore.Controls.Tables.Parameters;
 using QualRazorCore.Controls.Tables.Rows.Core;
 using QualRazorCore.Core;
 using QualRazorCore.Extenssions;
@@ -21,15 +23,19 @@ namespace QualRazorCore.Controls.Tables
         /// </summary>
         protected TableInformationContent _informationContent=default!;
 
+        protected ObservableCollection<TableColumnContent> _columns { get; set; } = new();
+
         [Parameter,EditorRequired]
         public TableSchemaOption<TModel> Option { get; set; } = default!;
 
-        IEnumerable<PropertyAccessCore> Columns { get; set; }=new ObservableCollection<PropertyAccessCore>();
+        public IEnumerable<IColumnParamter> Columns=> _columns.Select(t=>t.Paramter);
 
-        protected int NumberOfColumn => Columns.Count();
+        protected int NumberOfColumn => _columns.Count();
 
 
         protected IEnumerable<TableRowState<TModel>> Source { get; set; } = [];
+
+        internal void AddColumn(IColumnParamter column)=> _columns.Add(column);
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
@@ -52,8 +58,10 @@ namespace QualRazorCore.Controls.Tables
                     )
                 );
         }
-
-        public class Columns:RazorCore
+        /// <summary>
+        /// 列群のラッパー
+        /// </summary>
+        public class TableColumns:RazorCore
         {
             [CascadingParameter(Name = "TableContentParent")]
             public TableContent<TModel> TableParent { get; set; } = default!;
@@ -65,16 +73,19 @@ namespace QualRazorCore.Controls.Tables
                 builder.AddContent(0, ChildContent);
             }
         }
-
+        /// <summary>
+        /// 列
+        /// </summary>
+        /// <typeparam name="TPorperty"></typeparam>
         public class Column<TPorperty> : RazorCore
         {
             [CascadingParameter(Name = "TableContentParent")]
             public TableContent<TModel> TableParent { get; set; } = default!;
-            [Parameter,EditorRequired]
-            public Expression<Func<TModel, TPorperty>>? Property { get; set; }
+            [Parameter, EditorRequired]
+            public Expression<Func<TModel, TPorperty>> Property { get; set; } = default!;
 
             [Parameter]
-            public RenderFragment? HeaderTemplate { get; set; }
+            public RenderFragment? ChildContent { get; set; }
 
             [Parameter]
             public Func<TModel, RenderFragment>? CellTemplate { get; set; }
@@ -83,8 +94,8 @@ namespace QualRazorCore.Controls.Tables
             {
                 if (TableParent != null)
                 {
-
-                    TableParent.AddColumn(this);
+                    var columnParameter=new ColumnParameter<TModel, TPorperty>(ChildContent,Property);
+                    TableParent.AddColumn(columnParameter);
                 }
             }
         }

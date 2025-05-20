@@ -4,7 +4,7 @@
     <table @attributes="MergedAttributes">
         <thead>
             <tr>
-                @foreach (var column in Columns)
+                @foreach (var column in _columns)
                 {
                     <TableColumnContent Column="column" Option="Option.ColumnOption"></TableColumnContent>
                 }

@@ -1,26 +1,23 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.EntityFrameworkCore.Metadata;
 using QualRazorCore.Controls.Filters;
 using QualRazorCore.Controls.Tables.Columns.Core;
-using QualRazorCore.Controls.Tables.Options;
+using QualRazorCore.Controls.Tables.Parameters;
 using QualRazorCore.Core;
 using QualRazorCore.Extenssions;
-using System;
 
 namespace QualRazorCore.Controls.Tables.Columns
 {
     public partial class TableColumnContent:RazorCore
     {
         [Parameter, EditorRequired]
-        public ITableColumn Column { get; set; } = default!;
+        public IColumnParamter Paramter { get; set; } = default!;
 
-        [Parameter, EditorRequired]
-        public TableColumnOption Option { get; set; } = default!;
+        public SortType SortStatus { get; set; }
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
-                Option.ColumnAdditionalAttributes,
+                MeargeAttributeBase,
                 new([
                     new("onclick",(Action<MouseEventArgs>)((e)=>OnMouseClick(e)))//クリックイベント
                     ])
