@@ -16,7 +16,7 @@ namespace QualRazorCore.Controls.Tables.Helpers
         /// <param name="pageResult"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public static IEnumerable<PagenationArg> Build(InformationParameter parameter, ITalkPageResult pageResult)
+        public static IEnumerable<PagenationArg> Build(int numberOfPage, ITalkPageResult pageResult)
         {
 
             if (  pageResult.NumberOfPage == 1)
@@ -24,7 +24,7 @@ namespace QualRazorCore.Controls.Tables.Helpers
                 yield break;
             }
 
-            if (parameter.MaxPageCount >= pageResult.NumberOfPage)
+            if (numberOfPage >= pageResult.NumberOfPage)
             {
                 for (int page = 1; page <= pageResult.NumberOfPage; page++)
                 {
@@ -39,28 +39,28 @@ namespace QualRazorCore.Controls.Tables.Helpers
                 yield break;
             }
 
-            int half = parameter.MaxPageCount / 2;
+            int half = numberOfPage / 2;
             int start, end;
             bool isPrev, isNext;
 
             if (pageResult.PageNumber <= half + 1)
             {
                 start = 1;
-                end = parameter.MaxPageCount;
+                end = numberOfPage;
                 isPrev = false;
                 isNext = true;
             }
             else if (pageResult.NumberOfPage - pageResult.PageNumber > half)
             {
                 start = pageResult.PageNumber - half;
-                end = start + parameter.MaxPageCount - 1;
+                end = start + numberOfPage - 1;
                 isPrev = true;
                 isNext = true;
             }
             else
             {
                 end = pageResult.NumberOfPage;
-                start = end - parameter.MaxPageCount + 1;
+                start = end - numberOfPage + 1;
                 isPrev = true;
                 isNext = false;
             }

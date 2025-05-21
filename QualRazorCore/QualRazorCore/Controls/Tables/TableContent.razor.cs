@@ -41,6 +41,8 @@ namespace QualRazorCore.Controls.Tables
 
         protected int NumberOfColumn => _columns.Count();
 
+        protected RenderFragment? PageInforamation { get; set; }
+
         internal void AddColumn(ITableColumnContent column)=> _columns.Add(column);
 
         protected Dictionary<string, object> MergedAttributes =>
@@ -92,16 +94,16 @@ namespace QualRazorCore.Controls.Tables
         /// <summary>
         /// ページネーションのラッパー
         /// </summary>
-        public class TablePagenation : RazorCore
+        public class TablePagenations : RazorCore
         {
             [CascadingParameter(Name = "TableContentParent")]
             public TableContent<TModel> TableParent { get; set; } = default!;
             [Parameter]
             public RenderFragment? ChildContent { get; set; }
 
-            protected override void BuildRenderTree(RenderTreeBuilder builder)
+            protected override void OnInitialized()
             {
-                builder.AddContent(0, ChildContent);
+                TableParent.PageInforamation = ChildContent;
             }
         }
     }

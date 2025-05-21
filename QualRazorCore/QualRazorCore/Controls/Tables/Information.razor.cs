@@ -1,17 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using QualRazorCore.Controls.Tables.Argments;
 using QualRazorCore.Controls.Tables.Informatios;
 using QualRazorCore.Controls.Tables.Options;
 using QualRazorCore.Core;
 using QualRazorCore.Extenssions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorCore.Controls.Tables
 {
@@ -38,22 +31,11 @@ namespace QualRazorCore.Controls.Tables
         /// </summary>
         protected Dictionary<string, object> MeargeAttribute =>
             HtmlAttributeHelper.PurgeAttributes(
-                Option.ContainerAdditionalAttributes,
+                MeargeAttributeBase,
                 new([
-                    new("class","is-flex-deskto is-justify-content-space-between is-align-items-center is-flex-wrap-wrap")
+                    new("class",ClassDefine.Table.INFORMATION)
                     ])
                 );
-
-        /// <summary>
-        /// ページボタングループの属性
-        /// </summary>
-        protected Dictionary<string, object> MergeButtonGroupAttribute =>
-            HtmlAttributeHelper.PurgeAttributes(Option.ButtonGroupAdditionalAttributes,
-                new([
-                    new("class",ClassDefine.Table.PAGE_BUTTON_GROUP)
-                    ])
-                );
-
 
         /// <summary>
         /// テーブルインフォメーション引数を生成
@@ -75,7 +57,7 @@ namespace QualRazorCore.Controls.Tables
         /// ページネーションボタンの引数配列を生成
         /// </summary>
         /// <returns></returns>
-        protected IEnumerable<PagenationArg> GetPagenation() => TableParent.Source is null ? [] : Helpers.PaginationBuilder.Build(Parameter, TableParent.Source);
+        protected IEnumerable<PagenationArg> GetPagenation() => TableParent.Source is null ? [] : Helpers.PaginationBuilder.Build(Parameter.MaxPageCount, TableParent.Source);
 
         public RenderFragment RenderInformation() => builder =>
         {
@@ -84,7 +66,7 @@ namespace QualRazorCore.Controls.Tables
             builder.OpenElement(2, "div");
             builder.AddMultipleAttributes(1, MeargeAttribute);
             builder.OpenElement(3, "div");
-            builder.AddAttribute(4, "class", ClassDefine.Table.INFORMATION);
+            builder.AddAttribute(4, "class", $"{ClassDefine.MARGIN_ALL} {ClassDefine.TEXT_GREY}");
             builder.AddContent(5, InformationContent, CreatePageInformationArg());
             builder.CloseElement();
             builder.OpenElement(6, "div");
@@ -98,7 +80,6 @@ namespace QualRazorCore.Controls.Tables
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseComponent();
-
         };
     }
 }
