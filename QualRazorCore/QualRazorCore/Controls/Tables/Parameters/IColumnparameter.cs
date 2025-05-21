@@ -2,10 +2,8 @@
 
 namespace QualRazorCore.Controls.Tables.Parameters
 {
-    public interface IColumnParamter
+    public interface IColumnparameter
     {
         string PropertyName { get; }
-
-        RenderFragment? HeaderContent { get; }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web;
+using QualRazorCore.Controls.Filters;
+using QualRazorCore.Controls.Tables.Argments;
 using QualRazorCore.Controls.Tables.Columns;
-using QualRazorCore.Controls.Tables.Columns.Core;
-using QualRazorCore.Controls.Tables.Extensions;
 using QualRazorCore.Controls.Tables.Helpers;
 using QualRazorCore.Controls.Tables.Informatios;
 using QualRazorCore.Controls.Tables.Options;
@@ -13,6 +14,8 @@ using QualRazorCore.Extenssions;
 using QualRazorCore.Observers;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
+using System.Reflection.Metadata;
+using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorCore.Controls.Tables
 {
@@ -23,19 +26,22 @@ namespace QualRazorCore.Controls.Tables
         /// </summary>
         protected TableInformationContent _informationContent=default!;
 
-        protected ObservableCollection<TableColumnContent> _columns { get; set; } = new();
+        protected ObservableCollection<ITableColumnContent> _columns { get; set; } = new();
 
         [Parameter,EditorRequired]
         public TableSchemaOption<TModel> Option { get; set; } = default!;
 
-        public IEnumerable<IColumnParamter> Columns=> _columns.Select(t=>t.Paramter);
+        [Parameter]
+        public ITalkPageResult<TModel>? Source { get; set; }
+
+        [Parameter]
+        public EventCallback<ColumnChangeOrderArg>? ChangeSortOrder { get; set; }
+
+        public IEnumerable<IColumnparameter> Columns=> _columns.Select(t=>t.Parameter);
 
         protected int NumberOfColumn => _columns.Count();
 
-
-        protected IEnumerable<TableRowState<TModel>> Source { get; set; } = [];
-
-        internal void AddColumn(IColumnParamter column)=> _columns.Add(column);
+        internal void AddColumn(ITableColumnContent column)=> _columns.Add(column);
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
@@ -58,6 +64,16 @@ namespace QualRazorCore.Controls.Tables
                     )
                 );
         }
+
+        internal async Task OnColumnLeftClick(ITableColumnContent columnContent)
+        {
+            if(ChangeSortOrder is null)
+            {
+                return;
+            }
+            await ChangeSortOrder.Value.InvokeAsync(new ColumnChangeOrderArg(columnContent.Parameter.PropertyName, columnContent.SortStatus));
+        }
+
         /// <summary>
         /// 列群のラッパー
         /// </summary>
@@ -74,29 +90,18 @@ namespace QualRazorCore.Controls.Tables
             }
         }
         /// <summary>
-        /// 列
+        /// ページネーションのラッパー
         /// </summary>
-        /// <typeparam name="TPorperty"></typeparam>
-        public class Column<TPorperty> : RazorCore
+        public class TablePagenation : RazorCore
         {
             [CascadingParameter(Name = "TableContentParent")]
             public TableContent<TModel> TableParent { get; set; } = default!;
-            [Parameter, EditorRequired]
-            public Expression<Func<TModel, TPorperty>> Property { get; set; } = default!;
-
             [Parameter]
             public RenderFragment? ChildContent { get; set; }
 
-            [Parameter]
-            public Func<TModel, RenderFragment>? CellTemplate { get; set; }
-
-            protected override void OnInitialized()
+            protected override void BuildRenderTree(RenderTreeBuilder builder)
             {
-                if (TableParent != null)
-                {
-                    var columnParameter=new ColumnParameter<TModel, TPorperty>(ChildContent,Property);
-                    TableParent.AddColumn(columnParameter);
-                }
+                builder.AddContent(0, ChildContent);
             }
         }
     }

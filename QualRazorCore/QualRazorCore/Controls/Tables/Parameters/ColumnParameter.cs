@@ -5,13 +5,10 @@ using System.Linq.Expressions;
 
 namespace QualRazorCore.Controls.Tables.Parameters
 {
-    public class ColumnParameter<TModel, TResult> : PropertyAccessCore<TModel, TResult>, INotifyPropertyChanged, IColumnParamter
+    public class ColumnParameter<TModel, TResult> : PropertyAccessCore<TModel, TResult>, INotifyPropertyChanged, IColumnparameter
     {
-
-        public RenderFragment? HeaderContent { get; }
-        public ColumnParameter(RenderFragment? headerContent,Expression<Func<TModel, TResult>> propertyExpression) : base(propertyExpression)
+        public ColumnParameter(Expression<Func<TModel, TResult>> propertyExpression) : base(propertyExpression)
         {
-            HeaderContent = headerContent;
         }
     }
 }

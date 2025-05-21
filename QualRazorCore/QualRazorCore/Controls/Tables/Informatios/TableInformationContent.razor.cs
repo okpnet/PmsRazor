@@ -22,7 +22,7 @@ namespace QualRazorCore.Controls.Tables.Informatios
         /// </summary>
         protected Dictionary<string, object> MeargeContainerAttribute =>
             HtmlAttributeHelper.PurgeAttributes(
-                Option.ContainerAdditionalAttributes,
+                MeargeAttributeBase,
                 new([
                     new("class",ClassDefine.Table.INFORMATION)
                     ])

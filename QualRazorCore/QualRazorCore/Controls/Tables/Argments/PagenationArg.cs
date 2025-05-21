@@ -14,15 +14,28 @@ namespace QualRazorCore.Controls.Tables.Argments
     {
         public bool Active { get; }
 
-        public Func<string> GetLabelInvoke { get; }
-        
+        public PagenationButtonType ButtonType { get; }
+
         public int CurrentPageNumber { get; } = 1;
 
-        public PagenationArg(bool active, Func<string> label, int currentPageNumber)
+        public Func<int> ChagePage {  get; }
+
+        public PagenationArg(bool active, PagenationButtonType buttonType, int currentPageNumber, Func<int> chagePage)
         {
             Active = active;
-            GetLabelInvoke = label;
+            ButtonType = buttonType;
             CurrentPageNumber = currentPageNumber;
+            ChagePage = chagePage;
+        }
+
+        [Flags]
+        public enum PagenationButtonType
+        {
+            None = 0,
+            Number = 1 << 1,
+            Prev= 1 << 2,
+            Next= 1 << 3,
+            Between= 1 << 4,
         }
     }
 }

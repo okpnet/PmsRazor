@@ -1,0 +1,31 @@
+﻿@inherits RazorCore
+@switch (PagenationButton.ButtonType)
+{
+    case Argments.PagenationArg.PagenationButtonType.Between:
+        <span>...</span>
+        break;
+    case Argments.PagenationArg.PagenationButtonType.Number:
+        if (!PagenationButton.Active)
+        {
+            <span>
+                @PagenationButton.CurrentPageNumber
+            </span>
+        }
+        else
+        {
+            <button type="button" class="" @onclick="OnChangePage">
+                @PagenationButton.CurrentPageNumber
+            </button>
+        }
+        break;
+    case Argments.PagenationArg.PagenationButtonType.Prev:
+        <button type="button" class="@ClassDefine.Table.PAGE_BUTTON" @onclick="OnChangePage">
+            @ParentTableInformation.PrevContent
+        </button>
+        break;
+    case Argments.PagenationArg.PagenationButtonType.Next:
+        <button type="button" class="@ClassDefine.Table.PAGE_BUTTON" @onclick="OnChangePage">
+            @ParentTableInformation.NextContent
+        </button>
+        break;
+}

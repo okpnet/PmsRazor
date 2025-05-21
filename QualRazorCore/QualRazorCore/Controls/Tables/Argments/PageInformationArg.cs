@@ -12,6 +12,10 @@ namespace QualRazorCore.Controls.Tables.Argments
     public class PageInformationArg
     {
         /// <summary>
+        /// 取得ソースが有効かどうか
+        /// </summary>
+        public bool IsSourceEnabled { get; }
+        /// <summary>
         /// 全レコード数
         /// </summary>
         public int NumberOfRecords { get; }
@@ -28,12 +32,18 @@ namespace QualRazorCore.Controls.Tables.Argments
         /// </summary>
         public int PageNumber { get; }
 
-        public PageInformationArg(int numberOfRecords, int numberOfMatchedRecords, int numberOfPage, int pageNumber)
+        protected PageInformationArg(bool isSourceEnabled, int numberOfRecords, int numberOfMatchedRecords, int numberOfPage, int pageNumber)
         {
+            IsSourceEnabled = isSourceEnabled;
             NumberOfRecords = numberOfRecords;
             NumberOfMatchedRecords = numberOfMatchedRecords;
             NumberOfPage = numberOfPage;
             PageNumber = pageNumber;
         }
+
+        public static PageInformationArg CreateFailArg()=>new PageInformationArg(false,0,0,0,0);
+
+        public static PageInformationArg CreateSuccessArg(int numberOfRecords, int numberOfMatchedRecords, int numberOfPage, int pageNumber)
+            => new(true, numberOfRecords, numberOfMatchedRecords, numberOfPage, pageNumber);
     }
 }

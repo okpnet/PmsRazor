@@ -12,53 +12,55 @@ namespace QualRazorCore.Controls.Tables.Helpers
         /// <summary>
         /// テーブルインフォメーションのページネーションボタン情報を生成
         /// </summary>
-        /// <param name="option"></param>
+        /// <param name="parameter"></param>
         /// <param name="pageResult"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public static IEnumerable<PagenationArg> Build(TableInformationOption option, ITalkPageResult pageResult)
+        public static IEnumerable<PagenationArg> Build(InformationParameter parameter, ITalkPageResult pageResult)
         {
-            if (pageResult.NumberOfPage == 1)
+
+            if (  pageResult.NumberOfPage == 1)
             {
                 yield break;
             }
 
-            if (option.MaxPageCount >= pageResult.NumberOfPage)
+            if (parameter.MaxPageCount >= pageResult.NumberOfPage)
             {
                 for (int page = 1; page <= pageResult.NumberOfPage; page++)
                 {
                     yield return new PagenationArg(
                         pageResult.PageNumber == page,
-                        () => page.ToString(),
-                        page
+                        PagenationArg.PagenationButtonType.Number,
+                        page,
+                        ()=>page
                     );
                 }
 
                 yield break;
             }
 
-            int half = option.MaxPageCount / 2;
+            int half = parameter.MaxPageCount / 2;
             int start, end;
             bool isPrev, isNext;
 
             if (pageResult.PageNumber <= half + 1)
             {
                 start = 1;
-                end = option.MaxPageCount;
+                end = parameter.MaxPageCount;
                 isPrev = false;
                 isNext = true;
             }
             else if (pageResult.NumberOfPage - pageResult.PageNumber > half)
             {
                 start = pageResult.PageNumber - half;
-                end = start + option.MaxPageCount - 1;
+                end = start + parameter.MaxPageCount - 1;
                 isPrev = true;
                 isNext = true;
             }
             else
             {
                 end = pageResult.NumberOfPage;
-                start = end - option.MaxPageCount + 1;
+                start = end - parameter.MaxPageCount + 1;
                 isPrev = true;
                 isNext = false;
             }
@@ -68,28 +70,39 @@ namespace QualRazorCore.Controls.Tables.Helpers
                 throw new ArgumentException("start must be <= end");
             }
 
-            yield return new PagenationArg(isPrev, option.PrevLabelInvoke, pageResult.PageNumber - 1);
+            yield return new PagenationArg(
+                isPrev,
+                PagenationArg.PagenationButtonType.Number,
+                pageResult.PageNumber - 1,
+                ()=> pageResult.PageNumber - 1);
 
-            if (start > 1)
-            {
-                yield return new PagenationArg(false, () => "…", 0);
-            }
+            yield return new PagenationArg
+                (start > 1, 
+                PagenationArg.PagenationButtonType.Between, 
+                0,
+                ()=>0);
 
             for (int page = start; page <= end; page++)
             {
                 yield return new PagenationArg(
                     pageResult.PageNumber == page,
-                    () => page.ToString(),
-                    page
+                    PagenationArg.PagenationButtonType.Number,
+                    page,
+                    ()=>page
                 );
             }
 
-            if (end < pageResult.NumberOfPage)
-            {
-                yield return new PagenationArg(false, () => "…", 0);
-            }
+            yield return new PagenationArg(
+                end < pageResult.NumberOfPage,
+                PagenationArg.PagenationButtonType.Between, 
+                0,
+                ()=>0);
 
-            yield return new PagenationArg(isNext, option.NextLabelInvoke, pageResult.PageNumber + 1);
+            yield return new PagenationArg(
+                isNext,
+                PagenationArg.PagenationButtonType.Next,
+                pageResult.PageNumber + 1,
+                () => pageResult.PageNumber + 1);
         }
     }
 }

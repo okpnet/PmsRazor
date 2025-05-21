@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using QualRazorCore.Extenssions;
 using QualRazorCore.Observers;
 using System.ComponentModel;
@@ -66,6 +67,30 @@ namespace QualRazorCore.Core
                 HiddenValue = _isHidden ? "is-hidden" : "";
             }
         }
+
+        protected virtual Task OnLeftMouseClick(MouseKeyArg e)
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task OnRightMouseClick(MouseKeyArg e)
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task OnMouseClick(MouseEventArgs e)
+        {
+            var arg = new MouseKeyArg(e.ShiftKey, e.AltKey);
+            switch (e.Button)
+            {
+                case 0:
+                    return OnLeftMouseClick(arg);
+                case 1:
+                    return OnRightMouseClick(arg);
+            }
+            return Task.CompletedTask;
+        }
+
 
         protected override void Dispose(bool disposing)
         {
