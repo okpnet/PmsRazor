@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 using QualRazorCore.Controls.Filters;
 using QualRazorCore.Controls.Tables.Argments;
 using QualRazorCore.Controls.Tables.Columns;
+using QualRazorCore.Controls.Tables.Core;
 using QualRazorCore.Controls.Tables.Helpers;
 using QualRazorCore.Controls.Tables.Informatios;
 using QualRazorCore.Controls.Tables.Options;
@@ -28,9 +29,6 @@ namespace QualRazorCore.Controls.Tables
 
         protected ObservableCollection<ITableColumnContent> _columns { get; set; } = new();
 
-        [Parameter,EditorRequired]
-        public TableSchemaOption<TModel> Option { get; set; } = default!;
-
         [Parameter]
         public ITalkPageResult<TModel>? Source { get; set; }
 
@@ -42,6 +40,8 @@ namespace QualRazorCore.Controls.Tables
         protected int NumberOfColumn => _columns.Count();
 
         protected RenderFragment? PageInforamation { get; set; }
+
+        protected IInformationParameter Parameter { get; set; }
 
         internal void AddColumn(ITableColumnContent column)=> _columns.Add(column);
 
@@ -56,6 +56,8 @@ namespace QualRazorCore.Controls.Tables
 
         protected override void OnInitialized()
         {
+            Parameter = new InformationParameter();
+
             disposables.Add(
                 PropertyChangedRelay<TableSchemaOption<TModel>, IEnumerable<TableRowState<TModel>>>.Create
                 (

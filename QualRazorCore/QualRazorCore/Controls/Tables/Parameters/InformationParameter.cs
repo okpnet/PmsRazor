@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorCore.Controls.Tables.Argments;
+using QualRazorCore.Controls.Tables.Parameters;
 using QualRazorCore.Core;
 
 namespace QualRazorCore.Controls.Tables.Options
@@ -8,8 +9,26 @@ namespace QualRazorCore.Controls.Tables.Options
     /// テーブルの情報をビューへ提供する表示オプションクラス
     /// ユーザーとは対話しない
     /// </summary>
-    public class InformationParameter:NotifyCore
+    public class InformationParameter:NotifyCore, IInformationParameter
     {
+        protected bool _isSorted;
+        /// <summary>
+        /// ソートが有効
+        /// </summary>
+        public bool IsSorted 
+        {
+            get => _isSorted;
+            set
+            {
+                if (_isSorted == value)
+                {
+                    return;
+                }
+                _isSorted = value;
+                OnPropertyChanged(nameof(IsSorted));
+            }
+        }
+
         EventCallback<int> _pageMoveInvoke = EventCallback<int>.Empty;
         /// <summary>
         /// 指定ページ呼び出し
@@ -19,7 +38,7 @@ namespace QualRazorCore.Controls.Tables.Options
             get => _pageMoveInvoke;
             set
             {
-                if (_pageMoveInvoke.Equals(value))
+                if (Equals(_pageMoveInvoke,value))
                 {
                     return;
                 }
@@ -28,21 +47,36 @@ namespace QualRazorCore.Controls.Tables.Options
             }
         }
 
-        int _maxPaageCount = 10;
-        /// <summary>
-        /// ページネーションボタンを表示する個数
-        /// </summary>
-        public int MaxPageCount
+        EventCallback<ColumnChangeOrderArg> _changeSortOrder;
+        public EventCallback<ColumnChangeOrderArg> ChangeSortOrder 
         {
-            get => _maxPaageCount;
+            get => _changeSortOrder;
             set
             {
-                if (_maxPaageCount == value)
+                if(EventCallback.Equals(_changeSortOrder, value))
                 {
                     return;
                 }
-                _maxPaageCount = value;
-                OnPropertyChanged(nameof(MaxPageCount));
+                _changeSortOrder = value;
+                OnPropertyChanged(nameof(ChangeSortOrder));
+            }
+        }
+
+        int _maxNumberOfPage = 10;
+        /// <summary>
+        /// ページネーションボタンを表示する個数
+        /// </summary>
+        public int MaxNumberOfPage
+        {
+            get => _maxNumberOfPage;
+            set
+            {
+                if (_maxNumberOfPage == value)
+                {
+                    return;
+                }
+                _maxNumberOfPage = value;
+                OnPropertyChanged(nameof(MaxNumberOfPage));
             }
         }
     }

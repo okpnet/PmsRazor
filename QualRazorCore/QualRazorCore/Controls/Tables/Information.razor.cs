@@ -57,7 +57,7 @@ namespace QualRazorCore.Controls.Tables
         /// ページネーションボタンの引数配列を生成
         /// </summary>
         /// <returns></returns>
-        protected IEnumerable<PagenationArg> GetPagenation() => TableParent.Source is null ? [] : Helpers.PaginationBuilder.Build(Parameter.MaxPageCount, TableParent.Source);
+        protected IEnumerable<PagenationArg> GetPagenation() => TableParent.Source is null ? [] : Helpers.PaginationBuilder.Build(Parameter.MaxNumberOfPage, TableParent.Source);
 
         public RenderFragment RenderInformation() => builder =>
         {
