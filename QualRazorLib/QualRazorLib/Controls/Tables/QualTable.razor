@@ -1,0 +1,31 @@
+﻿@inherits QualRazorComponentBase
+@typeparam TModel
+<CascadingValue Name="TableContentParent" Value="this">
+    <CascadingValue Name="" Value="Paramete">
+    <table @attributes="MergedAttributes">
+        <thead>
+            <tr>
+                @foreach (var column in _columns)
+                {
+                    @column.RenderHeader()
+                }
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th colspan="@NumberOfColumn">
+                    @PageInforamation
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <CascadingValue Value="Option.CellOption" Name="CellOption">
+                @foreach (var row in Source)
+                {
+                    <TableRowContent Columns="Columns" Row="row" Option="Option.RowOption"></TableRowContent>
+                }
+            </CascadingValue>
+        </tbody>
+    </table>
+    </CascadingValue>
+</CascadingValue>
