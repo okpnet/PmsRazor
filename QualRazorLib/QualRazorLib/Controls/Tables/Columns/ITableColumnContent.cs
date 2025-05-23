@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
-using QualRazorLib.Core;
+using QualRazorLib.Controls.Tables.Columns.Dtos;
 
 namespace QualRazorLib.Controls.Tables.Columns
 {
     public interface ITableColumnContent
     {
-        PropertyAccessCore ColumnParameter { get; }
-
-        SortType SortStatus { get; }
+        IColumnState ColumnStateBase { get; }
 
         RenderFragment RenderHeader();
     }

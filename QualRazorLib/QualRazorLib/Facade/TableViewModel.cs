@@ -7,26 +7,33 @@ using System.Text;
 using System.Threading.Tasks;
 using TalkLib.Pages.Results.ResultItems;
 
-namespace QualRazorLib.Controls.Tables
+namespace QualRazorLib.Facade
 {
-    public class TableViewModel<TModel> : NotifyCore, IViewModel<ITalkPageResult<TModel>>, ITableViewModel<TModel> where TModel : class
+    public class TableViewModel<TModel> : ViewStateCore, IViewModel<ITalkPageResult<TModel>>, ITableViewModel where TModel : class
     {
         public ITalkPageResult<TModel> Data { get; protected set; } = default!;
 
-        public bool IsLoading => throw new NotImplementedException();
-
-        public bool HasError => throw new NotImplementedException();
-
-        public string ErrorMessage => throw new NotImplementedException();
-
-        TModel IDataHolder<TModel>.Data => throw new NotImplementedException();
+        protected int _maxNumberOfPage;
+        public int MaxNumberOfPage
+        {
+            get => _maxNumberOfPage;
+            set
+            {
+                if (_maxNumberOfPage == value)
+                {
+                    return;
+                }
+                _maxNumberOfPage = value;
+                OnPropertyChanged(nameof(MaxNumberOfPage));
+            }
+        }
 
         public void ChangeSortOrder()
         {
             throw new NotImplementedException();
         }
 
-        public void ClearError()
+        public override void ClearError()
         {
             throw new NotImplementedException();
         }
@@ -51,12 +58,12 @@ namespace QualRazorLib.Controls.Tables
             throw new NotImplementedException();
         }
 
-        public void SetError(string message)
+        public override void SetError(string message)
         {
             throw new NotImplementedException();
         }
 
-        public void SetLoading(bool isLoading)
+        public override void SetLoading(bool isLoading)
         {
             throw new NotImplementedException();
         }

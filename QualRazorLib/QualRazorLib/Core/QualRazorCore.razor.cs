@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using QualRazorLib.Argments;
+using QualRazorLib.Controls.Argments;
 using QualRazorLib.Helpers;
 
 namespace QualRazorLib.Core

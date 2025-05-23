@@ -9,12 +9,8 @@ using System.Threading.Tasks;
 
 namespace QualRazorLib.Intterfaces
 {
-    public interface ITableViewModel<TModel>:IViewModel<TModel>
+    public interface ITableViewModel
     {
-        EventCallback<ITableColumnContent> AddColumn { get; set; }
-
-        void ChangeSortOrder(string propertyName);
-
         int MaxNumberOfPage { get; }
     }
 }

@@ -18,12 +18,10 @@
             </tr>
         </tfoot>
         <tbody>
-            <CascadingValue Value="Option.CellOption" Name="CellOption">
-                @foreach (var row in Source)
+                @foreach (var row in TableViewModel.Data.Records.Select(t=> new TableRowState<TModel>(t)))
                 {
-                    <TableRowContent Columns="Columns" Row="row" Option="Option.RowOption"></TableRowContent>
+                    <RowContent Row="row"></RowContent>
                 }
-            </CascadingValue>
         </tbody>
     </table>
 </CascadingValue>

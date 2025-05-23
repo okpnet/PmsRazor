@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace QualRazorLib.Intterfaces
 {
-    public interface IModelSate
+    public interface IViewQueryCondition
     {
-        SortType SortTypes { get; }
-
-
+        // 任意の型に変換して、ServiceやRepository層に渡す
+        T ConvertTo<T>();
     }
 }

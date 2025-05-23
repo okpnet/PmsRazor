@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using QualRazorLib.Argments;
-using QualRazorLib.Controls.Tables;
-using QualRazorLib.Controls.Tables.Columns;
+using QualAnalyzer.Attributes;
+using QualRazorLib.Controls.Argments;
+using QualRazorLib.Controls.Tables.Columns.Dtos;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
 using System.Linq.Expressions;
 
-namespace QualRazorCore.Controls.Tables
+namespace QualRazorLib.Controls.Tables.Columns
 {
     public class Column<TModel, TProperty> : QualRazorComponentBase, ITableColumnContent where TModel : class
     {
@@ -20,9 +20,16 @@ namespace QualRazorCore.Controls.Tables
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
 
-        public SortType SortStatus { get; set; }
+        [Parameter]
+        public TextAlignType Align { get; set; } = TextAlignType.Auto;
 
-        public PropertyAccessCore ColumnParameter { get; set; }= default!;
+        [Parameter]
+        public string? FormatString { get; set; }
+
+        [CastCheck(typeof(PropertyAccessCore))]
+        public IColumnState<TModel, TProperty> ColumnState { get; set; } = default!;
+
+        public IColumnState ColumnStateBase => ColumnState;
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
@@ -30,27 +37,33 @@ namespace QualRazorCore.Controls.Tables
                 new()
                 );
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            await base.OnInitializedAsync();
+            base.OnInitialized();
             if (TableParent != null)
             {
-                ColumnParameter = new PropertyAccessCore<TModel, TProperty>(Property);
-                await TableParent.TableViewModel.AddColumn.InvokeAsync(this);
+                ColumnState = new ColumnState<TModel, TProperty>(Property) 
+                {
+                    FormatString = FormatString,
+                    TextAlign = Align,
+                };
+                
+                TableParent.AddColumn(this);
             }
+
         }
 
         protected override async Task OnLeftMouseClick(MouseKeyArg e)
         {//左クリックのみに反応
 
-            var changeOrderType = SortStatus switch
+            var changeOrderType = ColumnState.SortStatus switch
             {
                 SortType.None => SortType.ASC,
                 SortType.ASC => SortType.DESC,
                 SortType.DESC => SortType.None,
                 _ => SortType.None,
             };
-            TableParent.TableViewModel.ChangeSortOrder(ColumnParameter.PropertyName);
+            TableParent.TableViewModel.ChangeSortOrder(ColumnState.PropertyName);
             StateHasChanged();
         }
 
@@ -61,7 +74,7 @@ namespace QualRazorCore.Controls.Tables
             builder.AddAttribute(2, HtmlAtributes.MOUSECLICK, EventCallback.Factory.Create<MouseEventArgs>(this, (e) => OnMouseClick(e)));
             if (ChildContent is null)
             {
-                builder.AddContent(3, (MarkupString)ColumnParameter.PropertyName);
+                builder.AddContent(3, (MarkupString)ColumnState.PropertyName);
             }
             else
             {

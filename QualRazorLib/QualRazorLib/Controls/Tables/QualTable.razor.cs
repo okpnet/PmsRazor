@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using QualRazorLib.Controls.Tables.Columns;
+using QualRazorLib.Controls.Tables.Columns.Dtos;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
 using QualRazorLib.Intterfaces;
 using System.Collections.ObjectModel;
+using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorLib.Controls.Tables
 {
@@ -14,7 +16,9 @@ namespace QualRazorLib.Controls.Tables
         /// アクセス
         /// </summary>
         [Inject]
-        public ITableViewModel<TModel> TableViewModel { get; set; } = default!;
+        public IViewModel<ITalkPageResult<TModel>> TableViewModel { get; set; } = default!;
+
+        public IEnumerable<IColumnState> Columns => _columns.Select(t => t.ColumnStateBase);
         /// <summary>
         /// インフォメーションのレンダリング
         /// </summary>
@@ -31,7 +35,7 @@ namespace QualRazorLib.Controls.Tables
         /// 列追加
         /// </summary>
         /// <param name="column"></param>
-        protected void AddColumn(ITableColumnContent column) => _columns.Add(column);
+        internal void AddColumn(ITableColumnContent column) => _columns.Add(column);
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
@@ -45,7 +49,6 @@ namespace QualRazorLib.Controls.Tables
         protected override void OnParametersSet()
         {
             ArgumentNullException.ThrowIfNull(TableViewModel);
-            TableViewModel.AddColumn = EventCallback.Factory.Create<ITableColumnContent>(this, AddColumn);
         }
 
         /// <summary>

@@ -1,0 +1,32 @@
+﻿@inherits QualRazorComponentBase
+
+@switch (PagenationButton.ButtonType)
+{
+    case PagenationArg.PagenationButtonType.Between:
+        <span>...</span>
+        break;
+    case PagenationArg.PagenationButtonType.Number:
+        if (!PagenationButton.Active)
+        {
+            <span>
+                @PagenationButton.CurrentPageNumber
+            </span>
+        }
+        else
+        {
+            <button type="button" class="" @onclick="OnChangePage">
+                @PagenationButton.CurrentPageNumber
+            </button>
+        }
+        break;
+    case PagenationArg.PagenationButtonType.Prev:
+        <button type="button" class="@CssClasses.Table.PAGE_BUTTON" @onclick="OnChangePage">
+            @ParentTableInformation.PrevContent
+        </button>
+        break;
+    case PagenationArg.PagenationButtonType.Next:
+        <button type="button" class="@CssClasses.Table.PAGE_BUTTON" @onclick="OnChangePage">
+            @ParentTableInformation.NextContent
+        </button>
+        break;
+}

@@ -16,4 +16,8 @@
     <PackageReference Include="TalkLib" Version="0.18.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\QualAnalyzer\QualAnalyzer.csproj" />
+  </ItemGroup>
+
 </Project>
