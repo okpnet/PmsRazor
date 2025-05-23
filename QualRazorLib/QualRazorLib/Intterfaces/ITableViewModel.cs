@@ -14,5 +14,7 @@ namespace QualRazorLib.Intterfaces
         EventCallback<ITableColumnContent> AddColumn { get; set; }
 
         void ChangeSortOrder(string propertyName);
+
+        int MaxNumberOfPage { get; }
     }
 }

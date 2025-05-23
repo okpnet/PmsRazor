@@ -1,4 +1,5 @@
-﻿using QualRazorLib.Intterfaces;
+﻿using QualRazorLib.Core;
+using QualRazorLib.Intterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorLib.Controls.Tables
 {
-    public class TableViewModel<TModel> : IViewModel<ITalkPageResult<TModel>>, ITableViewModel<TModel> where TModel : class
+    public class TableViewModel<TModel> : NotifyCore, IViewModel<ITalkPageResult<TModel>>, ITableViewModel<TModel> where TModel : class
     {
         public ITalkPageResult<TModel> Data { get; protected set; } = default!;
 
