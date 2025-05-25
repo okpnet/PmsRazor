@@ -4,7 +4,7 @@ using QualRazorLib.Controls.Tables.Columns;
 using QualRazorLib.Controls.Tables.Columns.Dtos;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
-using QualRazorLib.Intterfaces;
+using QualRazorLib.Presentation.Facades;
 using System.Collections.ObjectModel;
 using TalkLib.Pages.Results.ResultItems;
 
@@ -16,7 +16,7 @@ namespace QualRazorLib.Controls.Tables
         /// アクセス
         /// </summary>
         [Inject]
-        public IViewModel<ITalkPageResult<TModel>> TableViewModel { get; set; } = default!;
+        public ITableViewModel<TModel> TableViewModel { get; set; } = default!;
 
         public IEnumerable<IColumnState> Columns => _columns.Select(t => t.ColumnStateBase);
         /// <summary>

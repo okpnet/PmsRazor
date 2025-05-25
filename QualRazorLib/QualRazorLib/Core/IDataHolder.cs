@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorLib.Intterfaces
+namespace QualRazorLib.Core
 {
     /// <summary>
     /// サービスから取得したデータやユーザー入力を保持する

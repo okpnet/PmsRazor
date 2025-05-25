@@ -44,6 +44,9 @@ namespace QualRazorLib.Helpers
         public static string TABLE_ROW_HOVER => "is-hoverable";
 
         public static string TYPE_ICON => "icon";
+
+        public static string TYPE_SELECTED => "is-selected";
+
         public static class Text
         {
             public static string LEFT => TEXT_LEFT;
@@ -93,6 +96,8 @@ namespace QualRazorLib.Helpers
             public static string PAGE_BUTTON => $"{BUTTON} {SIZE_MINI}";
 
             public static string PAGE_CURRENT_BUTTON => $"{BUTTON} {SIZE_MINI} {LINK}";
+
+            public static string ROW_SELECTED => $"{TYPE_SELECTED}";
         }
     }
 }

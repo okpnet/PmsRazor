@@ -3,7 +3,7 @@ using QualAnalyzer.Attributes;
 using QualRazorLib.Controls.Tables.Argments;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
-using QualRazorLib.Intterfaces;
+using QualRazorLib.Presentation.Facades;
 using System.Reflection.Metadata;
 using TalkLib.Pages.Results.ResultItems;
 
@@ -24,9 +24,7 @@ namespace QualRazorLib.Controls.Tables.Informations
         public RenderFragment? NextContent { get; set; }
 
         [CastCheck(typeof(ITableViewModel))]
-        protected IViewModel<ITalkPageResult<TModel>> ViewModel => TableParent.TableViewModel;
-
-        protected ITableViewModel TableViewModel => (ITableViewModel)ViewModel;
+        protected ITableViewModel<TModel> ViewModel => TableParent.TableViewModel;
 
         /// <summary>
         /// インフォメーションDIVの属性
@@ -56,15 +54,10 @@ namespace QualRazorLib.Controls.Tables.Informations
                 ViewModel.Data.NumberOfPage,
                 ViewModel.Data.PageNumber);
         }
-        /// <summary>
-        /// ページネーションボタンの引数配列を生成
-        /// </summary>
-        /// <returns></returns>
-        protected IEnumerable<PagenationArg> GetPagenation() => ViewModel.Data is null ? [] : BuildPageButtonInformation(TableViewModel.MaxNumberOfPage, ViewModel.Data);
 
         public RenderFragment RenderInformation() => builder =>
         {
-            var pageButtons= ViewModel.Data is null ? [] : BuildPageButtonInformation(, ViewModel.Data);
+            var pageButtons= ViewModel.Data is null ? [] : BuildPageButtonInformation(ViewModel.MaxNumberOfPage, ViewModel.Data);
             builder.OpenComponent<CascadingValue<ITableInformationContent>>(0);
             builder.AddAttribute(1, nameof(PagenationButtonContent.ParentTableInformation), this);
             builder.OpenElement(2, "div");

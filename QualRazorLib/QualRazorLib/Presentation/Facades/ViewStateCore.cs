@@ -1,8 +1,8 @@
 ﻿using QualRazorLib.Core;
-using QualRazorLib.Intterfaces;
+using QualRazorLib.Views.States;
 using System.ComponentModel;
 
-namespace QualRazorLib.Facade
+namespace QualRazorLib.Presentation.Facades
 {
     public abstract class ViewStateCore:NotifyCore, INotifyPropertyChanged,IViewState
     {

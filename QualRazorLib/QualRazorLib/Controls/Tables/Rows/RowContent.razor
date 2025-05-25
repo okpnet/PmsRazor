@@ -11,7 +11,7 @@
             
             @foreach (var column in Columns)
             {
-                <Cell Model="@Row.Data" ColumnState="column"></Cell>
+                <Cell IsSelected ="@Row.Status.HasFlag(RowStatus.Seleted)" Model="@Row.Data" ColumnState="column"></Cell>
             }
             break;
     }

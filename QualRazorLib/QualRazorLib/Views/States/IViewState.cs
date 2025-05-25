@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualRazorLib.Intterfaces
+namespace QualRazorLib.Views.States
 {
     /// <summary>
     /// UIとユーザーが対話する状態の管理

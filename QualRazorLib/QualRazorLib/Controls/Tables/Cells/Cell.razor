@@ -1,6 +1,6 @@
 ﻿@inherits QualRazorComponentBase
 @typeparam TModel where TModel : class
 
-<td @attributes="">
-@((MarkupString)Value!)
+<td @attributes="MergedAttributes">
+    @((MarkupString)Value!)
 </td>

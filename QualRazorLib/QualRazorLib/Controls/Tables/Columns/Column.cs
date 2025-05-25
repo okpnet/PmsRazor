@@ -55,16 +55,8 @@ namespace QualRazorLib.Controls.Tables.Columns
 
         protected override async Task OnLeftMouseClick(MouseKeyArg e)
         {//左クリックのみに反応
-
-            var changeOrderType = ColumnState.SortStatus switch
-            {
-                SortType.None => SortType.ASC,
-                SortType.ASC => SortType.DESC,
-                SortType.DESC => SortType.None,
-                _ => SortType.None,
-            };
-            TableParent.TableViewModel.ChangeSortOrder(ColumnState.PropertyName);
-            StateHasChanged();
+            await TableParent.TableViewModel.LoadAsync();
+            //StateHasChanged();
         }
 
         public RenderFragment RenderHeader() => builder =>

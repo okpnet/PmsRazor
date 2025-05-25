@@ -1,5 +1,4 @@
 ﻿using QualRazorLib.Core;
-using QualRazorLib.Intterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TalkLib.Pages.Results.ResultItems;
 
-namespace QualRazorLib.Facade
+namespace QualRazorLib.Presentation.Facades
 {
     public class TableViewModel<TModel> : ViewStateCore, IViewModel<ITalkPageResult<TModel>>, ITableViewModel where TModel : class
     {

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QualRazorLib.Core;
+using QualRazorLib.Views.States;
 
-namespace QualRazorLib.Intterfaces
+namespace QualRazorLib.Presentation.Facades
 {
     /// <summary>
     /// 窓口（Facade）としてUIからの呼び出しを一元化する
     /// </summary>
-    public interface IViewModel<T> : IDataHolder<T>, IViewState, IActionDispatcher
+    public interface IViewModel<T> : IDataHolder<T>, IViewState
     {
         Task LoadAsync();         // データの読み込み
         Task SubmitAsync();       // データの送信 or 更新

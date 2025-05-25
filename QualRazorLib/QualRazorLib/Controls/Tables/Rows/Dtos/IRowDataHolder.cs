@@ -1,4 +1,4 @@
-﻿using QualRazorLib.Intterfaces;
+﻿using QualRazorLib.Core;
 
 namespace QualRazorLib.Controls.Tables.Rows.Dtos
 {
