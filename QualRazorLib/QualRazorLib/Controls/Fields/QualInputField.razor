@@ -1,0 +1,86 @@
+﻿@inherits QualRazorComponentBase
+@typeparam TModel where TModel : class
+@typeparam TProperty
+
+@switch (FieldDataTypes)
+{
+    case FieldDataType.Number:
+        var numberProvider = Provider as NumberFieldProvider<TProperty> ?? new();
+
+        <EditerNumber Value="@Value"
+                      ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
+                      AdditionalAttributes="@AdditionalAttributes"
+                      ValueExpression="@PropertyExpression"
+                      Comma="@numberProvider.IsComma"
+                      Degit="@numberProvider.NumberOfDigit"
+                      MaxValue="@numberProvider.MaxValue"
+                      MinValue="@numberProvider.MinValue"></EditerNumber>
+        break;
+    case FieldDataType.Check:
+        var checkProvider = Provider as CheckFieldProvider<TProperty> ?? new();
+        <EditerBool AdditionalAttributes="@AdditionalAttributes"
+                    Value="@Value"
+                    ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
+                    ValueExpression="@PropertyExpression"
+                    TrueValue="@checkProvider.TrueValue"
+                    FalseValue="@checkProvider.FalseValue"></EditerBool>
+        break;
+
+    case FieldDataType.Date:
+        var dateProvider = Provider as DateFieldProvider ?? new();
+
+        <EditerDate AdditionalAttributes="@AdditionalAttributes"
+                    Value="@Value"
+                    ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
+                    ValueExpression="PropertyExpression"
+                    DateType="@dateProvider.DateType"
+                    CustomParseFormat="@dateProvider.ParseFormat"></EditerDate>
+        break;
+
+    case FieldDataType.TiemSpan:
+        var timespanOption = Provider as TimespanConfigOption ?? new();
+        <EditerTimeSpan AdditionalAttributes="@AdditionalAttributes"
+                        Value="@Value"
+                        ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
+                        ValueExpression="PropertyExpression"
+                        Comma="@timespanOption.IsComma"
+                        MaxValue="@timespanOption.MaxValue"
+                        Degit="@timespanOption.NumberOfDigit"
+                        TimeSpanUnit="@timespanOption.Unit"></EditerTimeSpan>
+        break;
+
+    case FieldDataType.Text:
+        var textProvider = Provider as TextFielProvider ?? new();
+
+        if (textProvider.IsMutiLine)
+        {
+            <EditerTextArea AdditionalAttributes="@AdditionalAttributes"
+                            Value="@Value"
+                            ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
+                            ValueExpression="PropertyExpression">
+            </EditerTextArea>
+        }
+        else
+        {
+            <EditerText AdditionalAttributes="@AdditionalAttributes"
+                        Value="@Value"
+                        ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
+                        ValueExpression="PropertyExpression"
+                        EditType="@textProvider.EditType"></EditerText>
+        }
+        break;
+    case FieldDataType.Select:
+        var selectProvider = Provider as SelectFieldProvider<TProperty> ?? new();
+        <div class="select">
+            <EditerSelect AdditionalAttributes="@AdditionalAttributes"
+                          Value="@Value"
+                          ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
+                          ValueExpression="PropertyExpression"
+                          Source="@(()=>selectProvider.Source)"
+                          OptionContents="@selectProvider.GetOptionText"
+                          ChoosePromptContents="@selectProvider.ChoosePrompt"></EditerSelect>
+        </div>
+        break;
+    default:
+        throw new NotImplementedException($"'{FieldDataTypes}' is not implemented to switch cases.");
+}

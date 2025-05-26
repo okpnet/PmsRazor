@@ -18,5 +18,7 @@ namespace QualRazorLib.Helpers
         public static string MOUSECLICK => "onclick";
 
         public static string TH => "th";
+
+        public static string TYPE_BUTTON => "button";
     }
 }

@@ -1,0 +1,58 @@
+﻿@inherits QualRazorComponentBase
+<div @attributes="MergeDialogAttributes">
+    <div class="@CssClasses.MODAL_BACKGROUND"></div>
+    <div class="@CssClasses.MODAL_CARD">
+        <header class="@CssClasses.MODAL_HEAD">
+            <p class="@CssClasses.MODAL__TITLE">@DialogTitle</p>
+            <button class="@CssClasses.MODAL_DELETEBUTTON" type="@HtmlAtributes.TYPE_BUTTON" aria-label="close" @onclick="OnClose"></button>
+        </header>
+        <section class="@CssClasses.MODAL_BODY">
+            @DialogContents
+        </section>
+        <footer class="@CssClasses.MODAL_FOOT">
+            <div class="@CssClasses.BUTTONS">
+                <CascadingValue Name="Parent" Value="this">
+                    <ErrorBoundary>
+                        <ChildContent>
+                            @if (PrimaryButtonsContent is not null)
+                            {
+                                <QualBtutton @attributes="@PrimaryButtonsContent.AdditionalAttributes"
+                                             IconClass="@PrimaryButtonsContent.IconClass"
+                                             IsDisabled="@PrimaryButtonsContent.IsDisabled"
+                                             IsHidden="@PrimaryButtonsContent.IsHidden"
+                                             IsMiniButton="@PrimaryButtonsContent.IsMiniButton"
+                                             OnClickEvent="OnPrimaryClick" 
+                                             Layer="@LayerType.Primary"
+                                             >@PrimaryButtonsContent.ChildContent</QualBtutton>
+                            }
+                            @if (SecondaryButtonsContent is not null)
+                            {
+                                <QualBtutton @attributes="@SecondaryButtonsContent.AdditionalAttributes"
+                                             IconClass="@SecondaryButtonsContent.IconClass"
+                                             IsDisabled="@SecondaryButtonsContent.IsDisabled"
+                                             IsHidden="@SecondaryButtonsContent.IsHidden"
+                                             IsMiniButton="@SecondaryButtonsContent.IsMiniButton"
+                                             OnClickEvent="OnSecondaryClick"
+                                             Layer="@LayerType.Secondary">@SecondaryButtonsContent.ChildContent</QualBtutton>
+                            }
+                            @if (TertiaryButtonsContent is not null)
+                            {
+                                <QualBtutton @attributes="@TertiaryButtonsContent.AdditionalAttributes"
+                                             IconClass="@TertiaryButtonsContent.IconClass"
+                                             IsDisabled="@TertiaryButtonsContent.IsDisabled"
+                                             IsHidden="@TertiaryButtonsContent.IsHidden"
+                                             IsMiniButton="@TertiaryButtonsContent.IsMiniButton"
+                                             OnClickEvent="OnTertiaryClick"
+                                             Layer="@LayerType.Tertiary">@TertiaryButtonsContent.ChildContent</QualBtutton>
+                            }
+                        </ChildContent>
+                        <ErrorContent>
+                            <span>ダイアログボタンエラー</span>
+                        </ErrorContent>
+                    </ErrorBoundary>
+
+                </CascadingValue>
+            </div>
+        </footer>
+    </div>
+</div>

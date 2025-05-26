@@ -10,9 +10,7 @@ namespace QualRazorLib.Views.QueryConditions
     /// <summary>
     /// Viewの状態とFacade条件DTOの相互変換を担うインターフェース
     /// </summary>
-    public interface IViewQueryCondition<TQuery> :
-        IViewQueryExtractor<TQuery>,
-        IViewQueryRestorer<TQuery>
+    public interface IViewQueryCondition<TQuery> :IViewQueryExtractor<TQuery>,IViewQueryRestorer<TQuery>
     {
     }
 }

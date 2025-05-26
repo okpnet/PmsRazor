@@ -1,13 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using QualRazorLib.Controls.Tables.Argments;
-using QualRazorLib.Controls.Tables.Columns;
-using QualRazorLib.Core;
+﻿using QualRazorLib.Core;
 using QualRazorLib.Views.States;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorLib.Presentation.Facades
