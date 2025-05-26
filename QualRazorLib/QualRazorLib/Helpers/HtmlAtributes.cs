@@ -19,6 +19,8 @@ namespace QualRazorLib.Helpers
 
         public static string TH => "th";
 
+        public static string DIV => "div";
+
         public static string TYPE_BUTTON => "button";
     }
 }
