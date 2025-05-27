@@ -7,6 +7,7 @@ using QualRazorLib.Core;
 using QualRazorLib.Helpers;
 using QualRazorLib.Models.Tables;
 using QualRazorLib.Presentation.Facades;
+using QualRazorLib.Providers.Sources;
 using System.Collections.ObjectModel;
 
 namespace QualRazorLib.Controls.Tables
@@ -20,6 +21,8 @@ namespace QualRazorLib.Controls.Tables
         public ITableViewParameter Parameter { get; set; } = default!;
 
         public ITableViewModel<TModel> ViewModel=> (ITableViewModel<TModel>)Parameter;
+
+        public ITableDataProvider<TModel> DataProvider => ViewModel.Data;
 
         public IEnumerable<IColumnState> Columns => _columns.Select(t => t.ColumnStateBase);
         /// <summary>

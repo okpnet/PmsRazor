@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace QualRazorLib.Providers.Trees
+namespace QualRazorLib.Providers.Sources
 {
 
     public interface ITreeStructureDataProvider<T>

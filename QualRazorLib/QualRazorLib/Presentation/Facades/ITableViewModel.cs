@@ -11,7 +11,8 @@ namespace QualRazorLib.Presentation.Facades
         int MaxNumberOfPage { get; }
     }
 
-    public interface ITableViewModel<T>: IViewModel<T>, ITableViewParameter,IDataHolder<ITableDataProvider<T>>, IViewState where T : class
+    public interface ITableViewModel<T>: IViewModel, ITableViewParameter,IDataHolder<ITableDataProvider<T>>, IViewState where T : class
     {
+
     }
 }

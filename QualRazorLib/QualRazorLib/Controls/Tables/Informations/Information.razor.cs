@@ -4,8 +4,8 @@ using QualRazorLib.Controls.Tables.Argments;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
 using QualRazorLib.Presentation.Facades;
+using QualRazorLib.Providers.Sources;
 using System.Reflection.Metadata;
-using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorLib.Controls.Tables.Informations
 {
@@ -86,7 +86,7 @@ namespace QualRazorLib.Controls.Tables.Informations
         /// <param name="pageResult"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        protected IEnumerable<PagenationArg> BuildPageButtonInformation(int maxNumberOfPage, ITalkPageResult pageResult)
+        protected IEnumerable<PagenationArg> BuildPageButtonInformation(int maxNumberOfPage, ITableDataProvider<TModel> pageResult)
         {
 
             if (pageResult.NumberOfPage == 1)

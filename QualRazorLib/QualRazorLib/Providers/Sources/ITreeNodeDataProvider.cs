@@ -1,8 +1,7 @@
-﻿using QualRazorLib.Providers.Sources;
-using QualRazorLib.Views.States;
+﻿using QualRazorLib.Views.States;
 using System.Collections.ObjectModel;
 
-namespace QualRazorLib.Providers.Trees
+namespace QualRazorLib.Providers.Sources
 {
     /// <summary>
     /// ツリーノードの情報をビューに提供する
