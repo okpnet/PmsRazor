@@ -1,0 +1,18 @@
+﻿@inherits QualRazorComponentBase
+@typeparam TModel where TModel :class   
+
+<tr @attributes="MergedAttributes">
+    @switch (Row.Status)
+    {
+        case RowStatus.Edit:
+            <TableRowEditCellContent Row="Row" Columns="Columns"></TableRowEditCellContent>
+            break;
+        default:
+            
+            @foreach (var column in Columns)
+            {
+                <Cell IsSelected ="@Row.Status.HasFlag(RowStatus.Seleted)" Model="@Row.Data" ColumnState="column"></Cell>
+            }
+            break;
+    }
+</tr>
