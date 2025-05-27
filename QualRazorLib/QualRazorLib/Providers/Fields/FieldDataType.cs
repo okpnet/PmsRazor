@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace QualRazorLib.Providers
+namespace QualRazorLib.Providers.Fields
 {
     [Flags]
     public enum FieldDataType : byte

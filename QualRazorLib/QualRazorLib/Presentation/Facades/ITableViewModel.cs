@@ -1,20 +1,17 @@
 ﻿using QualRazorLib.Core;
+using QualRazorLib.Models.Tables;
+using QualRazorLib.Providers.Sources;
 using QualRazorLib.Views.States;
-using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorLib.Presentation.Facades
 {
 
-    public interface ITableViewModel
+    public interface ITableViewModel: ITableViewParameter
     {
         int MaxNumberOfPage { get; }
     }
 
-    public interface ITableViewModel<T>: ITableViewModel, IDataHolder<ITalkPageResult<T>>, IViewState where T : class
+    public interface ITableViewModel<T>: IViewModel<T>, ITableViewParameter,IDataHolder<ITableDataProvider<T>>, IViewState where T : class
     {
-
-        Task LoadAsync();         // データの読み込み
-        Task SubmitAsync();       // データの送信 or 更新
-        void Reset();             // 初期状態に戻す
     }
 }

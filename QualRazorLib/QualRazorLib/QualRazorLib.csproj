@@ -13,16 +13,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
-    <PackageReference Include="TalkLib" Version="0.18.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\BlazorTools\BlazorCustomInput\BlazorCustomInput\BlazorCustomInput.csproj" />
     <ProjectReference Include="..\..\QualAnalyzer\QualAnalyzer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Providers\Dialogs\" />
   </ItemGroup>
 
 </Project>

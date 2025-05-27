@@ -2,12 +2,12 @@
 using QualRazorLib.Views.States;
 using System.ComponentModel;
 
-namespace QualRazorLib.Presentation.Facades
+namespace QualRazorLib.Models.Core
 {
-    public abstract class ViewStateCore:NotifyCore, INotifyPropertyChanged,IViewState
+    public abstract class ViewStateCore : NotifyCore, INotifyPropertyChanged, IViewState
     {
         protected bool _isLoading;
-        public bool IsLoading 
+        public bool IsLoading
         {
             get => _isLoading;
             set
@@ -26,7 +26,7 @@ namespace QualRazorLib.Presentation.Facades
             get => _hasError;
             set
             {
-                if (_hasError==value)
+                if (_hasError == value)
                 {
                     return;
                 }
@@ -35,7 +35,7 @@ namespace QualRazorLib.Presentation.Facades
             }
         }
 
-        protected string _errorMessage=string.Empty;
+        protected string _errorMessage = string.Empty;
         public string ErrorMessage
         {
             get => _errorMessage;

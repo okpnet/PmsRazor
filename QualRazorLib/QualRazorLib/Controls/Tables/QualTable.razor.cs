@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using QualAnalyzer.Attributes;
 using QualRazorLib.Controls.Tables.Columns;
 using QualRazorLib.Controls.Tables.Columns.Dtos;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
+using QualRazorLib.Models.Tables;
 using QualRazorLib.Presentation.Facades;
 using System.Collections.ObjectModel;
-using TalkLib.Pages.Results.ResultItems;
 
 namespace QualRazorLib.Controls.Tables
 {
@@ -15,8 +16,10 @@ namespace QualRazorLib.Controls.Tables
         /// <summary>
         /// アクセス
         /// </summary>
-        [Inject]
-        public ITableViewModel<TModel> TableViewModel { get; set; } = default!;
+        [Parameter,EditorRequired,CastCheck(typeof(ITableViewModel<>))]
+        public ITableViewParameter Parameter { get; set; } = default!;
+
+        public ITableViewModel<TModel> ViewModel=> (ITableViewModel<TModel>)Parameter;
 
         public IEnumerable<IColumnState> Columns => _columns.Select(t => t.ColumnStateBase);
         /// <summary>
@@ -48,7 +51,7 @@ namespace QualRazorLib.Controls.Tables
 
         protected override void OnParametersSet()
         {
-            ArgumentNullException.ThrowIfNull(TableViewModel);
+            ArgumentNullException.ThrowIfNull(Parameter);
         }
 
         /// <summary>

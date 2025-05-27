@@ -1,16 +1,12 @@
-﻿using QualRazorLib.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TalkLib.Pages.Results.ResultItems;
+﻿using QualRazorLib.Models.Core;
+using QualRazorLib.Presentation.Facades;
+using QualRazorLib.Providers.Sources;
 
-namespace QualRazorLib.Presentation.Facades
+namespace QualRazorLib.Models.Tables
 {
-    public class TableViewModel<TModel> : ViewStateCore, IViewModel<ITalkPageResult<TModel>>, ITableViewModel where TModel : class
+    public class TableViewModel<TModel> : ViewStateCore, IViewModel<ITableDataProvider<TModel>>, ITableViewModel where TModel : class
     {
-        public ITalkPageResult<TModel> Data { get; protected set; } = default!;
+        public ITableDataProvider<TModel> Data { get; protected set; } = default!;
 
         protected int _maxNumberOfPage;
         public int MaxNumberOfPage

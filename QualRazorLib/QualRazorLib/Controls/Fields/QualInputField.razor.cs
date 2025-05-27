@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Forms;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
-using QualRazorLib.Providers;
+using QualRazorLib.Providers.Fields;
 using System.Linq.Expressions;
 
 namespace QualRazorLib.Controls.Fields

@@ -55,7 +55,7 @@ namespace QualRazorLib.Controls.Tables.Columns
 
         protected override async Task OnLeftMouseClick(MouseKeyArg e)
         {//左クリックのみに反応
-            await TableParent.TableViewModel.LoadAsync();
+            await TableParent.ViewModel.LoadAsync();
             //StateHasChanged();
         }
 
