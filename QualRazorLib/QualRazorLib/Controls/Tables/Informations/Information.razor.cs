@@ -60,14 +60,14 @@ namespace QualRazorLib.Controls.Tables.Informations
             var pageButtons= ViewModel.Data is null ? [] : BuildPageButtonInformation(ViewModel.MaxNumberOfPage, ViewModel.Data);
             builder.OpenComponent<CascadingValue<ITableInformationContent>>(0);
             builder.AddAttribute(1, nameof(PagenationButtonContent.ParentTableInformation), this);
-            builder.OpenElement(2, "div");
+            builder.OpenElement(2, HtmlAtributes.DIV);
             builder.AddMultipleAttributes(1, MeargeAttribute);
-            builder.OpenElement(3, "div");
-            builder.AddAttribute(4, "class", $"{CssClasses.MARGIN_ALL} {CssClasses.TEXT_GREY}");
+            builder.OpenElement(3, HtmlAtributes.DIV);
+            builder.AddAttribute(4, HtmlAtributes.CLASS, $"{CssClasses.MARGIN_ALL} {CssClasses.TEXT_GREY}");
             builder.AddContent(5, InformationContent, CreatePageInformationArg());
             builder.CloseElement();
-            builder.OpenElement(6, "div");
-            builder.AddAttribute(7, "class", CssClasses.Table.PAGE_BUTTON_GROUP);
+            builder.OpenElement(6, HtmlAtributes.DIV);
+            builder.AddAttribute(7, HtmlAtributes.CLASS, CssClasses.Table.PAGE_BUTTON_GROUP);
             foreach (var page in pageButtons)
             {
                 builder.OpenComponent<PagenationButtonContent>(6);
