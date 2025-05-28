@@ -1,11 +1,4 @@
-﻿using QualRazorLib.Providers.Trees;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QualRazorLib.Controls.Argments
+﻿namespace QualRazorLib.Controls.Argments
 {
     /// <summary>
     /// RenderFlagmentの引数
@@ -23,6 +16,5 @@ namespace QualRazorLib.Controls.Argments
             IsSelected = isSelected;
             Level = level;
         }
-
     }
 }

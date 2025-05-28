@@ -12,15 +12,16 @@ namespace QualRazorLib.Providers.Sources
         bool HasParent { get; }
 
         int ChildrenCount { get; }
+
+        int Level { get; }
     }
     /// <summary>
     /// ツリーノードの情報をビューに提供する
     /// </summary>
-    /// <typeparam name="TModel"></typeparam>
-    public interface ITreeNodeDataProvider<TModel> : ITreeNodeDataProvider, IDataProvider, ISelectedState
+    /// <typeparam name="T"></typeparam>
+    public interface ITreeNodeDataProvider<T> : ITreeNodeDataProvider, IDataProvider, ISelectedState, IStructureState<ITreeNodeDataProvider<T>>
     {
-        TModel Value { get; }
-        ITreeNodeDataProvider<TModel>? Parent { get; }
-        ObservableCollection<ITreeNodeDataProvider<TModel>> Children { get; }
+        T Value { get; }
+        ObservableCollection<ITreeNodeDataProvider<T>> Children { get; }
     }
 }

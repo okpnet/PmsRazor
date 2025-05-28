@@ -12,6 +12,8 @@ namespace QualRazorLib.Helpers
 
         public static string CLASS => "class";
 
+        public static string STYLE="style";
+
         public static string MOUSEDOWNEVENT => "onmousedown";
         public static string MOUSEUPEVENT => "onmouseup";
 

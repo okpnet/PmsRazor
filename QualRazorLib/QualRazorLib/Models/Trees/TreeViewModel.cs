@@ -1,26 +1,51 @@
-﻿using QualRazorLib.Models.Core;
+﻿using QualRazorLib.Helpers;
+using QualRazorLib.Models.Core;
 using QualRazorLib.Presentation.Facades;
 using QualRazorLib.Providers.Sources;
 
 namespace QualRazorLib.Models.Trees
 {
-    public class TreeViewModel<T> : ViewStateCore, ITreeViewModel<ITreeStructureDataProvider<T>>
+    public abstract class TreeViewModel<T> : ViewStateCore, ITreeViewModel<T>
     {
-        public ITreeStructureDataProvider<ITreeStructureDataProvider<T>> Data => throw new NotImplementedException();
+        protected TreeStructureDataProvider<T> _treeStructureDataProvider=new();
 
-        public void AddChild(ITreeStructureDataProvider<T>? parent, ITreeStructureDataProvider<T> addChild)
+        public ITreeStructureDataProvider<T> Data => _treeStructureDataProvider;
+
+        protected TreeNodeViewModel<T> _root => (TreeNodeViewModel<T>)_treeStructureDataProvider.Root;
+
+        protected abstract void AssignParent(T child,T? parent);
+
+        public void AddChild(T? parent, T addChild)
         {
-            throw new NotImplementedException();
+            AssignParent(addChild, parent);
+            var addModel = new TreeNodeViewModel<T>(addChild);
+            if (parent is null)
+            {
+                _root.Children.Add(addModel);
+                return;
+            }
+            var findParent = parent is null ? 
+                _root : TreeStructureHelper.FilndNodeItem(new TreeNodeViewModel<T>(parent), _root.Children, (t) => t.Children, (a, b) => ReferenceEquals(a.Value, b.Value));
+            findParent?.Children.Add(addModel);
         }
 
-        public void AddNode(ITreeStructureDataProvider<T> node)
+        public void AddNode(T node)
         {
-            throw new NotImplementedException();
+            AddChild(default, node);
         }
 
-        public void ChangeParent(ITreeStructureDataProvider<T>? parent, ITreeStructureDataProvider<T> chaild)
+        public void ChangeParent(T? parent, T chaild)
         {
-            throw new NotImplementedException();
+            AssignParent(chaild, parent);
+            var findParent = parent is null ?
+                _root : TreeStructureHelper.FilndNodeItem(new TreeNodeViewModel<T>(parent), _root.Children, (t) => t.Children, (a, b) => ReferenceEquals(a.Value, b.Value));
+            var findChild= TreeStructureHelper.FilndNodeItem(new TreeNodeViewModel<T>(chaild), _root.Children, (t) => t.Children, (a, b) => ReferenceEquals(a.Value, b.Value));
+            if(findChild is null)
+            {
+                return;
+            }
+            findChild.Parent?.Children.Remove(findChild);
+            findChild.SetParent(findParent);
         }
 
         public override void ClearError()
@@ -33,7 +58,7 @@ namespace QualRazorLib.Models.Trees
             throw new NotImplementedException();
         }
 
-        public void RemoveNode(ITreeStructureDataProvider<T> node)
+        public void RemoveNode(T node)
         {
             throw new NotImplementedException();
         }

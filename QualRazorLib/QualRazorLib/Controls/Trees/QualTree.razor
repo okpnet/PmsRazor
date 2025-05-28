@@ -1,6 +1,11 @@
 ﻿@inherits QualRazorComponentBase
 @typeparam T
 
-<CascadingValue Name="@_casdcadingParameterName" Value="this">
-
+<CascadingValue Name="@CASCADE_PARAM" Value="this">
+    <section @attributes="MergedAttributes">
+        @foreach(var node in TreeViewModels.Data.Root.Children)
+        {
+            <TreeNode NodeTemplate="@NodeRenderFlagment" TreeDataProvider="node"></TreeNode>
+        }
+    </section>
 </CascadingValue>

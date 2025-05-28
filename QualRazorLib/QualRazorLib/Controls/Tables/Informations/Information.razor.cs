@@ -24,7 +24,7 @@ namespace QualRazorLib.Controls.Tables.Informations
         public RenderFragment? NextContent { get; set; }
 
         [CastCheck(typeof(ITableViewModel))]
-        protected ITableViewModel<TModel> ViewModel => TableParent.TableViewModel;
+        protected ITableViewModel<TModel> ViewModel => TableParent.ViewModel;
 
         /// <summary>
         /// インフォメーションDIVの属性
@@ -44,7 +44,7 @@ namespace QualRazorLib.Controls.Tables.Informations
         /// <returns></returns>
         public PageInformationArg CreatePageInformationArg()
         {
-            if(TableParent.TableViewModel.Data is null)
+            if(TableParent.ViewModel.Data is null)
             {
                 return PageInformationArg.CreateFailArg();
             }
@@ -57,7 +57,7 @@ namespace QualRazorLib.Controls.Tables.Informations
 
         public RenderFragment RenderInformation() => builder =>
         {
-            var pageButtons= ViewModel.Data is null ? [] : BuildPageButtonInformation(ViewModel.MaxNumberOfPage, ViewModel.Data);
+            var pageButtons= ViewModel.Data is null ? [] : BuildPageButtonInformation(((ITableViewModel)ViewModel).MaxNumberOfPage, ViewModel.Data);
             builder.OpenComponent<CascadingValue<ITableInformationContent>>(0);
             builder.AddAttribute(1, nameof(PagenationButtonContent.ParentTableInformation), this);
             builder.OpenElement(2, HtmlAtributes.DIV);

@@ -1,22 +1,31 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorLib.Controls.Argments;
 using QualRazorLib.Core;
+using QualRazorLib.Helpers;
 using QualRazorLib.Presentation.Facades;
 
 namespace QualRazorLib.Controls.Trees
 {
     public partial class QualTree<T>:QualRazorComponentBase
     {
-        public const string _casdcadingParameterName = $"{nameof(QualTree<T>)}Parent";
+        public const string CASCADE_PARAM = $"{nameof(QualTree<T>)}.Parent";
 
         [Parameter]
         public ITreeViewModel<T> TreeViewModels { get; set; } = default!;
 
+
+
         protected RenderFragment<TreeNodeArg<T>>? NodeRenderFlagment { get; set; }
+        
+        protected Dictionary<string, object> MergedAttributes =>
+                    HtmlAttributeHelper.PurgeAttributes(
+                        MeargeAttributeBase,
+                        new()
+                        );
 
         public class NodeTemplate: QualRazorComponentBase
         {
-            [CascadingParameter(Name =_casdcadingParameterName)]
+            [CascadingParameter(Name = CASCADE_PARAM)]
             public QualTree<T> Parent { get; set; } = default!;
 
             [Parameter]

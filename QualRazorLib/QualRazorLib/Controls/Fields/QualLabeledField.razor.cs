@@ -38,7 +38,7 @@ namespace QualRazorLib.Controls.Fields
         public class Labels : QualRazorComponentBase
         {
             [CascadingParameter(Name = "Parent")]
-            public LabeledField<TModel, TProperty>? Parent { get; set; }
+            public QualLabeledField<TModel, TProperty>? Parent { get; set; }
 
             [Parameter]
             public RenderFragment? ChildContent { get; set; }
@@ -60,7 +60,7 @@ namespace QualRazorLib.Controls.Fields
         public class Fields : QualRazorComponentBase
         {
             [CascadingParameter(Name = "Parent")]
-            public LabeledField<TModel, TProperty>? Parent { get; set; }
+            public QualLabeledField<TModel, TProperty>? Parent { get; set; }
             [Parameter]
             public RenderFragment? ChildContent { get; set; }
             [Parameter, EditorRequired]

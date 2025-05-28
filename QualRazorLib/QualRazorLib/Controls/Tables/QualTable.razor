@@ -20,7 +20,7 @@
         <tbody>
                 @foreach (var row in ViewModel.Data.Sources.Select(t=> new TableRowState<TModel>(t)))
                 {
-                    <RowContent Row="row"></RowContent>
+                    <Row RowState="row"></Row>
                 }
         </tbody>
     </table>

@@ -2,7 +2,7 @@
 @typeparam TModel where TModel :class   
 
 <tr @attributes="MergedAttributes">
-    @switch (Row.Status)
+    @switch (RowState.Status)
     {
         case RowStatus.Edit:
             <TableRowEditCellContent Row="Row" Columns="Columns"></TableRowEditCellContent>
@@ -11,7 +11,7 @@
             
             @foreach (var column in Columns)
             {
-                <Cell IsSelected ="@Row.Status.HasFlag(RowStatus.Seleted)" Model="@Row.Data" ColumnState="column"></Cell>
+                <Cell Model="@RowState.Data" ColumnState="column"></Cell>
             }
             break;
     }

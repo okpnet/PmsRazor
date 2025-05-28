@@ -1,5 +1,33 @@
 ﻿@inherits QualRazorComponentBase
 @typeparam T
-<p>
-    @NodeTemplate()
-</p>
+
+<div class="qual-tree-node">
+    @if (Model.ChildrenCount > 0)
+    {
+        <span class="@CssClasses.TYPE_ICON" @onclick="()=>Model.IsExpanded=!Model.IsExpanded">
+            <i class="qual-iconsize-07 @(IsExpanded ? "gg-chevron-right":"gg-chevron-down")"></i>
+        </span>
+        <span>
+            @if (NodeTemplate is not null)
+            {
+                @NodeTemplate(Create())
+            }
+        </span>
+    }
+    else
+    {
+        @if (NodeTemplate is not null)
+        {
+            @NodeTemplate(Create())
+        }
+    }
+</div>
+@if (IsExpanded)
+{
+    <div>
+        @foreach(var node in Model.Children)
+        {
+        <TreeNode NodeTemplate="NodeTemplate" TreeDataProvider="node"></TreeNode>
+        }
+    </div>
+}

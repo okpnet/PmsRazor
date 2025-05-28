@@ -1,10 +1,11 @@
-﻿using QualRazorLib.Models.Trees;
+﻿using QualRazorLib.Core;
+using QualRazorLib.Models.Trees;
 using QualRazorLib.Providers.Sources;
 using QualRazorLib.Views.States;
 
 namespace QualRazorLib.Presentation.Facades
 {
-    public interface ITreeViewModel<T>: IViewModel<ITreeStructureDataProvider<T>>, ITreeViewParamter, IViewState
+    public interface ITreeViewModel<T>: IViewModel, IDataHolder<ITreeStructureDataProvider<T>>, ITreeViewParamter, IViewState
     {
         void AddNode(T node);
 
