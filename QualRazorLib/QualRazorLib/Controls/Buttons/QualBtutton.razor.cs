@@ -10,12 +10,11 @@ namespace QualRazorLib.Controls.Buttons
         [Parameter]
         public bool IsMiniButton { get; set; } = false;
 
-        protected LayerType _layerType;
         [Parameter]
         public LayerType Layer { get; set; }
 
         [Parameter]
-        public RenderFragment? ButtonContent { get; set; }
+        public RenderFragment? ChildContent { get; set; }
 
         [Parameter]
         public string IconClass { get; set; } = string.Empty;
@@ -41,14 +40,10 @@ namespace QualRazorLib.Controls.Buttons
                 [HtmlAtributes.MOUSECLICK] = OnClickEvent
             });
 
-        protected override void OnParametersSet()
+        protected override void OnInitialized()
         {
-            base.OnParametersSet();
-            if (_layerType != Layer)
-            {
-                _layerType = Layer;
-                CssLayer = Layer.ToCssClasses()!;
-            }
+            base.OnInitialized();
+            CssLayer = Layer.ToCssClasses()!;
         }
     }
 }

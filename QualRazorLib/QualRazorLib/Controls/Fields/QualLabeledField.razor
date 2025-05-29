@@ -2,27 +2,9 @@
 @typeparam TModel where TModel:class
 @typeparam TProperty
 
-<div @attributes="MergeAttribute">
-    <CascadingValue Name="Parent" Value="this">
-        <ErrorBoundary>
-            <ChildContent>
-                <QualLabel IsDisabled="labels.IsDisabled" IsHidden="labels.IsHidden" @attributes="@LabelAttribute">@LabelText</QualLabel>
-            </ChildContent>
-            <ErrorContent>
-                <span>ラベルエラー</span>
-                <span>@context.Message</span>
-            </ErrorContent>
-        </ErrorBoundary>
-        <div class="control">
-            <ErrorBoundary>
-                <ChildContent>
-                    <QualInputField Property="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="FieldAttribute"></QualInputField>
-                </ChildContent>
-                <ErrorContent>
-                    <span>フィールドエラー</span>
-                    <span>@context.Message</span>
-                </ErrorContent>
-            </ErrorBoundary>
-        </div>
-    </CascadingValue>
+<div class="@CssClasses.FIELD">
+    <QualLabel>@ChildContent</QualLabel>
+    <div class="@CssClasses.CONTROL">
+        <QualInputField Property="@Property" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
+    </div>
 </div>

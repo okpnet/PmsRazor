@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using QualRazorLib.Controls.Trees;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
 using QualRazorLib.Providers.Fields;
@@ -8,78 +9,58 @@ namespace QualRazorLib.Controls.Fields
 {
     public partial class QualLabeledField<TModel, TProperty> : QualRazorComponentBase where TModel : class
     {
-        internal Labels? labels { get; set; }
-        internal Fields? fields { get; set; }
+        protected Expression<Func<TProperty>> _property = default!;
 
-        //ラベルパラメータ
-        internal Dictionary<string, object>? LabelAttribute { get; set; }
+        public const string CASCADE_PARAM = $"{nameof(QualForms<TModel>)}.Parent";
 
-        internal RenderFragment? LabelText { get; set; }
+        [CascadingParameter(Name =CASCADE_PARAM)]
+        public QualForms<TModel>? QualForms { get; set; } = default!;
 
-        //フィールドパラメータ
-        internal Dictionary<string, object>? FieldAttribute { get; set; }
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+
+        [Parameter, EditorRequired]
+        public Expression<Func<TProperty>> PropertyValueExpression 
+        {
+            get => _property;
+            set
+            {
+                _property = value;
+                if(QualForms?.Model is not null)
+                {
+                    Property = ConvertToModelExpression(_property, QualForms.Model);
+                }
+            }
+        }
+
+        protected Expression<Func<TModel, TProperty>>? Property { get; set; }
 
         internal IInputTypeProvider Provider { get; set; } = default!;
 
         internal FieldDataType FieldDataTypes { get; set; }
 
-        internal Expression<Func<TModel, TProperty>> PropertyExpression { get; set; } = default!;
 
         protected Dictionary<string, object> MergeAttribute => HtmlAttributeHelper.MergeAttributes(
             MeargeAttributeBase,
             new()
-            {
-                ["class"] = "field"
-            });
+            );
 
-        /// <summary>
-        /// 子のラベルタグラッパー
-        /// </summary>
-        public class Labels : QualRazorComponentBase
+
+
+        public Expression<Func<TModel, TProperty>> ConvertToModelExpression(Expression<Func<TProperty>> expr,TModel modelInstance)
         {
-            [CascadingParameter(Name = "Parent")]
-            public QualLabeledField<TModel, TProperty>? Parent { get; set; }
-
-            [Parameter]
-            public RenderFragment? ChildContent { get; set; }
-
-            protected override void OnInitialized()
+            if (expr.Body is MemberExpression memberExpr)
             {
-                base.OnInitialized();
-                if (Parent is not null)
-                {
-                    Parent.labels = this;
-                    Parent.LabelAttribute = MeargeAttributeBase;
-                    Parent.LabelText = ChildContent;
-                }
-            }
-        }
-        /// <summary>
-        /// 子のフィールドラッパークラス
-        /// </summary>
-        public class Fields : QualRazorComponentBase
-        {
-            [CascadingParameter(Name = "Parent")]
-            public QualLabeledField<TModel, TProperty>? Parent { get; set; }
-            [Parameter]
-            public RenderFragment? ChildContent { get; set; }
-            [Parameter, EditorRequired]
-            public FieldDataType FieldDataType { get; set; }
-            [Parameter, EditorRequired]
-            public Expression<Func<TModel, TProperty>> Property { get; set; } = default!;
+                var param = Expression.Parameter(typeof(TModel), "m");
 
+                // 例: model.Id → m.Id に置き換える
+                var newBody = Expression.MakeMemberAccess(param, memberExpr.Member);
 
-            protected override void OnInitialized()
-            {
-                base.OnInitialized();
-                if (Parent is not null)
-                {
-                    Parent.fields = this;
-                    Parent.FieldAttribute = MeargeAttributeBase;
-                    Parent.FieldDataTypes = FieldDataType;
-                    Parent.PropertyExpression = Property;
-                }
+                return Expression.Lambda<Func<TModel, TProperty>>(newBody, param);
             }
+
+            throw new InvalidOperationException("式が MemberExpression ではありません。");
         }
+
     }
 }

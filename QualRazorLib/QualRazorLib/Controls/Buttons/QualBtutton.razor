@@ -1,15 +1,15 @@
 ﻿@inherits QualRazorComponentBase
 @*デスクトップ*@
 <button @attributes="MergeDesktopAtribute">
-    <Icon IconClass="@IconClass"></Icon>
+    <QualIcon IconClass="@IconClass"></QualIcon>
     <span>
-        @ButtonContent
+        @ChildContent
     </span>
 </button>
 @* モバイル *@
 <button @attributes="MergeMobileAtribute">
-    <Icon IconClass="@IconClass"></Icon>
+    <QualIcon IconClass="@IconClass"></QualIcon>
     <span>
-        @ButtonContent
+        @ChildContent
     </span>
 </button>

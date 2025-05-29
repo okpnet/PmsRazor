@@ -45,6 +45,10 @@
         public static string TYPE_ICON => "icon";
         public static string TYPE_SELECTED => "is-selected";
 
+        public static string FIELD => "field";
+
+        public static string CONTROL => "control";
+
         public static class Text
         {
             public static string CENTER => TEXT_CENTER;
