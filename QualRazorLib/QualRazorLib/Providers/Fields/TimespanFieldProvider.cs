@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace QualRazorLib.Providers.Fields
 {
-    public class TimespanConfigOption : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
+    public class TimespanFieldProvider : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
     {
         bool _isComma;
         public bool IsComma

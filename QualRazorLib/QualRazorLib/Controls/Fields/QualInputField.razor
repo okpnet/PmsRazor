@@ -38,7 +38,7 @@
         break;
 
     case FieldDataType.TiemSpan:
-        var timespanOption = Provider as TimespanConfigOption ?? new();
+        var timespanOption = Provider as TimespanFieldProvider ?? new();
         <EditerTimeSpan AdditionalAttributes="@AdditionalAttributes"
                         Value="@Value"
                         ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
