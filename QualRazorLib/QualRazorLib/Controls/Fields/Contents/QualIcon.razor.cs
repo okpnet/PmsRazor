@@ -16,8 +16,8 @@ namespace QualRazorLib.Controls.Fields.Contents
             MeargeAttributeBase,
             new()
             {
-                ["class"] = "icon",
-                ["disabled"] = DisabledValue!
+                [HtmlAtributes.CLASS] = CssClasses.TYPE_ICON
             });
+
     }
 }

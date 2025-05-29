@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@inherits QualRazorComponentBase
+@typeparam TModel where TModel : class
+
+<CascadingValue Value="this" Name="@CASCADE_PARAM">
+    <EditForm @ref="_editForm" EditContext="_editContext" OnValidSubmit="OnValidSubmit" OnInvalidSubmit="OnInvalidSubmit">
+        @if (ChildContentWithModel is not null)
+        {
+            @ChildContentWithModel(Model)
+        }
+    </EditForm>
+</CascadingValue>
