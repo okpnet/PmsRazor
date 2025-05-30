@@ -7,10 +7,10 @@ namespace QualRazorLib.Controls.Fields.Contents
     public partial class QualLabel : QualRazorComponentBase
     {
         [Parameter]
-        public RenderFragment? Text { get; set; }
+        public RenderFragment? ChildContent { get; set; }
 
         protected Dictionary<string, object> MergeAttribute => HtmlAttributeHelper.MergeAttributes(
-            MergeAttribute,
+            MeargeAttributeBase,
             new()
             {
                 [HtmlAtributes.CLASS] = CssClasses.LABEL

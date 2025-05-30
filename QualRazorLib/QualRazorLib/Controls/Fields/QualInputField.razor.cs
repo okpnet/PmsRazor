@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorCustomInput.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
@@ -7,83 +8,92 @@ using System.Linq.Expressions;
 
 namespace QualRazorLib.Controls.Fields
 {
-    public partial class QualInputField<TModel, TProperty> : QualRazorComponentBase where TModel : class
+    public partial class QualInputField<TProperty> : QualRazorComponentBase
     {
         [CascadingParameter]
         EditContext? CascadedEditContext { get; set; }
 
         [Parameter]
-        public TModel Model { get; set; } = default!;
-
-        [Parameter, EditorRequired]
-        public Expression<Func<TModel, TProperty>>? Property { get; set; }
-
-        [Parameter]
         public FieldDataType? FieldDataTypes { get; set; }
 
-        [Parameter, EditorRequired]
+        [Parameter]
         public IInputTypeProvider Provider { get; set; } = default!;
 
-        protected Expression<Func<TProperty>> PropertyExpression => () => GetPropertyValue();
+        [Parameter, EditorRequired]
+        public Expression<Func<TProperty>> PropertyExpression { get; set; } = default!;
 
-        protected TProperty Value
+        [Parameter,EditorRequired]
+        public TProperty Value { get; set; } = default!;
+
+        [Parameter]
+        public EventCallback<TProperty> ValueChanged { get; set; }
+
+        protected TProperty PropertyValue
         {
-            get => _getter.Invoke(Model);
-            set => _setter?.Invoke(Model, value);
+            get => Value;
+            set
+            {
+                if (Equals(Value, value))
+                {
+                    return;
+                }
+                Value = value;
+                ValueChanged.InvokeAsync(Value);
+            }
         }
 
-        protected Action<TModel, TProperty>? _setter;
+        protected Dictionary<string, object> MergeAttribute => HtmlAttributeHelper.MergeAttributes(
+            MeargeAttributeBase,
+            ChangeTypeToAttributeString()
+            );
 
-        protected Func<TModel, TProperty> _getter = default!;
-
-        public override Task SetParametersAsync(ParameterView parameters)
+        protected override void OnInitialized()
         {
-            if (parameters.TryGetValue<Expression<Func<TModel, TProperty>>>(nameof(Property), out var expression))
+            base.OnInitialized();
+            if (FieldDataTypes is null || FieldDataTypes == FieldDataType.None)
             {
-                try
-                {
-                    _getter = ExpressionHelper.BuildGetter(expression);
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
-                try
-                {
-                    _setter = ExpressionHelper.BuildSetter(expression);
-                }
-                finally
-                {
-                    _setter = null;
-                }
-
-                if (!parameters.TryGetValue<FieldDataType>(nameof(FieldDataTypes), out var types))
-                {
-                    FieldDataTypes = FieldDataTypeHelper.GetFieldType(typeof(TProperty));
-                }
+                FieldDataTypes = FieldDataTypeHelper.GetFieldType(typeof(TProperty));
             }
-
-            return base.SetParametersAsync(parameters);
         }
 
-        protected TProperty GetPropertyValue()
-        {//EditContextかModelのどちらかが必要
-            if (CascadedEditContext?.Model is TModel model)
-            {
-                return _getter.Invoke(model);
-            }
-
-            return Model is null ? default! : _getter.Invoke(Model);
-        }
-
-        protected void SetPropertyValue(TProperty value)
+        protected Dictionary<string, object> ChangeTypeToAttributeString()
         {
-            var model = CascadedEditContext?.Model is TModel ? (TModel)CascadedEditContext.Model : Model;
-            if (_setter is null || model is null)
+            var attrDictionary=new Dictionary<string, object>();
+            switch (FieldDataTypes)
             {
-                return;
+                case FieldDataType.Text:
+                    if (Provider is TextFieldProvider textProvider)
+                    {
+                        attrDictionary[HtmlAtributes.TYPE] = textProvider.EditType.GetTypeString();
+                    }
+                    attrDictionary[HtmlAtributes.CLASS] = "input";
+                    break;
+                case FieldDataType.Number:
+                    attrDictionary[HtmlAtributes.TYPE] = "number";
+                    attrDictionary[HtmlAtributes.CLASS] = "input";
+                    break;
+                case FieldDataType.Date:
+                    attrDictionary[HtmlAtributes.TYPE] = "date";
+                    attrDictionary[HtmlAtributes.CLASS] = "input";
+                    break;
+                case FieldDataType.DateTime:
+                    attrDictionary[HtmlAtributes.TYPE] = "datetime-local";
+                    attrDictionary[HtmlAtributes.CLASS] = "input";
+                    break;
+                case FieldDataType.TiemSpan:
+                    attrDictionary[HtmlAtributes.TYPE] = "time";
+                    attrDictionary[HtmlAtributes.CLASS] = "input";
+                    break;
+                case FieldDataType.Check:
+                    attrDictionary[HtmlAtributes.TYPE] = "checkbox";
+                    attrDictionary[HtmlAtributes.CLASS] = "input";
+                    break;
+                case FieldDataType.Select:
+                    attrDictionary[HtmlAtributes.CLASS] = "select";
+                    break;
+
             }
-            _setter.Invoke(model, value);
+            return attrDictionary;
         }
     }
 }

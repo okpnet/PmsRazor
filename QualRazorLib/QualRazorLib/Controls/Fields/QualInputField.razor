@@ -1,5 +1,4 @@
 ﻿@inherits QualRazorComponentBase
-@typeparam TModel where TModel : class
 @typeparam TProperty
 
 @switch (FieldDataTypes)
@@ -7,10 +6,9 @@
     case FieldDataType.Number:
         var numberProvider = Provider as NumberFieldProvider<TProperty> ?? new();
 
-        <EditerNumber Value="@Value"
-                      ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
-                      AdditionalAttributes="@AdditionalAttributes"
-                      ValueExpression="@PropertyExpression"
+        <EditerNumber @bind-Value="Value"
+                      Tval="TProperty"
+                      AdditionalAttributes="@MergeAttribute"
                       Comma="@numberProvider.IsComma"
                       Degit="@numberProvider.NumberOfDigit"
                       MaxValue="@numberProvider.MaxValue"
@@ -18,10 +16,8 @@
         break;
     case FieldDataType.Check:
         var checkProvider = Provider as CheckFieldProvider<TProperty> ?? new();
-        <EditerBool AdditionalAttributes="@AdditionalAttributes"
-                    Value="@Value"
-                    ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
-                    ValueExpression="@PropertyExpression"
+        <EditerBool AdditionalAttributes="@MergeAttribute"
+                    @bind-Value="Value"
                     TrueValue="@checkProvider.TrueValue"
                     FalseValue="@checkProvider.FalseValue"></EditerBool>
         break;
@@ -29,20 +25,19 @@
     case FieldDataType.Date:
         var dateProvider = Provider as DateFieldProvider ?? new();
 
-        <EditerDate AdditionalAttributes="@AdditionalAttributes"
-                    Value="@Value"
-                    ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
-                    ValueExpression="PropertyExpression"
+        <EditerDate AdditionalAttributes="@MergeAttribute"
+                    @bind-Value="Value"
+                    Tval="TProperty"
                     DateType="@dateProvider.DateType"
                     CustomParseFormat="@dateProvider.ParseFormat"></EditerDate>
         break;
 
     case FieldDataType.TiemSpan:
         var timespanOption = Provider as TimespanFieldProvider ?? new();
-        <EditerTimeSpan AdditionalAttributes="@AdditionalAttributes"
-                        Value="@Value"
-                        ValueChanged="EventCallback.Factory.Create<TProperty>(this, SetPropertyValue)"
+        <EditerTimeSpan AdditionalAttributes="@MergeAttribute"
+                        @bind-Val="@Value"
                         ValueExpression="PropertyExpression"
+                        Tval="TProperty"
                         Comma="@timespanOption.IsComma"
                         MaxValue="@timespanOption.MaxValue"
                         Degit="@timespanOption.NumberOfDigit"
@@ -50,32 +45,30 @@
         break;
 
     case FieldDataType.Text:
-        var textProvider = Provider as TextFielProvider ?? new();
+        var textProvider = Provider as TextFieldProvider ?? new();
 
         if (textProvider.IsMutiLine)
         {
-            <EditerTextArea AdditionalAttributes="@AdditionalAttributes"
-                            Value="@Value"
-                            ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
-                            ValueExpression="PropertyExpression">
+            <EditerTextArea AdditionalAttributes="@MergeAttribute"
+                            @bind-value="@Value"
+                            ValueExpression="PropertyExpression"
+                            Tval="TProperty">
             </EditerTextArea>
         }
         else
         {
-            <EditerText AdditionalAttributes="@AdditionalAttributes"
-                        Value="@Value"
-                        ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
+            <EditerText AdditionalAttributes="@MergeAttribute"
+                        @bind-value="@Value"
                         ValueExpression="PropertyExpression"
+                        Tval="TProperty"
                         EditType="@textProvider.EditType"></EditerText>
         }
         break;
     case FieldDataType.Select:
         var selectProvider = Provider as SelectFieldProvider<TProperty> ?? new();
-        <div class="select">
-            <EditerSelect AdditionalAttributes="@AdditionalAttributes"
-                          Value="@Value"
-                          ValueChanged="EventCallback.Factory.Create<TProperty>(this,SetPropertyValue)"
-                          ValueExpression="PropertyExpression"
+        <div @attributes ="@MergeAttribute">
+            <EditerSelect 
+                          @bind-Value="Value"
                           Source="@(()=>selectProvider.Source)"
                           OptionContents="@selectProvider.GetOptionText"
                           ChoosePromptContents="@selectProvider.ChoosePrompt"></EditerSelect>

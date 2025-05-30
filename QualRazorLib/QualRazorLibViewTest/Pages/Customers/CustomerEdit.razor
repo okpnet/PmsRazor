@@ -1,4 +1,5 @@
-﻿@inherits OwningComponentBase
+﻿@using QualRazorLib.Providers.Fields
+@inherits OwningComponentBase
 
 <p class="icon-text is-size-3">
     <span class="icon">
@@ -10,7 +11,9 @@
 </p>
 <section class="section"> 
     <QualForms Model="Model">
-        <QualLabeledField PropertyValueExpression="@(()=>Model.f)" ></QualLabeledField>
+        <ChildContentWithModel Context="model">
+            <QualLabeledField Value="model.Name" PropertyExpression="()=>model.Name">Name</QualLabeledField>
+            <QualLabeledField Provider="@(new TextFieldProvider(){EditType=BlazorCustomInput.Components.TextEditType.Tel})" Value="model.PhoneNumber" PropertyExpression="()=>model.PhoneNumber">Phone</QualLabeledField>
+        </ChildContentWithModel>
     </QualForms>
-
 </section>

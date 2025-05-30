@@ -1,10 +1,19 @@
 ﻿@inherits QualRazorComponentBase
-@typeparam TModel where TModel:class
 @typeparam TProperty
 
 <div class="@CssClasses.FIELD">
-    <QualLabel>@ChildContent</QualLabel>
-    <div class="@CssClasses.CONTROL">
-        <QualInputField Property="@Property" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
-    </div>
+    @if (FieldDataTypes == FieldDataType.Check)
+    {
+        <QualLabel>
+            <QualInputField  Value="Value"  PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
+            @ChildContent
+        </QualLabel>
+    }
+    else
+    {
+        <QualLabel>@ChildContent</QualLabel>
+        <div class="@CssClasses.CONTROL">
+            <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
+        </div>
+    }
 </div>

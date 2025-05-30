@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace QualRazorLib.Providers.Fields
 {
-    public class TextFielProvider : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
+    public class TextFieldProvider : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
     {
         bool _isMultiLine;
         public bool IsMutiLine
