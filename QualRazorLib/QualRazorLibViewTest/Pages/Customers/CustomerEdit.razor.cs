@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using QualRazorLibViewTest.Dtos;
 using QualRazorLibViewTest.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QualRazorLibViewTest.Pages.Customers
 {
@@ -13,5 +8,13 @@ namespace QualRazorLibViewTest.Pages.Customers
     public partial class CustomerEdit:OwningComponentBase
     {
         public TestCustomer Model { get; set; } = new();
+
+        protected IEnumerable<TestState> States { get; set; }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            States = DummyDataHelper.GetTestStates();
+        }
     }
 }

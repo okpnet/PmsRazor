@@ -14,6 +14,7 @@
         <ChildContentWithModel Context="model">
             <QualLabeledField Value="model.Name" PropertyExpression="()=>model.Name">Name</QualLabeledField>
             <QualLabeledField Provider="@(new TextFieldProvider(){EditType=BlazorCustomInput.Components.TextEditType.Tel})" Value="model.PhoneNumber" PropertyExpression="()=>model.PhoneNumber">Phone</QualLabeledField>
+            <QualLabeledField Value="model.IsSupplier" PropertyExpression="()=>model.IsSupplier">Supplier?</QualLabeledField>
         </ChildContentWithModel>
     </QualForms>
 </section>

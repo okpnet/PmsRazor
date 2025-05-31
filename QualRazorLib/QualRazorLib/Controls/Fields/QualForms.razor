@@ -3,7 +3,7 @@
 @typeparam TModel where TModel : class
 
 <CascadingValue Value="this" Name="@CASCADE_PARAM">
-    <EditForm @ref="_editForm" EditContext="_editContext" OnValidSubmit="OnValidSubmit" OnInvalidSubmit="OnInvalidSubmit">
+    <EditForm @ref="_editForm" EditContext="_editContext" OnValidSubmit="OnValidSubmit" OnInvalidSubmit="OnInvalidSubmit" FormName="@FormName">
         @if (ChildContentWithModel is not null)
         {
             @ChildContentWithModel(Model)

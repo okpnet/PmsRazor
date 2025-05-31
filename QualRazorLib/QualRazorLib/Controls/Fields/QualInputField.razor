@@ -5,7 +5,6 @@
 {
     case FieldDataType.Number:
         var numberProvider = Provider as NumberFieldProvider<TProperty> ?? new();
-
         <EditerNumber @bind-Value="Value"
                       Tval="TProperty"
                       AdditionalAttributes="@MergeAttribute"
@@ -15,23 +14,20 @@
                       MinValue="@numberProvider.MinValue"></EditerNumber>
         break;
     case FieldDataType.Check:
-        var checkProvider = Provider as CheckFieldProvider<TProperty> ?? new();
+        var checkProvider = Provider as CheckFieldProvider<TProperty> ?? new();ProviderFactory.CreateChekcProvider<TProperty>();
         <EditerBool AdditionalAttributes="@MergeAttribute"
                     @bind-Value="Value"
                     TrueValue="@checkProvider.TrueValue"
                     FalseValue="@checkProvider.FalseValue"></EditerBool>
         break;
-
     case FieldDataType.Date:
         var dateProvider = Provider as DateFieldProvider ?? new();
-
         <EditerDate AdditionalAttributes="@MergeAttribute"
                     @bind-Value="Value"
                     Tval="TProperty"
                     DateType="@dateProvider.DateType"
                     CustomParseFormat="@dateProvider.ParseFormat"></EditerDate>
         break;
-
     case FieldDataType.TiemSpan:
         var timespanOption = Provider as TimespanFieldProvider ?? new();
         <EditerTimeSpan AdditionalAttributes="@MergeAttribute"
@@ -43,10 +39,8 @@
                         Degit="@timespanOption.NumberOfDigit"
                         TimeSpanUnit="@timespanOption.Unit"></EditerTimeSpan>
         break;
-
     case FieldDataType.Text:
         var textProvider = Provider as TextFieldProvider ?? new();
-
         if (textProvider.IsMutiLine)
         {
             <EditerTextArea AdditionalAttributes="@MergeAttribute"

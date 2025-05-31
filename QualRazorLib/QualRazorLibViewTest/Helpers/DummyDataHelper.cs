@@ -8,9 +8,16 @@ namespace QualRazorLibViewTest.Helpers
     {
         public static TestCustomer[] GetTestCustomers()
         {
-            var path = PathHelper.CreateExcecutePathToFile("test_customers.json");
+            var path = PathHelper.CreateExcecutePathToFile("TestCustomer.json");
             ArgumentNullException.ThrowIfNullOrEmpty(path);
             return CreateFromJson<TestCustomer[]>(path);
+        }
+
+        public static TestState[] GetTestStates()
+        {
+            var path = PathHelper.CreateExcecutePathToFile("TestState.json");
+            ArgumentNullException.ThrowIfNullOrEmpty(path);
+            return CreateFromJson<TestState[]>(path);
         }
 
         public static T CreateFromJson<T>(string filePath)
@@ -22,8 +29,6 @@ namespace QualRazorLibViewTest.Helpers
             var deserialize=JsonSerializer.Deserialize<T>(buffer,options);
             ArgumentNullException.ThrowIfNull(deserialize);
             return deserialize;
-        } 
-
-
+        }
     }
 }

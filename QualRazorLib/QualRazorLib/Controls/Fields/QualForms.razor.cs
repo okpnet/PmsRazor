@@ -24,6 +24,9 @@ namespace QualRazorLib.Controls.Fields
         [Parameter]
         public RenderFragment<TModel>? ChildContentWithModel { get; set; }
 
+        [Parameter]
+        public string FormName { get; set; }=Guid.NewGuid().ToString();
+
 
         protected override void OnInitialized()
         {

@@ -4,10 +4,12 @@
 <div class="@CssClasses.FIELD">
     @if (FieldDataTypes == FieldDataType.Check)
     {
-        <QualLabel>
-            <QualInputField  Value="Value"  PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
-            @ChildContent
-        </QualLabel>
+        <div class="@CssClasses.CONTROL">
+            <QualLabel>
+                <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
+                @ChildContent
+            </QualLabel>
+        </div>
     }
     else
     {

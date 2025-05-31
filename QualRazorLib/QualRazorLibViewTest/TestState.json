@@ -1,0 +1,42 @@
+[
+    {
+        "Id": 1,
+        "Name": "State_1"
+    },
+    {
+        "Id": 2,
+        "Name": "State_2"
+    },
+    {
+        "Id": 3,
+        "Name": "State_3"
+    },
+    {
+        "Id": 4,
+        "Name": "State_4"
+    },
+    {
+        "Id": 5,
+        "Name": "State_5"
+    },
+    {
+        "Id": 6,
+        "Name": "State_6"
+    },
+    {
+        "Id": 7,
+        "Name": "State_7"
+    },
+    {
+        "Id": 8,
+        "Name": "State_8"
+    },
+    {
+        "Id": 9,
+        "Name": "State_9"
+    },
+    {
+        "Id": 10,
+        "Name": "State_10"
+    }
+]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,5 +18,13 @@ namespace QualRazorLibViewTest.Dtos
         public string PhoneNumber { get; set; }
 
         public string Address { get; set; }
+
+        public bool? IsSupplier { get; set; }
+        [Range(-1.0,1.0)]
+        public decimal CostRate { get; set; }
+
+        public int TestStateId { get; set; }
+
+        public TestState TestState { get; set; }
     }
 }
