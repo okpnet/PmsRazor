@@ -5,14 +5,14 @@
     @if (FieldDataTypes == FieldDataType.Check)
     {
         <div class="@CssClasses.CONTROL">
-            <QualLabel>
+            <label class="@CssClasses.Field.CHECKBOX">
                 <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
                 @ChildContent
-            </QualLabel>
+            </label>
         </div>
     }
     else
-    {
+    {//ここで初めてDataTypeが決まるので、上のチェックには行かない
         <QualLabel>@ChildContent</QualLabel>
         <div class="@CssClasses.CONTROL">
             <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>

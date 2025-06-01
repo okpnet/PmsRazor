@@ -49,6 +49,8 @@
 
         public static string CONTROL => "control";
 
+        public static string FIELD_CHECKBOX => "checkbox";
+
         public static class Text
         {
             public static string CENTER => TEXT_CENTER;
@@ -89,6 +91,12 @@
             public static string ROW_SELECTED => $"{TYPE_SELECTED}";
             public static string SORT_COLUMN => $"{STYLE_FLEX} {STYLE_ITEM_CENTER}";
             public static string TABLE_CONTENT => $"{TABLE} {TABLE_ROW_HOVER} {STYLE_FULLWIDTH}";
+        }
+
+        public static class Field
+        {
+            public static string CHECKBOX => FIELD_CHECKBOX;
+
         }
     }
 }

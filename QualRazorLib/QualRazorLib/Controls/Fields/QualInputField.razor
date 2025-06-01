@@ -17,6 +17,7 @@
         var checkProvider = Provider as CheckFieldProvider<TProperty> ?? new();ProviderFactory.CreateChekcProvider<TProperty>();
         <EditerBool AdditionalAttributes="@MergeAttribute"
                     @bind-Value="Value"
+                    Tval="TProperty"
                     TrueValue="@checkProvider.TrueValue"
                     FalseValue="@checkProvider.FalseValue"></EditerBool>
         break;
@@ -45,7 +46,6 @@
         {
             <EditerTextArea AdditionalAttributes="@MergeAttribute"
                             @bind-value="@Value"
-                            ValueExpression="PropertyExpression"
                             Tval="TProperty">
             </EditerTextArea>
         }
@@ -53,7 +53,6 @@
         {
             <EditerText AdditionalAttributes="@MergeAttribute"
                         @bind-value="@Value"
-                        ValueExpression="PropertyExpression"
                         Tval="TProperty"
                         EditType="@textProvider.EditType"></EditerText>
         }
@@ -68,6 +67,6 @@
                           ChoosePromptContents="@selectProvider.ChoosePrompt"></EditerSelect>
         </div>
         break;
-    default:
-        throw new NotImplementedException($"'{FieldDataTypes}' is not implemented to switch cases.");
+    @* default: *@
+        @* throw new NotImplementedException($"'{FieldDataTypes}' is not implemented to switch cases."); *@
 }

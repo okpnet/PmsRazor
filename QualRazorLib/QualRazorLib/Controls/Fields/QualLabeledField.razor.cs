@@ -49,6 +49,10 @@ namespace QualRazorLib.Controls.Fields
         protected override void OnInitialized()
         {
             base.OnInitialized();
+            if (FieldDataTypes is null || FieldDataTypes == FieldDataType.None)
+            {
+                FieldDataTypes = FieldDataTypeHelper.GetFieldType(typeof(TProperty));
+            }
         }
     }
 }

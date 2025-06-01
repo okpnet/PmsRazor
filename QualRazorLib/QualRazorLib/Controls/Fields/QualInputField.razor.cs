@@ -61,35 +61,14 @@ namespace QualRazorLib.Controls.Fields
             var attrDictionary=new Dictionary<string, object>();
             switch (FieldDataTypes)
             {
-                case FieldDataType.Text:
-                    if (Provider is TextFieldProvider textProvider)
-                    {
-                        attrDictionary[HtmlAtributes.TYPE] = textProvider.EditType.GetTypeString();
-                    }
-                    attrDictionary[HtmlAtributes.CLASS] = "input";
-                    break;
-                case FieldDataType.Number:
-                    attrDictionary[HtmlAtributes.TYPE] = "number";
-                    attrDictionary[HtmlAtributes.CLASS] = "input";
-                    break;
-                case FieldDataType.Date:
-                    attrDictionary[HtmlAtributes.TYPE] = "date";
-                    attrDictionary[HtmlAtributes.CLASS] = "input";
-                    break;
-                case FieldDataType.DateTime:
-                    attrDictionary[HtmlAtributes.TYPE] = "datetime-local";
-                    attrDictionary[HtmlAtributes.CLASS] = "input";
-                    break;
-                case FieldDataType.TiemSpan:
-                    attrDictionary[HtmlAtributes.TYPE] = "time";
-                    attrDictionary[HtmlAtributes.CLASS] = "input";
-                    break;
-                case FieldDataType.Check:
-                    attrDictionary[HtmlAtributes.TYPE] = "checkbox";
-                    attrDictionary[HtmlAtributes.CLASS] = "input";
-                    break;
                 case FieldDataType.Select:
                     attrDictionary[HtmlAtributes.CLASS] = "select";
+                    break;
+                case FieldDataType.Check:
+                    //checkboxの場合は、inputのtypeをcheckboxにする
+                    break;
+                default:
+                    attrDictionary[HtmlAtributes.CLASS] = "input";
                     break;
 
             }
