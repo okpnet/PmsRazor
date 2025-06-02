@@ -46,6 +46,7 @@
         {
             <EditerTextArea AdditionalAttributes="@MergeAttribute"
                             @bind-value="@Value"
+                            ValueExpression="PropertyExpression"
                             Tval="TProperty">
             </EditerTextArea>
         }
@@ -53,6 +54,7 @@
         {
             <EditerText AdditionalAttributes="@MergeAttribute"
                         @bind-value="@Value"
+                        ValueExpression="PropertyExpression"
                         Tval="TProperty"
                         EditType="@textProvider.EditType"></EditerText>
         }
@@ -65,6 +67,17 @@
                           Source="@(()=>selectProvider.Source)"
                           OptionContents="@selectProvider.GetOptionText"
                           ChoosePromptContents="@selectProvider.ChoosePrompt"></EditerSelect>
+        </div>
+        break;
+    case FieldDataType.RadioGroup:
+        <Microsoft.AspNetCore.Components.Forms.InputRadioGroup @bind-Value="Value">
+            @ChildContent
+        </Microsoft.AspNetCore.Components.Forms.InputRadioGroup>
+        break;
+    case FieldDataType.Radio:
+        <div class="@CssClasses.FIELD_RADIO">
+            <Microsoft.AspNetCore.Components.Forms.InputRadio Value="@Value" ></Microsoft.AspNetCore.Components.Forms.InputRadio>
+            @ChildContent
         </div>
         break;
     @* default: *@

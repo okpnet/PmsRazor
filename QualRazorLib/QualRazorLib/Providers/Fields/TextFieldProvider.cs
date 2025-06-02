@@ -5,6 +5,7 @@ namespace QualRazorLib.Providers.Fields
 {
     public class TextFieldProvider : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
     {
+        public override FieldDataType InputType => FieldDataType.Text;
         bool _isMultiLine;
         public bool IsMutiLine
         {

@@ -5,6 +5,7 @@ namespace QualRazorLib.Providers.Fields
 {
     public class SelectFieldProvider<T> : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
     {
+        public override FieldDataType InputType => FieldDataType.Select;
         ObservableCollection<T> _collection = new();
         public IEnumerable<T> Source
         {

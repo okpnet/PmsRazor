@@ -28,6 +28,9 @@ namespace QualRazorLib.Controls.Fields
         [Parameter]
         public EventCallback<TProperty> ValueChanged { get; set; }
 
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+
         protected TProperty PropertyValue
         {
             get => Value;
@@ -64,6 +67,7 @@ namespace QualRazorLib.Controls.Fields
                 case FieldDataType.Select:
                     attrDictionary[HtmlAtributes.CLASS] = "select";
                     break;
+                case FieldDataType.Radio:
                 case FieldDataType.Check:
                     //checkboxの場合は、inputのtypeをcheckboxにする
                     break;

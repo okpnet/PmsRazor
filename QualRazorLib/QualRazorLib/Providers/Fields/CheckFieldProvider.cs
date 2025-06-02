@@ -4,6 +4,8 @@ namespace QualRazorLib.Providers.Fields
 {
     public class CheckFieldProvider<T> : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
     {
+        public override FieldDataType InputType => FieldDataType.Check;
+
         T _trueVale = default!;
         public T TrueValue
         {

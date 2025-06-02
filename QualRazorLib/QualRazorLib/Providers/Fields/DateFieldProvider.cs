@@ -5,6 +5,8 @@ namespace QualRazorLib.Providers.Fields
 {
     public class DateFieldProvider : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
     {
+        public override FieldDataType InputType => FieldDataType.Date;
+
         bool _isTimeSpan = false;
         public bool IsTimeSpan
         {

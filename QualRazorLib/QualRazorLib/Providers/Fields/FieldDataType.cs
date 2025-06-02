@@ -3,7 +3,7 @@
 namespace QualRazorLib.Providers.Fields
 {
     [Flags]
-    public enum FieldDataType : byte
+    public enum FieldDataType : int
     {
         None = 0,
         Text = 1 << 0,
@@ -13,6 +13,8 @@ namespace QualRazorLib.Providers.Fields
         DateTime=1<< 4,
         TiemSpan = 1 << 5,
         Select = 1 << 6,
+        Radio= 1 << 7,
+        RadioGroup = 1 << 8,
     }
 
     public static class FieldDataTypeHelper

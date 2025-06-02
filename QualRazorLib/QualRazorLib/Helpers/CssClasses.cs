@@ -44,12 +44,11 @@
         public static string TEXT_RIGHT => "has-text-right";
         public static string TYPE_ICON => "icon";
         public static string TYPE_SELECTED => "is-selected";
-
         public static string FIELD => "field";
-
         public static string CONTROL => "control";
-
         public static string FIELD_CHECKBOX => "checkbox";
+        public static string FIELD_RADIO => "radio";
+
 
         public static class Text
         {

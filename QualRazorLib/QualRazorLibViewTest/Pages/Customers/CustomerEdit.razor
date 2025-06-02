@@ -9,12 +9,18 @@
         編集ページ
     </span>
 </p>
-<section class="section"> 
+<section class="section">
+
     <QualForms Model="Model">
         <ChildContentWithModel Context="model">
             <QualLabeledField Value="model.Name" PropertyExpression="()=>model.Name">Name</QualLabeledField>
             <QualLabeledField Provider="@(new TextFieldProvider(){EditType=BlazorCustomInput.Components.TextEditType.Tel})" Value="model.PhoneNumber" PropertyExpression="()=>model.PhoneNumber">Phone</QualLabeledField>
             <QualLabeledField Value="model.IsSupplier" PropertyExpression="()=>model.IsSupplier">Supplier?</QualLabeledField>
+            <QualLabeledField Value="model.Address" FieldDataTypes="FieldDataType.RadioGroup">
+                <QualLabeledField Value="@("0001")" FieldDataTypes="FieldDataType.Radio">郵便番号0001</QualLabeledField>
+                <QualLabeledField Value="@("0002")" FieldDataTypes="FieldDataType.Radio">郵便番号0002</QualLabeledField>
+                <QualLabeledField Value="@("0003")" FieldDataTypes="FieldDataType.Radio">郵便番号0003</QualLabeledField>
+            </QualLabeledField>
         </ChildContentWithModel>
     </QualForms>
 </section>

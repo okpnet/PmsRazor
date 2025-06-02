@@ -5,6 +5,7 @@ namespace QualRazorLib.Providers.Fields
 {
     public class TimespanFieldProvider : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
     {
+        public override FieldDataType InputType => FieldDataType.TiemSpan;
         bool _isComma;
         public bool IsComma
         {

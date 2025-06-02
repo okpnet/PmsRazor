@@ -2,20 +2,29 @@
 @typeparam TProperty
 
 <div class="@CssClasses.FIELD">
-    @if (FieldDataTypes == FieldDataType.Check)
+    @switch (FieldDataTypes)
     {
-        <div class="@CssClasses.CONTROL">
-            <label class="@CssClasses.Field.CHECKBOX">
+        case FieldDataType.Check:
+            <div class="@CssClasses.CONTROL">
+                <label class="@CssClasses.Field.CHECKBOX">
+                    <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
+                    @ChildContent
+                </label>
+            </div>
+            break;
+        case FieldDataType.RadioGroup:
+            <div class="@CssClasses.CONTROL">
+                <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute">@ChildContent</QualInputField>
+            </div>
+            break;
+        case FieldDataType.Radio:
+            <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute">@ChildContent</QualInputField>
+            break;
+        default:
+            <QualLabel>@ChildContent</QualLabel>
+            <div class="@CssClasses.CONTROL">
                 <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
-                @ChildContent
-            </label>
-        </div>
-    }
-    else
-    {//ここで初めてDataTypeが決まるので、上のチェックには行かない
-        <QualLabel>@ChildContent</QualLabel>
-        <div class="@CssClasses.CONTROL">
-            <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
-        </div>
+            </div>
+            break;
     }
 </div>

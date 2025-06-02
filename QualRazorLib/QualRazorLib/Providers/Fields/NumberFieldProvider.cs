@@ -4,6 +4,7 @@ namespace QualRazorLib.Providers.Fields
 {
     public class NumberFieldProvider<T> : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
     {
+        public override FieldDataType InputType => FieldDataType.Number;
         bool _isComma = false;
         public bool IsComma
         {

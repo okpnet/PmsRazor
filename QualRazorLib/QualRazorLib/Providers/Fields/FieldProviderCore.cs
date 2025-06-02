@@ -9,6 +9,6 @@ namespace QualRazorLib.Providers.Fields
 {
     public class FieldProviderCore:NotifyCore,IInputTypeProvider
     {
-        public FieldDataType InputType { get; set; } = FieldDataType.None;
+        public virtual FieldDataType InputType { get; } = FieldDataType.None;
     }
 }
