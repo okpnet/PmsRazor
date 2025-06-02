@@ -21,6 +21,11 @@
                 <QualLabeledField Value="@("0002")" FieldDataTypes="FieldDataType.Radio">郵便番号0002</QualLabeledField>
                 <QualLabeledField Value="@("0003")" FieldDataTypes="FieldDataType.Radio">郵便番号0003</QualLabeledField>
             </QualLabeledField>
+            <BlazorCustomInput.Components.Tests.EditorSelectTest @bind-Value="model.TestState" CompareFunc="(a,b)=>a.Idget==b.Idget">
+                <BlazorCustomInput.Components.Tests.EditorSelectOptionTest Value="@(new TestState(){Name="a",Idget=0})">a</BlazorCustomInput.Components.Tests.EditorSelectOptionTest>
+                <BlazorCustomInput.Components.Tests.EditorSelectOptionTest Value="@(new TestState(){Name="b",Idget=1})">b</BlazorCustomInput.Components.Tests.EditorSelectOptionTest>
+                <BlazorCustomInput.Components.Tests.EditorSelectOptionTest Value="@(new TestState(){Name="c",Idget=2})">c</BlazorCustomInput.Components.Tests.EditorSelectOptionTest>
+            </BlazorCustomInput.Components.Tests.EditorSelectTest>
         </ChildContentWithModel>
     </QualForms>
 </section>
