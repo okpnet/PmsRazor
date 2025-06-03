@@ -26,5 +26,7 @@ namespace QualRazorLib.Helpers
         public static string DIV => "div";
 
         public static string TYPE_BUTTON => "button";
+        public static string INPUT => "input";
+        public static string SELECT => "select";
     }
 }

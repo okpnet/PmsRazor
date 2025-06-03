@@ -49,6 +49,10 @@
         public static string FIELD_CHECKBOX => "checkbox";
         public static string FIELD_RADIO => "radio";
 
+        public static string FIELD_IS_GROUPED => "is-grouped";
+        public static string FIELD_IS_GROUPED_MULTILINE => "is-grouped-multiline";
+
+
 
         public static class Text
         {
@@ -95,6 +99,8 @@
         public static class Field
         {
             public static string CHECKBOX => FIELD_CHECKBOX;
+
+            public static string RADIO_GROUP => $"{FIELD} {FIELD_IS_GROUPED} {FIELD_IS_GROUPED_MULTILINE}";
 
         }
     }

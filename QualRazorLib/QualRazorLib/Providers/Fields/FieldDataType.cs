@@ -10,11 +10,10 @@ namespace QualRazorLib.Providers.Fields
         Number = 1 << 1,
         Check = 1 << 2,
         Date = 1 << 3,
-        DateTime=1<< 4,
-        TiemSpan = 1 << 5,
-        Select = 1 << 6,
-        Radio= 1 << 7,
-        RadioGroup = 1 << 8,
+        TiemSpan = 1 << 4,
+        Select = 1 << 5,
+        Radio= 1 << 6,
+        RadioGroup = 1 << 7,
     }
 
     public static class FieldDataTypeHelper
@@ -29,7 +28,6 @@ namespace QualRazorLib.Providers.Fields
             [typeof(decimal)] = FieldDataType.Number,
             [typeof(bool)] = FieldDataType.Check,
             [typeof(DateTime)] = FieldDataType.Date,
-            [typeof(DateTime)] = FieldDataType.DateTime,
             [typeof(TimeSpan)] = FieldDataType.TiemSpan,
             [typeof(string)] = FieldDataType.Text,
         };

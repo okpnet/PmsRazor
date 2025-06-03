@@ -65,14 +65,14 @@ namespace QualRazorLib.Controls.Fields
             switch (FieldDataTypes)
             {
                 case FieldDataType.Select:
-                    attrDictionary[HtmlAtributes.CLASS] = "select";
+                    attrDictionary[HtmlAtributes.CLASS] = HtmlAtributes.SELECT;
                     break;
                 case FieldDataType.Radio:
                 case FieldDataType.Check:
                     //checkboxの場合は、inputのtypeをcheckboxにする
                     break;
                 default:
-                    attrDictionary[HtmlAtributes.CLASS] = "input";
+                    attrDictionary[HtmlAtributes.CLASS] = HtmlAtributes.INPUT;
                     break;
 
             }
