@@ -25,6 +25,6 @@ namespace QualRazorLibViewTest.Dtos
 
         public int TestStateId { get; set; }
 
-        public TestState TestState { get; set; }
+        public TestState? TestState { get; set; }
     }
 }

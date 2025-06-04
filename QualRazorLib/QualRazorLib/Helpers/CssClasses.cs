@@ -52,7 +52,24 @@
         public static string FIELD_IS_GROUPED => "is-grouped";
         public static string FIELD_IS_GROUPED_MULTILINE => "is-grouped-multiline";
 
+        public static string COLUMNS => "columns";
 
+        public static string COLUMN => "column";
+        public static string COLUMN_HALF => "is-half";
+
+        public static  string COLUMN_FULL => "is-full";
+        public static string DESKTOP => "is-desktop";
+
+        public static string MULTILINE => "is-multilien";
+
+        public static class ColumnGroup
+        {
+            public static string DESKTOP_GROUP => $"{COLUMNS} {DESKTOP}";
+            public static string HALF=>$"{COLUMN} {COLUMN_HALF}";
+            public static string FULL => $"{COLUMN} {COLUMN_FULL}";
+
+            public static string MULTILINE_DESKTOP_GROUP => $"{DESKTOP_GROUP} {MULTILINE}";
+        }
 
         public static class Text
         {

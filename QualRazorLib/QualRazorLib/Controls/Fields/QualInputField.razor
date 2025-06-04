@@ -5,80 +5,80 @@
 {
     case FieldDataType.Number:
         var numberProvider = Provider as NumberFieldProvider<TProperty> ?? new();
-        <EditerNumber @bind-Value="Value"
+        <EditorNumber @bind-Value="Value"
                       Tval="TProperty"
                       AdditionalAttributes="@MergeAttribute"
                       Comma="@numberProvider.IsComma"
                       Degit="@numberProvider.NumberOfDigit"
                       MaxValue="@numberProvider.MaxValue"
-                      MinValue="@numberProvider.MinValue"></EditerNumber>
+                      MinValue="@numberProvider.MinValue"></EditorNumber>
         break;
     case FieldDataType.Check:
         var checkProvider = Provider as CheckFieldProvider<TProperty> ?? new();ProviderFactory.CreateChekcProvider<TProperty>();
-        <EditerBool AdditionalAttributes="@MergeAttribute"
+        <EditorBool AdditionalAttributes="@MergeAttribute"
                     @bind-Value="Value"
                     Tval="TProperty"
                     TrueValue="@checkProvider.TrueValue"
-                    FalseValue="@checkProvider.FalseValue"></EditerBool>
+                    FalseValue="@checkProvider.FalseValue"></EditorBool>
         break;
     case FieldDataType.Date:
         var dateProvider = Provider as DateFieldProvider ?? new();
-        <EditerDate AdditionalAttributes="@MergeAttribute"
+        <EditorDate AdditionalAttributes="@MergeAttribute"
                     @bind-Value="Value"
                     Tval="TProperty"
                     DateType="@dateProvider.DateType"
-                    CustomParseFormat="@dateProvider.ParseFormat"></EditerDate>
+                    CustomParseFormat="@dateProvider.ParseFormat"></EditorDate>
         break;
     case FieldDataType.TiemSpan:
         var timespanOption = Provider as TimespanFieldProvider ?? new();
-        <EditerTimeSpan AdditionalAttributes="@MergeAttribute"
+        <EditorTimeSpan AdditionalAttributes="@MergeAttribute"
                         @bind-Val="@Value"
                         ValueExpression="PropertyExpression"
                         Tval="TProperty"
                         Comma="@timespanOption.IsComma"
                         MaxValue="@timespanOption.MaxValue"
                         Degit="@timespanOption.NumberOfDigit"
-                        TimeSpanUnit="@timespanOption.Unit"></EditerTimeSpan>
+                        TimeSpanUnit="@timespanOption.Unit"></EditorTimeSpan>
         break;
     case FieldDataType.Text:
         var textProvider = Provider as TextFieldProvider ?? new();
         if (textProvider.IsMutiLine)
         {
-            <EditerTextArea AdditionalAttributes="@MergeAttribute"
+            <EditorTextArea AdditionalAttributes="@MergeAttribute"
                             @bind-value="@Value"
                             ValueExpression="PropertyExpression"
                             Tval="TProperty">
-            </EditerTextArea>
+            </EditorTextArea>
         }
         else
         {
-            <EditerText AdditionalAttributes="@MergeAttribute"
+            <EditorText AdditionalAttributes="@MergeAttribute"
                         @bind-value="@Value"
                         ValueExpression="PropertyExpression"
                         Tval="TProperty"
-                        EditType="@textProvider.EditType"></EditerText>
+                        EditType="@textProvider.EditType"></EditorText>
         }
         break;
     case FieldDataType.Select:
         var selectProvider = Provider as SelectFieldProvider<TProperty> ?? new();
         <div @attributes ="@MergeAttribute">
-            <EditerSelect 
-                          @bind-Value="Value"
-                          Source="@(()=>selectProvider.Source)"
-                          OptionContents="@selectProvider.GetOptionText"
-                          ChoosePromptContents="@selectProvider.ChoosePrompt"></EditerSelect>
+            <EditorSelect @bind-Value="Value" CompareFunc="selectProvider.CompareFunc" OptionValueSelector="selectProvider.OptionValueSelector">
+                @ChildContent
+            </EditorSelect>
         </div>
         break;
     case FieldDataType.RadioGroup:
-        <Microsoft.AspNetCore.Components.Forms.InputRadioGroup @bind-Value="Value">
-            @ChildContent
-        </Microsoft.AspNetCore.Components.Forms.InputRadioGroup>
+        <div class="@CssClasses.CONTROL">
+            <Microsoft.AspNetCore.Components.Forms.InputRadioGroup @bind-Value="Value">
+                @ChildContent
+            </Microsoft.AspNetCore.Components.Forms.InputRadioGroup>
+        </div>
         break;
     case FieldDataType.Radio:
-        <div class="@CssClasses.FIELD_RADIO">
+        <label class="@CssClasses.FIELD_RADIO">
             <Microsoft.AspNetCore.Components.Forms.InputRadio Value="@Value" ></Microsoft.AspNetCore.Components.Forms.InputRadio>
             @ChildContent
-        </div>
+        </label>
         break;
     @* default: *@
         @* throw new NotImplementedException($"'{FieldDataTypes}' is not implemented to switch cases."); *@

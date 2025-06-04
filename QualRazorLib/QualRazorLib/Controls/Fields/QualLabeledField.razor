@@ -1,36 +1,54 @@
 ﻿@inherits QualRazorComponentBase
 @typeparam TProperty
 
-<div class="columns is-desktop">
-    <div class="column is-half">
-        <div class="@CssClasses.FIELD">
-            @switch (FieldDataTypes)
-            {
-                case FieldDataType.Check:
-                    <div class="@CssClasses.CONTROL">
-                        <label class="@CssClasses.Field.CHECKBOX">
-                            <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
-                            @ChildContent
-                        </label>
-                    </div>
-                    break;
-                case FieldDataType.RadioGroup:
-                    <div class="@CssClasses.Field.RADIO_GROUP">
-                        <div class="@CssClasses.CONTROL">
-                            <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute">@ChildContent</QualInputField>
-                        </div>
-                    </div>
-                    break;
-                case FieldDataType.Radio:
+@switch (FieldDataTypes)
+{
+    case FieldDataType.CheckGroup:
+        <div class="@CssClasses.ColumnGroup.MULTILINE_DESKTOP_GROUP">
+            <div class="@CssClasses.ColumnGroup.FULL">
+                @ChildContent
+            </div>
+        </div>
+        break;
+    case FieldDataType.Check:
+        <div class="@CssClasses.CONTROL">
+            <label class="@CssClasses.Field.CHECKBOX">
+                <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
+                @ChildContent
+            </label>
+        </div>
+        break;
+    case FieldDataType.RadioGroup:
+        <div class="@CssClasses.ColumnGroup.MULTILINE_DESKTOP_GROUP">
+            <div class="@CssClasses.ColumnGroup.FULL">
+                <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute">@ChildContent</QualInputField>
+            </div>
+        </div>
+        break;
+    case FieldDataType.Radio:
+        <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute">
+            @ChildContent
+        </QualInputField>
+        break;
+    case FieldDataType.Select:
+        <div class="@CssClasses.ColumnGroup.DESKTOP_GROUP">
+            <div class="@CssClasses.ColumnGroup.HALF">
+                <div class="@CssClasses.FIELD">
                     <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute">@ChildContent</QualInputField>
-                    break;
-                default:
+                </div>
+            </div>
+        </div>
+        break;
+    default:
+        <div class="@CssClasses.ColumnGroup.DESKTOP_GROUP">
+            <div class="@CssClasses.ColumnGroup.HALF">
+                <div class="@CssClasses.FIELD">
                     <QualLabel>@ChildContent</QualLabel>
                     <div class="@CssClasses.CONTROL">
                         <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
                     </div>
-                    break;
-            }
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+        break;
+}

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.AspNetCore.Components;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace QualRazorLib.Providers.Fields
@@ -6,46 +7,33 @@ namespace QualRazorLib.Providers.Fields
     public class SelectFieldProvider<T> : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
     {
         public override FieldDataType InputType => FieldDataType.Select;
-        ObservableCollection<T> _collection = new();
-        public IEnumerable<T> Source
+        protected Func<T?, T?, bool>? _compareFunc;
+        public Func<T?, T?, bool>? CompareFunc
         {
-            get => _collection;
+            get => _compareFunc;
             set
             {
-                _collection.Clear();
-                foreach (var item in value)
-                {
-                    _collection.Add(item);
-                }
-            }
-        }
-        Func<T, string> _getOptionText = default!;
-        public Func<T, string> GetOptionText
-        {
-            get => _getOptionText;
-            set
-            {
-                if (_getOptionText == value)
+                if(Equals(value, _compareFunc))
                 {
                     return;
                 }
-                _getOptionText = value;
-                OnPropertyChanged(nameof(GetOptionText));
+                _compareFunc = value;
+                OnPropertyChanged(nameof(CompareFunc));
             }
         }
 
-        string _chosePrompt = string.Empty;
-        public string ChoosePrompt
+        protected Func<T?, string>? _optionValueSelector;
+        public Func<T?, string>? OptionValueSelector 
         {
-            get => _chosePrompt;
+            get => _optionValueSelector;
             set
             {
-                if (value == _chosePrompt)
+                if(Equals(_optionValueSelector, value))
                 {
                     return;
                 }
-                _chosePrompt = value;
-                OnPropertyChanged(nameof(ChoosePrompt));
+                _optionValueSelector = value;
+                OnPropertyChanged(nameof(OptionValueSelector));
             }
         }
     }
