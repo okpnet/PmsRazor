@@ -15,20 +15,29 @@
         <ChildContentWithModel Context="model">
             <QualLabeledField Value="model.Name" PropertyExpression="()=>model.Name">Name</QualLabeledField>
             <QualLabeledField Provider="@(new TextFieldProvider(){EditType=BlazorCustomInput.Components.TextEditType.Tel})" Value="model.PhoneNumber" PropertyExpression="()=>model.PhoneNumber">Phone</QualLabeledField>
-            <QualLabeledField Value="model.IsSupplier" PropertyExpression="()=>model.IsSupplier">Supplier?</QualLabeledField>
-            <QualLabel>ラヂオ</QualLabel>
-            <QualLabeledField Value="model.Address" FieldDataTypes="FieldDataType.RadioGroup">
-                <QualLabeledField Value="@("0001")" FieldDataTypes="FieldDataType.Radio">郵便番号0001</QualLabeledField>
-                <QualLabeledField Value="@("0002")" FieldDataTypes="FieldDataType.Radio">郵便番号0002</QualLabeledField>
-                <QualLabeledField Value="@("0003")" FieldDataTypes="FieldDataType.Radio">郵便番号0003</QualLabeledField>
-            </QualLabeledField>
-            <QualLabel>選択</QualLabel>
-            <QualLabeledField Value="model.TestState" FieldDataTypes="FieldDataType.Select" PropertyExpression="()=>model.TestState">
-                <BlazorCustomInput.Components.EditorSelectOption Tval="TestState" Value="null" IsPlaceholder="true">選択してください</BlazorCustomInput.Components.EditorSelectOption>
-                <BlazorCustomInput.Components.EditorSelectOption Value="@(new TestState(){Name="a",Idget=0})">Nameがa</BlazorCustomInput.Components.EditorSelectOption>
-                <BlazorCustomInput.Components.EditorSelectOption Value="@(new TestState(){Name="b",Idget=1})">Nameがb</BlazorCustomInput.Components.EditorSelectOption>
-                <BlazorCustomInput.Components.EditorSelectOption Value="@(new TestState(){Name="c",Idget=2})">Nameがc</BlazorCustomInput.Components.EditorSelectOption>
-            </QualLabeledField>
+            <QualLabeledCheckGroupField>
+                <LabelContent>チェック</LabelContent>
+                <Checks>
+                    <QualLabeledField Value="model.IsSupplier" PropertyExpression="()=>model.IsSupplier">Supplier?</QualLabeledField>
+                </Checks>
+            </QualLabeledCheckGroupField>
+            <QualLabeledRadioGroupField Value="model.Address">
+                <LabelContent>ラヂオ</LabelContent>
+                <Radios>
+                    <QualRadio Value="@("0001")">郵便番号0001</QualRadio>
+                    <QualRadio Value="@("0002")">郵便番号0002</QualRadio>
+                    <QualRadio Value="@("0003")">郵便番号0003</QualRadio>
+                </Radios>
+            </QualLabeledRadioGroupField>
+            <QualLabeledSelectGroupField Value="model.TestState" PropertyExpression="()=>model.TestState">
+                <LabelContent>選択</LabelContent>
+                <Options>
+                    <QualSelectOption TProperty="TestState" Value="null" IsPlaceholder="true">選択してください</QualSelectOption>
+                    <QualSelectOption Value="@(new TestState(){Name="a",Idget=0})">Nameがa</QualSelectOption>
+                    <QualSelectOption Value="@(new TestState(){Name="b",Idget=1})">Nameがb</QualSelectOption>
+                    <QualSelectOption Value="@(new TestState(){Name="c",Idget=2})">Nameがc</QualSelectOption>
+                </Options>
+            </QualLabeledSelectGroupField>
         </ChildContentWithModel>
     </QualForms>
 </section>

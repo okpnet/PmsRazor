@@ -19,5 +19,10 @@ namespace QualRazorLibViewTest.Pages
             Navigation.NavigateTo(AppRoutes.CUS_EDIT);
             return Task.CompletedTask;
         }
+        protected Task OnCustomerTableClick()
+        {
+            Navigation.NavigateTo(AppRoutes.CUS_TABLE);
+            return Task.CompletedTask;
+        }
     }
 }

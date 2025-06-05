@@ -14,7 +14,7 @@
                       MinValue="@numberProvider.MinValue"></EditorNumber>
         break;
     case FieldDataType.Check:
-        var checkProvider = Provider as CheckFieldProvider<TProperty> ?? new();ProviderFactory.CreateChekcProvider<TProperty>();
+        var checkProvider = Provider as CheckFieldProvider<TProperty> ?? new(); ProviderFactory.CreateChekcProvider<TProperty>();
         <EditorBool AdditionalAttributes="@MergeAttribute"
                     @bind-Value="Value"
                     Tval="TProperty"
@@ -59,27 +59,6 @@
                         EditType="@textProvider.EditType"></EditorText>
         }
         break;
-    case FieldDataType.Select:
-        var selectProvider = Provider as SelectFieldProvider<TProperty> ?? new();
-        <div @attributes ="@MergeAttribute">
-            <EditorSelect @bind-Value="Value" CompareFunc="selectProvider.CompareFunc" OptionValueSelector="selectProvider.OptionValueSelector">
-                @ChildContent
-            </EditorSelect>
-        </div>
-        break;
-    case FieldDataType.RadioGroup:
-        <div class="@CssClasses.CONTROL">
-            <Microsoft.AspNetCore.Components.Forms.InputRadioGroup @bind-Value="Value">
-                @ChildContent
-            </Microsoft.AspNetCore.Components.Forms.InputRadioGroup>
-        </div>
-        break;
-    case FieldDataType.Radio:
-        <label class="@CssClasses.FIELD_RADIO">
-            <Microsoft.AspNetCore.Components.Forms.InputRadio Value="@Value" ></Microsoft.AspNetCore.Components.Forms.InputRadio>
-            @ChildContent
-        </label>
-        break;
-    @* default: *@
+        @* default: *@
         @* throw new NotImplementedException($"'{FieldDataTypes}' is not implemented to switch cases."); *@
 }

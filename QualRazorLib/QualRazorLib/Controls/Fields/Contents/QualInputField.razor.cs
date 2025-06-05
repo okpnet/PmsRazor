@@ -1,12 +1,11 @@
-﻿using BlazorCustomInput.Components;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
 using QualRazorLib.Providers.Fields;
 using System.Linq.Expressions;
 
-namespace QualRazorLib.Controls.Fields
+namespace QualRazorLib.Controls.Fields.Contents
 {
     public partial class QualInputField<TProperty> : QualRazorComponentBase
     {
@@ -22,7 +21,7 @@ namespace QualRazorLib.Controls.Fields
         [Parameter, EditorRequired]
         public Expression<Func<TProperty>> PropertyExpression { get; set; } = default!;
 
-        [Parameter,EditorRequired]
+        [Parameter, EditorRequired]
         public TProperty Value { get; set; } = default!;
 
         [Parameter]
@@ -61,13 +60,9 @@ namespace QualRazorLib.Controls.Fields
 
         protected Dictionary<string, object> ChangeTypeToAttributeString()
         {
-            var attrDictionary=new Dictionary<string, object>();
+            var attrDictionary = new Dictionary<string, object>();
             switch (FieldDataTypes)
             {
-                case FieldDataType.Select:
-                    attrDictionary[HtmlAtributes.CLASS] = HtmlAtributes.SELECT;
-                    break;
-                case FieldDataType.Radio:
                 case FieldDataType.Check:
                     //checkboxの場合は、inputのtypeをcheckboxにする
                     break;

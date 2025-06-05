@@ -26,7 +26,7 @@
         public static string SIZE_NORMAL => "is-normal";
         public static string STYLE_FLEX => "is-flex";
         public static string STYLE_FLEX_ALIGNITEMSEND => "is-align-items-flex-end";
-        public static string STYLE_FLEX_DESKTOP => "is-flex-deskto";
+        public static string STYLE_FLEX_DESKTOP => "is-flex-desktop";
         public static string STYLE_FLEX_DIRECTION_COLUMN_TOUCH => "is-flex-direction-column-touch";
         public static string STYLE_FLEX_WWRAP => "is-flex-wrap-wrap";
         public static string STYLE_FULLWIDTH => "is-fullwidth";
@@ -61,6 +61,11 @@
         public static string DESKTOP => "is-desktop";
 
         public static string MULTILINE => "is-multilien";
+
+        public static string COLUMN_PER15 => "is-2";
+        public static string COLUMN_PER35 => "is-4";
+        public static string COLUMN_PER65 => "is-8";
+        public static string COLUMN_PER80 => "is-10";
 
         public static class ColumnGroup
         {

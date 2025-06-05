@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace QualRazorLib.Providers.Fields
 {
     public class SelectFieldProvider<T> : FieldProviderCore, IInputTypeProvider, INotifyPropertyChanged
     {
-        public override FieldDataType InputType => FieldDataType.Select;
         protected Func<T?, T?, bool>? _compareFunc;
         public Func<T?, T?, bool>? CompareFunc
         {

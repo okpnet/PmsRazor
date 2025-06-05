@@ -11,10 +11,6 @@ namespace QualRazorLib.Providers.Fields
         Check = 1 << 2,
         Date = 1 << 3,
         TiemSpan = 1 << 4,
-        Select = 1 << 5,
-        Radio= 1 << 6,
-        RadioGroup = 1 << 7,
-        CheckGroup= 1 << 8,
     }
 
     public static class FieldDataTypeHelper
