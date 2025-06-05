@@ -92,7 +92,7 @@
             public static string DESCTOP => $"{BUTTON} {STYLE_TO_HIDDEN_MOBILE}";
             public static string MOBILE => $"{BUTTON} {STYLE_FULLWIDTH} {STYLE_TO_HIDDEN_DESKTOP}";
             public static string PRIMARY => CssClasses.PRIMARY;
-            public static string SECONDARY => $"{CssClasses.PRIMARY} {OUTLINE_BUTTON}";
+            public static string SECONDARY => "";//default style buttons
             public static string SIZE_MEDIUM => CssClasses.SIZE_MEDIUM;
             public static string SIZE_MINI => CssClasses.SIZE_MINI;
             public static string SIZE_NORMAL => CssClasses.SIZE_NORMAL;
