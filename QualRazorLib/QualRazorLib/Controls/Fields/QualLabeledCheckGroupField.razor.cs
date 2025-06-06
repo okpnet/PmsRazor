@@ -13,7 +13,7 @@ namespace QualRazorLib.Controls.Fields
         public RenderFragment? Checks { get; set; }
 
         protected Dictionary<string, object> MergeAttribute => HtmlAttributeHelper.MergeAttributes(
-            MeargeAttributeBase,
+            MergeAttributeBase,
             new()
             );
 

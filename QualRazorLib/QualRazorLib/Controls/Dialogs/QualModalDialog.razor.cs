@@ -24,7 +24,7 @@ namespace QualRazorLib.Controls.Dialogs
 
         protected Dictionary<string, object> MergeDialogAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
-                MeargeAttributeBase,
+                MergeAttributeBase,
                 new()
                 {
                     [HtmlAtributes.CLASS]=$"{CssClasses.STYLE_MODAL} {CssActive}"

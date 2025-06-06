@@ -1,0 +1,34 @@
+﻿@inherits QualRazorComponentBase
+
+<QualSection>
+    <QualGrids VisiblityTypes="VisiblityType.MobileOnly" IsDesktopWidthRestricted="true" >
+        <QualGrid WidhStyle="GridWidhStyle.Full">
+            <QualTypography SizeType="TextSizeType.Medium">
+                @Title
+            </QualTypography>
+        </QualGrid>
+    </QualGrids>
+    <QualGrids IsDesktopWidthRestricted="true">
+        <QualGrid WidhStyle="GridWidhStyle.Half">
+            @if(SecondaryButtonLabel is not null)
+            {
+                <QualBtutton OnClickEvent="SecondaryButtonClick" Layer="LayerType.Secondary" IconClass="@SecondaryButtonIcon" VisiblityTypes="VisiblityType.DesktopOnly">@SecondaryButtonLabel</QualBtutton>
+                <QualBtutton OnClickEvent="SecondaryButtonClick" Layer="LayerType.Secondary" IconClass="@SecondaryButtonIcon" IsFullwidth="true" VisiblityTypes="VisiblityType.MobileOnly">@SecondaryButtonLabel</QualBtutton>
+            }
+        </QualGrid>
+        <QualGrid WidhStyle="GridWidhStyle.Half" class="@CssClasses.TEXT_RIGHT">
+            @if(PrimaryButtonLabel is not null)
+            {
+                <QualBtutton OnClickEvent="PrimaryButtonClick" Layer="LayerType.Primary" IconClass="@PrimaryButtonIcon" VisiblityTypes="VisiblityType.DesktopOnly">@PrimaryButtonLabel</QualBtutton>
+                <QualBtutton OnClickEvent="PrimaryButtonClick" Layer="LayerType.Primary" IconClass="@PrimaryButtonIcon" IsFullwidth="true" VisiblityTypes="VisiblityType.MobileOnly">@PrimaryButtonLabel</QualBtutton>
+            }
+        </QualGrid>
+    </QualGrids>
+    <QualGrids VisiblityTypes="VisiblityType.DesktopOnly" IsDesktopWidthRestricted="true">
+        <QualGrid WidhStyle="GridWidhStyle.Full">
+            <QualTypography SizeType="TextSizeType.Medium">
+                @Title
+            </QualTypography>
+        </QualGrid>
+    </QualGrids>
+</QualSection>

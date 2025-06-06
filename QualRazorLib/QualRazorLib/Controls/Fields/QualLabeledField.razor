@@ -10,11 +10,11 @@
         </label>
         break;
     default:
-        <QualFieldContainer IsDesktopWidthRestricted="true" WidhStyle="ColumnWidhStyle.Half">
+        <QualFieldContainer IsDesktopWidthRestricted="true" WidhStyle="GridWidhStyle.Half">
             <QualLabel>@ChildContent</QualLabel>
-            <div class="@CssClasses.CONTROL">
+            <QualFieldControl>
                 <QualInputField Value="Value" PropertyExpression="PropertyExpression" Provider="@Provider" FieldDataTypes="@FieldDataTypes" @attributes="MergeAttribute"></QualInputField>
-            </div>
+            </QualFieldControl>
         </QualFieldContainer>
         break;
 }

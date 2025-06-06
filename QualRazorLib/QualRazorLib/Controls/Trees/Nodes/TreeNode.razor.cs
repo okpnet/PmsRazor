@@ -31,7 +31,7 @@ namespace QualRazorLib.Controls.Trees.Nodes
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
-                MeargeAttributeBase,
+                MergeAttributeBase,
                 new()
                 {
                     [HtmlAtributes.STYLE]=$"{Indent()}",

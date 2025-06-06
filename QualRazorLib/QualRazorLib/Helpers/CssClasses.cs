@@ -42,6 +42,18 @@
         public static string TEXT_GREY => "has-text-grey";
         public static string TEXT_LEFT => "has-text-left";
         public static string TEXT_RIGHT => "has-text-right";
+        public static string TEXT_THIN_THICKNESS => "has-text-weight-light";
+        public static string TEXT_SEMIBOLD_THICKNESS => "has-text-weight-semibold";
+        public static string TEXT_BOLD_THICKNESS => "has-text-weight-bold";
+        public static string TEXT_SIZE_1 => "is-size-1";
+        public static string TEXT_SIZE_2 => "is-size-2";
+        public static string TEXT_SIZE_3 => "is-size-3";
+        public static string TEXT_SIZE_4 => "is-size-4";
+        public static string TEXT_SIZE_5 => "is-size-5";
+        public static string TEXT_SIZE_6 => "is-size-6";
+        public static string TEXT_SIZE_7 => "is-size-7";
+
+
         public static string TYPE_ICON => "icon";
         public static string TYPE_SELECTED => "is-selected";
         public static string FIELD => "field";
@@ -66,6 +78,8 @@
         public static string COLUMN_PER35 => "is-4";
         public static string COLUMN_PER65 => "is-8";
         public static string COLUMN_PER80 => "is-10";
+
+        public static string LAYOUT_SECTION => "section";
 
         public static class ColumnGroup
         {

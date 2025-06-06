@@ -29,7 +29,7 @@ namespace QualRazorLib.Controls.Fields
         protected SelectFieldProvider<TProperty> SelectProvider => (Provider as SelectFieldProvider<TProperty>) ?? new();
 
         protected Dictionary<string, object> MergeAttribute => HtmlAttributeHelper.MergeAttributes(
-            MeargeAttributeBase,
+            MergeAttributeBase,
             new()
             {
                 [HtmlAtributes.CLASS]=$"{HtmlAtributes.SELECT}"

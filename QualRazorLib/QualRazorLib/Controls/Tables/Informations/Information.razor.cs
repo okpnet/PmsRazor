@@ -31,7 +31,7 @@ namespace QualRazorLib.Controls.Tables.Informations
         /// </summary>
         protected Dictionary<string, object> MeargeAttribute =>
             HtmlAttributeHelper.PurgeAttributes(
-                MeargeAttributeBase,
+                MergeAttributeBase,
                 new()
                 {
                     [HtmlAtributes.CLASS] = CssClasses.Table.INFORMATION

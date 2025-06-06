@@ -1,8 +1,9 @@
 ﻿@inherits QualRazorComponentBase
-<div @attributes="MergeAtribute">
-    <div class="@ColumnCss">
-        <div class="@CssClasses.CONTROL">
+
+<QualGrids IsMultiLine="IsMultiLine" IsDesktopWidthRestricted="IsDesktopWidthRestricted">
+    <QualGrid WidhStyle="@WidhStyle">
+        <QualFields>
             @ChildContent
-        </div>
-    </div>
-</div>
+        </QualFields>
+    </QualGrid>
+</QualGrids>

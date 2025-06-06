@@ -1,8 +1,10 @@
 ﻿@inherits QualRazorComponentBase
 
-<QualFieldContainer IsDesktopWidthRestricted="true" WidhStyle="@ColumnWidhStyle.Full" IsMultiLine="true">
+<QualFieldContainer IsDesktopWidthRestricted="true" WidhStyle="@GridWidhStyle.Full" IsMultiLine="true">
     <QualLabel>
         @LabelContent
     </QualLabel>
-    @Checks
+    <QualFieldControl>
+        @Checks
+    </QualFieldControl>
 </QualFieldContainer>

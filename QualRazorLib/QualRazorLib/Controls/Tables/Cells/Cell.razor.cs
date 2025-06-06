@@ -19,7 +19,7 @@ namespace QualRazorLib.Controls.Tables.Cells
 
         protected Dictionary<string, object> MergedAttributes =>
                 HtmlAttributeHelper.PurgeAttributes(
-                MeargeAttributeBase,
+                MergeAttributeBase,
                 new()
                 {
                     [HtmlAtributes.CLASS]=""

@@ -19,7 +19,7 @@ namespace QualRazorLib.Controls.Trees
         
         protected Dictionary<string, object> MergedAttributes =>
                     HtmlAttributeHelper.PurgeAttributes(
-                        MeargeAttributeBase,
+                        MergeAttributeBase,
                         new()
                         );
 

@@ -1,11 +1,14 @@
-﻿@inherits QualRazorComponentBase
+﻿@using Microsoft.AspNetCore.Components.Forms
+@inherits QualRazorComponentBase
 @typeparam TProperty
 
-<QualFieldContainer IsDesktopWidthRestricted="true" WidhStyle="@ColumnWidhStyle.Full" IsMultiLine="true">
+<QualFieldContainer IsDesktopWidthRestricted="true" WidhStyle="@GridWidhStyle.Full" IsMultiLine="true">
     <QualLabel>
         @LabelContent
     </QualLabel>
-    <Microsoft.AspNetCore.Components.Forms.InputRadioGroup @bind-Value="Value">
-        @Radios
-    </Microsoft.AspNetCore.Components.Forms.InputRadioGroup>
+    <QualFieldControl>
+        <InputRadioGroup @bind-Value="Value">
+            @Radios
+        </InputRadioGroup>
+    </QualFieldControl>
 </QualFieldContainer>

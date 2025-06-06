@@ -13,15 +13,15 @@ namespace QualRazorLib.Controls.Fields.Contents
         public bool IsMultiLine { get; set; }
 
         [Parameter]
-        public ColumnWidhStyle WidhStyle { get; set; } = ColumnWidhStyle.Half;
+        public GridWidhStyle WidhStyle { get; set; } = GridWidhStyle.Half;
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
 
         protected string ColumnCss { get; set; } = string.Empty;
 
-        protected Dictionary<string, object> MergeAtribute => HtmlAttributeHelper.MergeAttributes(
-                MeargeAttributeBase,
+        protected Dictionary<string, object> MergeAttribute => HtmlAttributeHelper.MergeAttributes(
+                MergeAttributeBase,
                 new()
                 {
                     [HtmlAtributes.CLASS] = $"{CssClasses.COLUMNS} {(IsDesktopWidthRestricted?CssClasses.DESKTOP:"")} {(IsMultiLine?CssClasses.MULTILINE:"")}"

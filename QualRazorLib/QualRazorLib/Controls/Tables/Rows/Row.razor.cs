@@ -21,7 +21,7 @@ namespace QualRazorLib.Controls.Tables.Rows
 
         protected Dictionary<string, object> MergedAttributes =>
         HtmlAttributeHelper.PurgeAttributes(
-            MeargeAttributeBase,
+            MergeAttributeBase,
             new()
             {
                 [HtmlAtributes.CLASS] = RowState.Status.HasFlag(RowStatus.Seleted) ? CssClasses.Table.ROW_SELECTED : "",

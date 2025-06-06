@@ -37,7 +37,7 @@ namespace QualRazorLib.Controls.Fields
 
 
         protected Dictionary<string, object> MergeAttribute => HtmlAttributeHelper.MergeAttributes(
-            MeargeAttributeBase,
+            MergeAttributeBase,
             new()
             );
 

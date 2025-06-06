@@ -45,7 +45,7 @@ namespace QualRazorLib.Controls.Tables
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
-                MeargeAttributeBase,
+                MergeAttributeBase,
                 new()
                 {
                     [HtmlAtributes.CLASS] = CssClasses.Table.TABLE_CONTENT

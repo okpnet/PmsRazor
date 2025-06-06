@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using QualRazorLib.Controls;
 using QualRazorLib.Controls.Argments;
 using QualRazorLib.Helpers;
 
@@ -37,6 +38,12 @@ namespace QualRazorLib.Core
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object>? AdditionalAttributes { get; set; }
+
+        [Parameter]
+        public VisiblityType VisiblityTypes { get; set; } = VisiblityType.None;
+
+        [Parameter]
+        public bool IsFullwidth { get; set; }
 
         #region "Parameter Disabled"
         /// <summary>
@@ -77,12 +84,12 @@ namespace QualRazorLib.Core
         /// <summary>
         /// HTML属性をマージし、状態に応じた属性やイベントハンドラを付与します。
         /// </summary>
-        protected Dictionary<string, object> MeargeAttributeBase => HtmlAttributeHelper.MergeAttributes(
+        protected Dictionary<string, object> MergeAttributeBase => HtmlAttributeHelper.MergeAttributes(
             AdditionalAttributes,
             new()
             {
                 [HtmlAtributes.DISABLED] = DisabledValue!,
-                [HtmlAtributes.CLASS] = HiddenValue!,
+                [HtmlAtributes.CLASS] = $"{HiddenValue!} {VisiblityTypes.CreateCssString()} {(IsFullwidth?CssClasses.STYLE_FULLWIDTH:"")}",
                 [HtmlAtributes.MOUSEDOWNEVENT] = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseDown),
                 [HtmlAtributes.MOUSEUPEVENT] = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseUp),
             });

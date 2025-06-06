@@ -33,7 +33,7 @@ namespace QualRazorLib.Controls.Tables.Columns
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
-                MeargeAttributeBase,
+                MergeAttributeBase,
                 new()
                 );
 

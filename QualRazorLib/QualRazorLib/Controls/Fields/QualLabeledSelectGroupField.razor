@@ -1,13 +1,13 @@
 ﻿@inherits QualRazorComponentBase
 @typeparam TProperty
 
-<QualFieldContainer IsDesktopWidthRestricted="true" WidhStyle="@ColumnWidhStyle.Half">
+<QualFieldContainer IsDesktopWidthRestricted="true" WidhStyle="@GridWidhStyle.Half">
     <QualLabel>
         @LabelContent
     </QualLabel>
-    <div @attributes="@MergeAttribute">
+    <QualSelectFields>
         <EditorSelect @bind-Value="Value" CompareFunc="SelectProvider.CompareFunc" OptionValueSelector="SelectProvider.OptionValueSelector">
             @Options
         </EditorSelect>
-    </div>
+    </QualSelectFields>
 </QualFieldContainer>

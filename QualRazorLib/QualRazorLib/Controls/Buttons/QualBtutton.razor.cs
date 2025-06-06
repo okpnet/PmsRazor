@@ -25,7 +25,7 @@ namespace QualRazorLib.Controls.Buttons
         public string CssLayer { get; protected set; } = string.Empty;
 
         protected Dictionary<string, object> MergeDesktopAtribute => HtmlAttributeHelper.MergeAttributes(
-            MeargeAttributeBase,
+            MergeAttributeBase,
             new()
             {
                 [HtmlAtributes.CLASS] = $"{CssClasses.Button.DESCTOP} {CssLayer}",
@@ -33,7 +33,7 @@ namespace QualRazorLib.Controls.Buttons
             });
 
         protected Dictionary<string, object> MergeMobileAtribute => HtmlAttributeHelper.MergeAttributes(
-            MeargeAttributeBase,
+            MergeAttributeBase,
             new()
             {
                 [HtmlAtributes.CLASS] = $"{CssClasses.Button.MOBILE} {CssLayer}",

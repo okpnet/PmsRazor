@@ -1,16 +1,12 @@
 ﻿@using QualRazorLib.Providers.Fields
+@using QualRazorLib.Controls.LayoutControls
 @inherits OwningComponentBase
 
-<p class="icon-text is-size-3">
-    <span class="icon">
-        <i class="gg-loadbar-sound"></i>
-    </span>
-    <span>
-        編集ページ
-    </span>
-</p>
-<section class="section">
-
+<QualHeader SecondaryButtonIcon="gg-loadbar-sound">
+    <Title>編集ページ</Title>
+    <PrimaryButtonLabel>保存</PrimaryButtonLabel>
+</QualHeader>
+<QualSection>
     <QualForms Model="Model">
         <ChildContentWithModel Context="model">
             <QualLabeledField Value="model.Name" PropertyExpression="()=>model.Name">Name</QualLabeledField>
@@ -40,4 +36,4 @@
             </QualLabeledSelectGroupField>
         </ChildContentWithModel>
     </QualForms>
-</section>
+</QualSection>

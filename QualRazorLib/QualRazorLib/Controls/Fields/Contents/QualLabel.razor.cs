@@ -10,7 +10,7 @@ namespace QualRazorLib.Controls.Fields.Contents
         public RenderFragment? ChildContent { get; set; }
 
         protected Dictionary<string, object> MergeAttribute => HtmlAttributeHelper.MergeAttributes(
-            MeargeAttributeBase,
+            MergeAttributeBase,
             new()
             {
                 [HtmlAtributes.CLASS] = CssClasses.LABEL
