@@ -13,6 +13,5 @@ namespace QualRazorLib.Presentation.Facades
 
     public interface ITableViewModel<T>: IViewModel, ITableViewParameter,IDataHolder<ITableDataProvider<T>>, IViewState where T : class
     {
-
     }
 }

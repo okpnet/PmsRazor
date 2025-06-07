@@ -14,13 +14,8 @@ namespace QualRazorLib.Controls.Tables
 {
     public partial class QualTable<TModel>:QualRazorComponentBase where TModel : class
     {
-        /// <summary>
-        /// アクセス
-        /// </summary>
-        [Parameter,EditorRequired,CastCheck(typeof(ITableViewModel<>))]
-        public ITableViewParameter Parameter { get; set; } = default!;
-
-        public ITableViewModel<TModel> ViewModel=> (ITableViewModel<TModel>)Parameter;
+        [Parameter,EditorRequired]
+        public ITableViewModel<TModel> ViewModel { get; set; } = default!;
 
         public ITableDataProvider<TModel> DataProvider => ViewModel.Data;
 

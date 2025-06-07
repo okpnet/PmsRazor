@@ -1,10 +1,4 @@
-﻿using QualRazorLib.Core;
-using QualRazorLib.Providers.Sources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QualRazorLib.Providers.Sources;
 
 namespace QualRazorLib.Views.Converters
 {

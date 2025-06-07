@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QualRazorLib.Views.QueryConditions
+﻿namespace QualRazorLib.Views.QueryConditions
 {
     /// <summary>
     /// Viewの状態から、Facadeへ渡す条件（例：DTOなど）を抽出する責務
