@@ -1,4 +1,5 @@
 ﻿using QualRazorLib.Views.QueryConditions;
+using System.Linq.Expressions;
 
 namespace QualRazorLib.Presentation.Facades
 {
@@ -6,7 +7,16 @@ namespace QualRazorLib.Presentation.Facades
     /// モデルや値の絞り込み条件を表すインターフェイス
     /// </summary>
     public interface IValueFilter
-    { }
+    {
+        /// <summary>
+        /// プロパティ名。プロパティパス。
+        /// </summary>
+        string Name { get; }
+        /// <summary>
+        /// モデルから取得した値に対する条件のリスト
+        /// </summary>
+        IReadOnlyList<ConditionEntry> Conditions { get; }
+    }
 
     /// <summary>
     /// ジェネリック型のモデルと値に基づく絞り込み条件を表すインターフェイス
@@ -16,14 +26,9 @@ namespace QualRazorLib.Presentation.Facades
     public interface IValueFilter<TModel, TValue> : IValueFilter
     {
         /// <summary>
-        /// モデルから値を取得するための式
+        /// プロパティパスを表す式。
         /// </summary>
-        Func<TModel, TValue> Getter { get; }
-
-        /// <summary>
-        /// モデルから取得した値に対する条件のリスト
-        /// </summary>
-        IReadOnlyList<ConditionEntry<TValue>> Conditions { get; }
+        Expression<Func<TModel, TValue>> PropertyExpression { get; }
     }
 
     /// <summary>
@@ -32,5 +37,5 @@ namespace QualRazorLib.Presentation.Facades
     /// <typeparam name="TValue">条件に関連付けられる値の型</typeparam>
     /// <param name="Type">条件の種類を表す<see cref="ConditionType"/></param>
     /// <param name="Values">条件に関連付けられる値のリスト</param>
-    public record ConditionEntry<TValue>(ConditionType Type, IList<TValue> Values);
+    public record ConditionEntry(ConditionType Type, IList<object?> Values);
 }

@@ -1,5 +1,4 @@
-﻿using QualAnalyzer.Attributes;
-using QualRazorLib.Core;
+﻿using QualRazorLib.Core;
 using QualRazorLib.Helpers;
 using System.ComponentModel;
 using System.Linq.Expressions;

@@ -52,6 +52,8 @@ namespace QualRazorLib.Core
     /// <typeparam name="TResult">プロパティの型</typeparam>
     public class PropertyAccessCore<TModel, TResult> : PropertyAccessCore, INotifyPropertyChanged
     {
+        protected readonly Expression<Func<TModel, TResult>> _propertyExpression;   
+
         /// <summary>
         /// プロパティの値を取得するためのデリゲート。
         /// </summary>
@@ -110,7 +112,7 @@ namespace QualRazorLib.Core
         protected PropertyAccessCore(Expression<Func<TModel, TResult>> propertyExpression)
         {
             ArgumentNullException.ThrowIfNull(propertyExpression);
-
+            _propertyExpression = propertyExpression;
             _propertyName = ExpressionHelper.GetPropertyPath(propertyExpression);
             _getter = ExpressionHelper.BuildGetter(propertyExpression);
             _setter = ExpressionHelper.BuildSetter(propertyExpression);
