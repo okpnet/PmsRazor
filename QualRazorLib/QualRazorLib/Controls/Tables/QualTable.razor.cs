@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using QualAnalyzer.Attributes;
 using QualRazorLib.Controls.Tables.Columns;
 using QualRazorLib.Controls.Tables.Columns.Dtos;
 using QualRazorLib.Core;
 using QualRazorLib.Helpers;
-using QualRazorLib.Models.Tables;
 using QualRazorLib.Presentation.Facades;
 using QualRazorLib.Providers.Sources;
 using System.Collections.ObjectModel;

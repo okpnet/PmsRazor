@@ -7,7 +7,7 @@ namespace QualRazorLib.Views.QueryConditions
     /// Viewの状態から条件を抽出し、また外部から受け取った条件をViewの状態に復元する責務を持つ。
     /// </summary>
     /// <typeparam name="TQuery">Facadeが受け取るクエリ条件型</typeparam>
-    public interface IViewQueryCondition<TQuery,TCondition> : IViewQueryExtractor<TQuery>, IViewQueryRestorer<TCondition>
+    public interface IViewQueryCondition<TCondition> : IViewQueryRestorer<TCondition>, IViewQueryExtractor<TCondition>
     {
         /// <summary>
         /// Viewに関連付けられた値の絞り込み条件のリスト。

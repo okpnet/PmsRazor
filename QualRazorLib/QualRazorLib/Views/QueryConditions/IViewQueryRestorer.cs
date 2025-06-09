@@ -8,7 +8,9 @@
     {
         /// <summary>
         /// 外部から渡された条件オブジェクトを使ってViewの状態を更新する
+        /// FacadeからViewへ条件を復元する際に使用される。
         /// </summary>
+        /// <param name="condition">Facadeの条件</param>
         void RestoreFrom(TCondition condition);
     }
 }

@@ -12,17 +12,17 @@ namespace QualRazorLib.Views.QueryConditions
     /// </para>
     /// </summary>
     /// <typeparam name="TQuery">Facade層で利用するクエリ条件DTOの型</typeparam>
-    public class DefaultViewQueryCondition<TQuery> : IViewQueryCondition<TQuery, IReadOnlyList<IValueFilter>> where TQuery : class
+    public class DefaultViewQueryCondition<TCondition> : IViewQueryCondition<TCondition> where TCondition : class
     {
         /// <summary>
         /// Viewの状態（IValueFilterリスト）からTQuery型の条件DTOを生成するデリゲート。
         /// </summary>
-        protected readonly Func<IReadOnlyList<IValueFilter>, TQuery> _extractor = default!;
+        protected readonly Func<IReadOnlyList<IValueFilter>, TCondition> _extractor = default!;
 
         /// <summary>
         /// 外部から受け取ったIValueFilterリストをViewの状態に復元するデリゲート。
         /// </summary>
-        protected readonly Action<IReadOnlyList<IValueFilter>> _restorer = default!;
+        protected readonly Func<TCondition,IReadOnlyList<IValueFilter>> _restorer = default!;
 
         /// <summary>
         /// Viewに紐づく絞り込み条件のリスト。
@@ -39,22 +39,23 @@ namespace QualRazorLib.Views.QueryConditions
         /// </summary>
         /// <param name="extractor">Viewの状態からTQuery型条件DTOを生成するデリゲート</param>
         /// <param name="restorer">TQuery型条件DTOからViewの状態を復元するデリゲート</param>
-        public DefaultViewQueryCondition(Func<IReadOnlyList<IValueFilter>, TQuery> extractor, Action<IReadOnlyList<IValueFilter>> restorer)
+        public DefaultViewQueryCondition(Func<IReadOnlyList<IValueFilter>, TCondition> extractor, Func<TCondition, IReadOnlyList<IValueFilter>> restorer)
         {
             _extractor = extractor;
             _restorer = restorer;
         }
-
         /// <summary>
         /// Viewの状態（ValueFilters）からFacade層向けのクエリ条件DTOを生成します。
         /// </summary>
         /// <returns>TQuery型の条件DTO</returns>
-        public TQuery Extract() => _extractor(ValueFilters);
-
+        public TCondition Extract() => _extractor(_valueFilters);
         /// <summary>
         /// 外部から受け取った絞り込み条件リストをViewの状態に復元します。
         /// </summary>
         /// <param name="condition">IValueFilterリスト</param>
-        public void RestoreFrom(IReadOnlyList<IValueFilter> condition) => _restorer(condition);
+        public void RestoreFrom(TCondition condition)
+        {
+            _valueFilters = _restorer(condition).ToList();
+        }
     }
 }
