@@ -2,6 +2,7 @@
 using QualRazorLib.Providers.Sources;
 using QualRazorLibViewTest.Dtos;
 using QualRazorLibViewTest.Helpers;
+using System.Collections.ObjectModel;
 
 namespace QualRazorLibViewTest.Facade
 {
@@ -15,19 +16,27 @@ namespace QualRazorLibViewTest.Facade
 
         
 
-        public override Task LoadAsync()
+        public override async Task LoadAsync()
         {
-            var array = DummyDataHelper.GetTestCustomers().AsEnumerable();
-            var numOfRecords = array.Count();
-            var pagenum = 100 > numOfRecords ? 1 : Math.Ceiling(((decimal)numOfRecords)/100);
-            var result=new TableDataProvider<TestCustomer>()
+            await Task.Run(() =>
             {
-                NumberOfRecords= numOfRecords,
-                PageNumber = this.QueryCondition.PageIndex,
-            };
-            var page=this.QueryCondition.PageIndex == 0 ? 1 : QueryCondition.PageIndex;
-            
-            DummyDataHelper.GetTestCustomers().Skip(0).Take(100);
+                IsLoading = true;
+                var array = DummyDataHelper.GetTestCustomers().AsEnumerable();
+                var numOfRecords = array.Count();
+                var pagenum = 100 > numOfRecords ? 1 : Math.Ceiling(((decimal)numOfRecords) / 100);
+                var values = pagenum == 1 ? DummyDataHelper.GetTestCustomers() : DummyDataHelper.GetTestCustomers().Skip((QueryCondition.PageIndex - 1) * 100);
+                values.Take(100);
+                var result = new TableDataProvider<TestCustomer>()
+                {
+                    NumberOfRecords = numOfRecords,
+                    PageNumber = QueryCondition.PageIndex,
+                    NumberOfPage = (int)pagenum,
+                    NumberOfMatchedRecords = numOfRecords, // ここでは全件一致とする
+                    Sources = [.. values]
+                };
+                IsLoading = false;
+            });
+
         }
 
         public override Task SubmitAsync()
