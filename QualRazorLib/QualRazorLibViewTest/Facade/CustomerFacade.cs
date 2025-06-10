@@ -1,45 +1,36 @@
 ﻿using QualRazorLib.Presentation.Facades;
 using QualRazorLib.Providers.Sources;
 using QualRazorLibViewTest.Dtos;
+using QualRazorLibViewTest.Helpers;
 
 namespace QualRazorLibViewTest.Facade
 {
-    public class CustomerFacade : ITableViewModel<TestCustomer>
+    public class CustomerFacade : TableViewModelBase<TestCustomer>
     {
-        public ITableDataProvider<TestCustomer> Data => throw new NotImplementedException();
+        public override ITableDataProvider<TestCustomer> Data => throw new NotImplementedException();
 
-        public bool IsLoading => throw new NotImplementedException();
-
-        public bool HasError => throw new NotImplementedException();
-
-        public string ErrorMessage => throw new NotImplementedException();
-
-        public void ClearError()
+        public CustomerFacade(int maxNumberOfPage) : base(maxNumberOfPage)
         {
-            throw new NotImplementedException();
         }
 
-        public Task LoadAsync()
+        
+
+        public override Task LoadAsync()
         {
-            throw new NotImplementedException();
+            var array = DummyDataHelper.GetTestCustomers().AsEnumerable();
+            var numOfRecords = array.Count();
+            var pagenum = 100 > numOfRecords ? 1 : Math.Ceiling(((decimal)numOfRecords)/100);
+            var result=new TableDataProvider<TestCustomer>()
+            {
+                NumberOfRecords= numOfRecords,
+                PageNumber = this.QueryCondition.PageIndex,
+            };
+            var page=this.QueryCondition.PageIndex == 0 ? 1 : QueryCondition.PageIndex;
+            
+            DummyDataHelper.GetTestCustomers().Skip(0).Take(100);
         }
 
-        public void Reset()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetError(string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetLoading(bool isLoading)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SubmitAsync()
+        public override Task SubmitAsync()
         {
             throw new NotImplementedException();
         }

@@ -20,7 +20,7 @@ namespace QualRazorLib.Presentation.Facades
         /// <summary>
         /// テーブルデータのプロバイダー。
         /// </summary>
-        public ITableDataProvider<T> Data { get; protected set; } = null!;
+        public abstract ITableDataProvider<T> Data { get; }
 
         /// <summary>
         /// データ取得中かどうかの状態。
@@ -45,13 +45,18 @@ namespace QualRazorLib.Presentation.Facades
         /// <summary>
         /// テーブルの絞り込み条件（Viewの状態）を管理するオブジェクト。
         /// </summary>
-        public IViewQueryCondition QueryCondition { get; set; } = default!;
+        public IViewQueryCondition QueryCondition { get;protected set; } = default!;
 
         protected TableViewModelBase(int maxNumberOfPage)
         {
             MaxNumberOfPage = maxNumberOfPage;
         }
-
+        /// <summary>
+        /// テーブルの絞り込み条件（Viewの状態）を管理するオブジェクトをデフォルトで初期化します。
+        /// </summary>
+        /// <typeparam name="TCondition"></typeparam>
+        /// <param name="extractor"></param>
+        /// <param name="restorer"></param>
         public void SetQueryCondition<TCondition>(Func<IReadOnlyList<IValueFilter>, TCondition> extractor, Func<TCondition, IReadOnlyList<IValueFilter>> restorer) where TCondition : class
         {
             QueryCondition = new DefaultViewQueryCondition<TCondition>(extractor, restorer);

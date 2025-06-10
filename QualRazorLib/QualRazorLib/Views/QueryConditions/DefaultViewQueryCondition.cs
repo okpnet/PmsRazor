@@ -33,6 +33,10 @@ namespace QualRazorLib.Views.QueryConditions
         /// Viewに紐づく絞り込み条件のリスト（読み取り専用）。
         /// </summary>
         public IReadOnlyList<IValueFilter> ValueFilters => _valueFilters;
+        /// <summary>
+        /// ページインデックス
+        /// </summary>
+        public int PageIndex { get; set; }
 
         /// <summary>
         /// 変換用デリゲートを指定してインスタンスを生成します。

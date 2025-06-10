@@ -45,11 +45,6 @@ namespace QualRazorLib.Controls.Tables
                 }
                 );
 
-        protected override void OnParametersSet()
-        {
-            ArgumentNullException.ThrowIfNull(Parameter);
-        }
-
         /// <summary>
         /// 列群のラッパー
         /// </summary>

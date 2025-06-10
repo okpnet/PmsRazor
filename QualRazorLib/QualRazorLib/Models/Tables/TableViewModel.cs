@@ -1,12 +1,31 @@
 ﻿using QualRazorLib.Models.Core;
 using QualRazorLib.Presentation.Facades;
 using QualRazorLib.Providers.Sources;
+using QualRazorLib.Views.QueryConditions;
 
 namespace QualRazorLib.Models.Tables
 {
     public class TableViewModel<TModel> : ViewStateCore, IViewModel<ITableDataProvider<TModel>>, ITableViewModel where TModel : class
     {
         public ITableDataProvider<TModel> Data { get; protected set; } = default!;
+
+        /// <summary>
+        /// テーブルの絞り込み条件（Viewの状態）を管理するオブジェクト。
+        /// </summary>
+        protected IViewQueryCondition? _queryCondition;
+        public IViewQueryCondition? QueryCondition
+        {
+            get => _queryCondition;
+            set
+            {
+                if (_queryCondition == value)
+                {
+                    return;
+                }
+                _queryCondition = value;
+                OnPropertyChanged(nameof(QueryCondition));
+            }
+        }
 
         protected int _maxNumberOfPage;
         public int MaxNumberOfPage
@@ -32,7 +51,7 @@ namespace QualRazorLib.Models.Tables
         {
             throw new NotImplementedException();
         }
-
+         
         public bool InvokeAction(string key)
         {
             throw new NotImplementedException();

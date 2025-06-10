@@ -9,6 +9,10 @@ namespace QualRazorLib.Views.QueryConditions
     public interface IViewQueryCondition
     {
         /// <summary>
+        /// ページ
+        /// </summary>
+        int PageIndex { get; }
+        /// <summary>
         /// Viewに関連付けられた値の絞り込み条件のリスト。
         /// 各条件は<see cref="IValueFilter"/>インターフェースを通じて定義される。
         /// </summary>
