@@ -9,6 +9,10 @@ using System.Collections.ObjectModel;
 
 namespace QualRazorLib.Controls.Tables
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
     public partial class QualTable<TModel>:QualRazorComponentBase where TModel : class
     {
         [Parameter,EditorRequired]
