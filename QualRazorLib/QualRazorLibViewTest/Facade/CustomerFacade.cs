@@ -2,7 +2,6 @@
 using QualRazorLib.Providers.Sources;
 using QualRazorLibViewTest.Dtos;
 using QualRazorLibViewTest.Helpers;
-using System.Collections.ObjectModel;
 
 namespace QualRazorLibViewTest.Facade
 {
@@ -10,11 +9,9 @@ namespace QualRazorLibViewTest.Facade
     {
         public override ITableDataProvider<TestCustomer> Data => throw new NotImplementedException();
 
-        public CustomerFacade(int maxNumberOfPage) : base(maxNumberOfPage)
+        public CustomerFacade() : base(10)
         {
         }
-
-        
 
         public override async Task LoadAsync()
         {

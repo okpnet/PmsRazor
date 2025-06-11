@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
 using QualRazorLib.Controls.Tables.Columns;
 using QualRazorLib.Controls.Tables.Columns.Dtos;
 using QualRazorLib.Core;
@@ -21,7 +20,7 @@ namespace QualRazorLib.Controls.Tables
         /// <summary>
         /// インフォメーションのレンダリング
         /// </summary>
-        protected RenderFragment? PageInforamation { get; set; }
+        internal RenderFragment? PageInforamation { get; set; }
         /// <summary>
         /// 列
         /// </summary>
@@ -45,35 +44,5 @@ namespace QualRazorLib.Controls.Tables
                 }
                 );
 
-        /// <summary>
-        /// 列群のラッパー
-        /// </summary>
-        public class TableColumns : QualRazorComponentBase
-        {
-            [CascadingParameter(Name = "TableContentParent")]
-            public QualTable<TModel> TableParent { get; set; } = default!;
-            [Parameter]
-            public RenderFragment? ChildContent { get; set; }
-
-            protected override void BuildRenderTree(RenderTreeBuilder builder)
-            {
-                builder.AddContent(0, ChildContent);
-            }
-        }
-        /// <summary>
-        /// ページネーションのラッパー
-        /// </summary>
-        public class TablePagenations : QualRazorComponentBase
-        {
-            [CascadingParameter(Name = "TableContentParent")]
-            public QualTable<TModel> TableParent { get; set; } = default!;
-            [Parameter]
-            public RenderFragment? ChildContent { get; set; }
-
-            protected override void OnInitialized()
-            {
-                TableParent.PageInforamation = ChildContent;
-            }
-        }
     }
 }
