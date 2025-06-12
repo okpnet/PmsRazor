@@ -1,6 +1,6 @@
 ﻿@inherits QualRazorComponentBase
 @typeparam TModel
-<CascadingValue Name="TableContentParent" Value="this">
+<CascadingValue Name="@CascadingParameterName.TableContentParent" Value="this">
     <table @attributes="MergedAttributes">
         <thead>
             <tr>
@@ -10,13 +10,16 @@
                 }
             </tr>
         </thead>
-        <tfoot>
-            <tr>
-                <th colspan="@NumberOfColumn">
-                    @PageInforamation
-                </th>
-            </tr>
-        </tfoot>
+        @if (PageInforamation is not null )
+        {
+            <tfoot>
+                <tr>
+                    <th colspan="@NumberOfColumn">
+                        @PageInforamation
+                    </th>
+                </tr>
+            </tfoot>
+        }
         <tbody>
                 @foreach (var row in ViewModel.Data.Sources.Select(t=> new TableRowState<TModel>(t)))
                 {

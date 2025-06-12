@@ -12,7 +12,7 @@ namespace QualRazorLib.Controls.Tables
 {
     public class QualTableColumn<TModel, TProperty> : QualRazorComponentBase, ITableColumnContent where TModel : class
     {
-        [CascadingParameter(Name = "TableContentParent")]
+        [CascadingParameter(Name = CascadingParameterName.TableContentParent)]
         public QualTable<TModel> TableParent { get; set; } = default!;
 
         [Parameter, EditorRequired]
@@ -76,3 +76,4 @@ namespace QualRazorLib.Controls.Tables
             builder.CloseElement();
         };
     }
+}
