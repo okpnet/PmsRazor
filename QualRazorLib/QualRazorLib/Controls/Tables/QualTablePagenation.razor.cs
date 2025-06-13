@@ -45,7 +45,7 @@ namespace QualRazorLib.Controls.Tables
         /// <returns></returns>
         public PageInformationArg CreatePageInformationArg()
         {
-            if (TableParent.ViewModel.Data is null)
+            if (TableParent.DataProvider is null)
             {
                 return PageInformationArg.CreateFailArg();
             }
@@ -58,7 +58,10 @@ namespace QualRazorLib.Controls.Tables
 
         public RenderFragment RenderInformation() => builder =>
         {
-            var pageButtons = ViewModel.Data is null ? [] : BuildPageButtonInformation(ViewModel.MaxNumberOfPage, ViewModel.Data);
+            var provvider = TableParent.DataProvider;
+            var maxPages = TableParent.ViewModel.MaxNumberOfPage;
+            
+            var pageButtons = provvider is null ? [] : BuildPageButtonInformation(maxPages, provvider);
             builder.OpenComponent<CascadingValue<ITableInformationContent>>(0);
             builder.AddAttribute(1, nameof(PagenationButtonContent.ParentTableInformation), this);
             builder.OpenElement(2, HtmlAtributes.DIV);
