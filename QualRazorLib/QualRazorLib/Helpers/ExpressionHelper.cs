@@ -112,5 +112,51 @@ namespace QualRazorLib.Helpers
 
             return string.Join(".", stack);
         }
+        public static Expression<Func<TModel, TProperty>> Convert<TModel, TProperty>(Expression<Func<TProperty>> propertySelector)
+        {
+            // () => model.Property から model を取り出してラムダを作り直す
+            if (propertySelector.Body is MemberExpression memberExpr)
+            {
+                var parameter = Expression.Parameter(typeof(TModel), "x");
+
+                // 「model.Property」の「model」が、ClosureではなくTModelであることを保証
+                var member = ReplaceParameter(memberExpr, propertySelector.Parameters, parameter);
+
+                return Expression.Lambda<Func<TModel, TProperty>>(member, parameter);
+            }
+
+            throw new NotSupportedException("Unsupported expression type");
+        }
+
+        private static Expression ReplaceParameter(Expression expr, IReadOnlyList<ParameterExpression> oldParams, ParameterExpression newParam)
+        {
+            return new ParameterReplacer(oldParams[0], newParam).Visit(expr);
+        }
+
+        private class ParameterReplacer : ExpressionVisitor
+        {
+            private readonly ParameterExpression _oldParam;
+            private readonly ParameterExpression _newParam;
+
+            public ParameterReplacer(ParameterExpression oldParam, ParameterExpression newParam)
+            {
+                _oldParam = oldParam;
+                _newParam = newParam;
+            }
+
+            protected override Expression VisitParameter(ParameterExpression node)
+            {
+                return node == _oldParam ? _newParam : base.VisitParameter(node);
+            }
+
+            protected override Expression VisitMember(MemberExpression node)
+            {
+                // 入れ子に対応（model.Property1.Property2）
+                var newExpr = Visit(node.Expression);
+                return Expression.MakeMemberAccess(newExpr!, node.Member);
+            }
+        }
+
     }
+
 }

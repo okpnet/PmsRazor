@@ -10,13 +10,13 @@ using System.Linq.Expressions;
 
 namespace QualRazorLib.Controls.Tables
 {
-    public class QualTableColumn<TModel, TProperty> : QualRazorComponentBase, ITableColumnContent where TModel : class
+    public partial class QualTableColumn<TModel, TProperty> : QualRazorComponentBase, ITableColumnContent where TModel : class
     {
         [CascadingParameter(Name = CascadingParameterName.TableContentParent)]
         public QualTable<TModel> TableParent { get; set; } = default!;
 
         [Parameter, EditorRequired]
-        public Expression<Func<TModel, TProperty>> Property { get; set; } = default!;
+        public Expression<Func< TProperty>> Property { get; set; } = default!;
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
@@ -43,12 +43,12 @@ namespace QualRazorLib.Controls.Tables
             base.OnInitialized();
             if (TableParent != null)
             {
-                ColumnState = new ColumnState<TModel, TProperty>(Property)
+                var converted = ExpressionHelper.Convert<TModel, TProperty>(Property);
+                ColumnState = new ColumnState<TModel, TProperty>(converted)
                 {
                     FormatString = FormatString,
                     TextAlign = Align,
                 };
-
                 TableParent.AddColumn(this);
             }
 
@@ -77,3 +77,6 @@ namespace QualRazorLib.Controls.Tables
         };
     }
 }
+
+
+

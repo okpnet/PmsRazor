@@ -2,6 +2,6 @@
 
 <QualTable ViewModel="Facade">
     <QualTableColumns>
-        <QualTableColumn TModel="TestCustomer" Align="TextAlignType.Auto" Property="@((t)=>t.Name)"  TProperty="string"></QualTableColumn>
+        <QualTableColumn TModel="TestCustomer" Align="TextAlignType.Auto" Property="()=>View.Name" ></QualTableColumn>
     </QualTableColumns>
 </QualTable>
