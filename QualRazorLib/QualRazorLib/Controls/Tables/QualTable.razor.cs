@@ -13,7 +13,7 @@ namespace QualRazorLib.Controls.Tables
     /// 
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
-    public partial class QualTable<TModel>:QualRazorComponentBase where TModel : class
+    public partial class QualTable<TModel>:QualRazorComponentBase
     {
         [Parameter,EditorRequired]
         public ITableViewModel<TModel> ViewModel { get; set; } = default!;
@@ -25,6 +25,9 @@ namespace QualRazorLib.Controls.Tables
         /// インフォメーションのレンダリング
         /// </summary>
         internal RenderFragment? PageInforamation { get; set; }
+
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
         /// <summary>
         /// 列
         /// </summary>
@@ -47,6 +50,5 @@ namespace QualRazorLib.Controls.Tables
                     [HtmlAtributes.CLASS] = CssClasses.Table.TABLE_CONTENT
                 }
                 );
-
     }
 }

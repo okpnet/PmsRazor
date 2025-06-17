@@ -6,7 +6,7 @@ namespace QualRazorLib.Providers.Sources
     /// テーブルのデータを保持するためのインターフェイス
     /// </summary>
     /// <typeparam name="TModel">テーブルに関連付けられるデータモデルの型。</typeparam>
-    public interface ITableDataProvider<TModel> : IDataProvider where TModel : class
+    public interface ITableDataProvider<TModel> : IDataProvider
     {
         /// <summary>
         /// テーブル内の総レコード数を取得します。

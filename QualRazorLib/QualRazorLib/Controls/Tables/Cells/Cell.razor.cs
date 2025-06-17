@@ -6,7 +6,7 @@ using QualRazorLib.Helpers;
 
 namespace QualRazorLib.Controls.Tables.Cells
 {
-    public partial class Cell<TModel>: QualRazorComponentBase where TModel : class
+    public partial class Cell<TModel>: QualRazorComponentBase
     {
         [Parameter,EditorRequired]
         public IColumnState ColumnState { get; set; } = default!;

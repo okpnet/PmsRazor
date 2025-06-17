@@ -1,9 +1,4 @@
 ﻿using QualRazorLib.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QualRazorLib.Controls.Tables.Columns.Dtos
 {
@@ -20,6 +15,13 @@ namespace QualRazorLib.Controls.Tables.Columns.Dtos
         TextAlignType TextAlign { get; }
 
         string? GetStringFromValue<T>(T value);
+    }
+
+    public interface IColumnStateInitializer
+    {
+        string? FormatString { get; set; }
+
+        TextAlignType TextAlign { get; set; }
     }
 
     public interface IColumnState<TModel, TResult> : IColumnState

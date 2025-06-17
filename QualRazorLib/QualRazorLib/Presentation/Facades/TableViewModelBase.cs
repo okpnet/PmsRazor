@@ -20,7 +20,7 @@ namespace QualRazorLib.Presentation.Facades
         /// <summary>
         /// テーブルデータのプロバイダー。
         /// </summary>
-        public abstract ITableDataProvider<T> Data { get; }
+        public abstract ITableDataProvider<T> Data { get; protected set; }
 
         /// <summary>
         /// データ取得中かどうかの状態。

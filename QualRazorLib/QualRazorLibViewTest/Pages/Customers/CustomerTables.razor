@@ -1,7 +1,8 @@
 ﻿@inherits OwningComponentBase
 
-<QualTable ViewModel="Facade">
+<QualTable ViewModel="Facades">
     <QualTableColumns>
-        <QualTableColumn TModel="TestCustomer" Align="TextAlignType.Auto" Property="()=>View.Name" ></QualTableColumn>
+        <QualTableColumn Align="TextAlignType.Auto" StateFactory="t=>t.Create(x=>x.Name)">名前</QualTableColumn>
+        <QualTableColumn Align="TextAlignType.Auto" StateFactory="t=>t.Create(x=>x.CostRate)">レート</QualTableColumn>
     </QualTableColumns>
 </QualTable>

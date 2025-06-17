@@ -32,7 +32,7 @@ namespace QualRazorLib.Presentation.Facades
     /// </para>
     /// </summary>
     /// <typeparam name="T">テーブルで扱うモデルの型</typeparam>
-    public interface ITableViewModel<T> : ITableViewModel, IViewModel, IDataHolder<ITableDataProvider<T>>, IViewState where T : class
+    public interface ITableViewModel<T> : ITableViewModel, IViewModel, IDataHolder<ITableDataProvider<T>>, IViewState
     {
     }
 }

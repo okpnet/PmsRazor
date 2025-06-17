@@ -7,7 +7,7 @@ namespace QualRazorLibViewTest.Facade
 {
     public class CustomerFacade : TableViewModelBase<TestCustomer>
     {
-        public override ITableDataProvider<TestCustomer> Data => throw new NotImplementedException();
+        public override ITableDataProvider<TestCustomer> Data { get; protected set; }
 
         public CustomerFacade() : base(10)
         {

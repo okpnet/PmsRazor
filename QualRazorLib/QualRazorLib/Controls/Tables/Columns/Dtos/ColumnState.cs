@@ -5,10 +5,10 @@ using System.Linq.Expressions;
 
 namespace QualRazorLib.Controls.Tables.Columns.Dtos
 {
-    public class ColumnState<TModel,TProperty> :PropertyAccessCore<TModel,TProperty>,INotifyPropertyChanged, IColumnState<TModel,TProperty>, IColumnState
+    public class ColumnState<TModel, TProperty> : PropertyAccessCore<TModel, TProperty>, INotifyPropertyChanged, IColumnState<TModel, TProperty>, IColumnState, IColumnStateInitializer
     {
         protected string? _formatString;
-        public string? FormatString 
+        public string? FormatString
         {
             get => _formatString;
             set
@@ -23,7 +23,7 @@ namespace QualRazorLib.Controls.Tables.Columns.Dtos
         }
 
         protected TextAlignType _textAlign;
-        public TextAlignType TextAlign 
+        public TextAlignType TextAlign
         {
             get => _textAlign;
             set
@@ -38,7 +38,7 @@ namespace QualRazorLib.Controls.Tables.Columns.Dtos
         }
 
         protected SortType _sortType = SortType.None;
-        public SortType SortStatus 
+        public SortType SortStatus
         {
             get => _sortType;
             set
@@ -52,13 +52,13 @@ namespace QualRazorLib.Controls.Tables.Columns.Dtos
             }
         }
 
-        public ColumnState(Expression<Func<TModel, TProperty>> propertyExpression) : base( propertyExpression)
+        public ColumnState(Expression<Func<TModel, TProperty>> propertyExpression) : base(propertyExpression)
         {
         }
 
         public string? GetStringFromValue<T>(T value)
         {
-            if(value is not TModel model)
+            if (value is not TModel model)
             {
                 throw new InvalidOperationException();
             }
@@ -69,4 +69,6 @@ namespace QualRazorLib.Controls.Tables.Columns.Dtos
             return null;
         }
     }
+
+
 }

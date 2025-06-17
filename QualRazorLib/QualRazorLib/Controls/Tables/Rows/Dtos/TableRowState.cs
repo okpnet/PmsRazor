@@ -12,7 +12,7 @@ namespace QualRazorLib.Controls.Tables.Rows.Dtos
         public abstract object BaseData { get; }
     }
 
-    public class TableRowState<TModel> : TableRowState, IDataHolder<TModel>, IRowDataHolder<TModel>, IRowDataHolder where TModel : class
+    public class TableRowState<TModel> : TableRowState, IDataHolder<TModel>, IRowDataHolder<TModel>, IRowDataHolder
     {
         public override object BaseData => _data;
 

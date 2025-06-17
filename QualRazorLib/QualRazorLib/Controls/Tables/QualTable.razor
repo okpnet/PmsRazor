@@ -1,30 +1,38 @@
 ﻿@inherits QualRazorComponentBase
+@attribute [CascadingTypeParameter(nameof(TModel))]
 @typeparam TModel
-<CascadingValue Name="@CascadingParameterName.TableContentParent" Value="this">
-    <table @attributes="MergedAttributes">
-        <thead>
-            <tr>
-                @foreach (var column in _columns)
-                {
-                    @column.RenderHeader()
-                }
-            </tr>
-        </thead>
-        @if (PageInforamation is not null )
-        {
-            <tfoot>
+
+<CascadingValue Value="typeof(TModel)">
+    <CascadingValue Name="@CascadingParameterName.TableContentParent" Value="this">
+        @ChildContent
+        <table @attributes="MergedAttributes">
+            <thead>
                 <tr>
-                    <th colspan="@NumberOfColumn">
-                        @PageInforamation
-                    </th>
+                    @foreach (var column in _columns)
+                    {
+                        @column.RenderHeader()
+                    }
                 </tr>
-            </tfoot>
-        }
-        <tbody>
-                @foreach (var row in ViewModel.Data.Sources.Select(t=> new TableRowState<TModel>(t)))
+            </thead>
+            @if (PageInforamation is not null)
+            {
+                <tfoot>
+                    <tr>
+                        <th colspan="@NumberOfColumn">
+                            @PageInforamation
+                        </th>
+                    </tr>
+                </tfoot>
+            }
+            <tbody>
+                @if(ViewModel?.Data is not null)
                 {
-                    <Row RowState="row"></Row>
+                    @foreach (var row in ViewModel.Data.Sources.Select(t => new TableRowState<TModel>(t)))
+                    {
+                        <Row RowState="row"></Row>
+                    }
                 }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </CascadingValue>
 </CascadingValue>
