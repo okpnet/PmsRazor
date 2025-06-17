@@ -55,7 +55,6 @@ namespace QualRazorLib.Controls.Tables
                 }
                 TableParent.AddColumn(this);
             }
-
         }
 
         protected override async Task OnLeftMouseClick(MouseKeyArg e)
