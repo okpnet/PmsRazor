@@ -15,6 +15,19 @@ namespace QualRazorLib.Controls.Tables
     /// <typeparam name="TModel"></typeparam>
     public partial class QualTable<TModel>:QualRazorComponentBase
     {
+        protected EventCallback _subscribe=EventCallback.Empty;
+        public EventCallback Subscribe
+        {
+            get
+            {
+                if (EventCallback.Equals(_columns, EventCallback.Empty))
+                {
+                    _subscribe = EventCallback.Factory.Create(this, () => StateHasChanged());
+                }
+                return _subscribe;
+            }
+        }
+
         [Parameter,EditorRequired]
         public ITableViewModel<TModel> ViewModel { get; set; } = default!;
 
@@ -40,7 +53,11 @@ namespace QualRazorLib.Controls.Tables
         /// 列追加
         /// </summary>
         /// <param name="column"></param>
-        internal void AddColumn(ITableColumnContent column) => _columns.Add(column);
+        internal void AddColumn(ITableColumnContent column)
+        {
+            _columns.Add(column);
+            StateHasChanged();
+        }
 
         protected Dictionary<string, object> MergedAttributes =>
             HtmlAttributeHelper.PurgeAttributes(
@@ -50,5 +67,10 @@ namespace QualRazorLib.Controls.Tables
                     [HtmlAtributes.CLASS] = CssClasses.Table.TABLE_CONTENT
                 }
                 );
+        protected override async Task OnInitializedAsync()
+        {
+            await base.OnInitializedAsync();
+            await ViewModel.LoadAsync();
+        }
     }
 }

@@ -118,5 +118,7 @@ namespace QualRazorLib.Presentation.Facades
         /// データの送信や更新処理を実装します（派生クラスで必須）。
         /// </summary>
         public abstract Task SubmitAsync();
+
+        protected abstract IRe
     }
 }

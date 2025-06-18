@@ -1,8 +1,11 @@
-﻿@inherits OwningComponentBase
+﻿@using QualRazorLib.Controls.LayoutControls
+@inherits OwningComponentBase
 
-<QualTable ViewModel="Facades">
-    <QualTableColumns>
-        <QualTableColumn Align="TextAlignType.Auto" StateFactory="t=>t.Create(x=>x.Name)">名前</QualTableColumn>
-        <QualTableColumn Align="TextAlignType.Auto" StateFactory="t=>t.Create(x=>x.CostRate)">レート</QualTableColumn>
-    </QualTableColumns>
-</QualTable>
+<QualSection>
+    <QualTable ViewModel="Facades">
+        <QualTableColumns>
+            <QualTableColumn Align="TextAlignType.Auto" StateFactory="t=>t.Create(x=>x.Name)">名前</QualTableColumn>
+            <QualTableColumn Align="TextAlignType.Auto" StateFactory="t=>t.Create(x=>x.CostRate)">レート</QualTableColumn>
+        </QualTableColumns>
+    </QualTable>
+</QualSection>
